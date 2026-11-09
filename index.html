@@ -344,7 +344,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     // The ManyHats Studios logo: 16 px tall, its 2 px over the 12 px line hang above and below so the label keeps its
     // height, and it stays beside the first line if the text wraps. One drawing per theme; .pc-hw on the game root
     // shows Halloween's.
-    ".pc-label-logo{flex:none;align-self:flex-start;display:block;width:16px;height:16px;margin:-2px 0;fill:var(--pc-accent);}",
+    ".pc-label-logo{flex:none;align-self:flex-start;display:block;width:16px;height:16px;margin:-2px 0;}",
     ".pc-label-logo-hw,.pc-hw .pc-label-logo-std{display:none;}",
     ".pc-hw .pc-label-logo-hw{display:inline;}",
     // Card: the slate panel (the only variant the game uses) and a plain game card.
@@ -385,9 +385,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h("path", { d: ARROW, fill: "currentColor" })) : null;
     return h("button", p, props.children, arrow);
   }
-  // The ManyHats Studios logo, three hats stacked in a 16 x 16 box, every outline drawn clockwise. Standard: a beanie
-  // with its pompom on a cap on a top hat (the gap in the crown is its band), all in the accent. Halloween: a purple
-  // witch's hat with a green band on an orange cap on a green top hat.
+  // The ManyHats Studios logo, three hats stacked in a 16 x 16 box, every outline drawn clockwise. Standard: a purple
+  // beanie with its pompom on an orange cap on a green top hat (the gap in the crown is its band); the orange is not
+  // the Halloween accent, which stays out of the standard theme (spec section 2). Halloween: a purple witch's hat with
+  // a green band on an orange cap on a green top hat.
   var CAP = "M3.7 9.8 C3.7 7.7 5.2 6.5 7.2 6.5 C9.2 6.5 10.7 7.7 10.7 9.8 Z M10.3 8.7 H14.4 Q15.5 8.7 15.5 9.25 Q15.5 9.8 14.4 9.8 H10.3 Z";
   var TOP_HAT = "M4.6 13.1 V11.1 Q4.6 10.7 5 10.7 H9.4 Q9.8 10.7 9.8 11.1 V13.1 Z M4.6 13.9 H9.8 V14.6 H4.6 Z" +
     " M2.35 14.5 H12.05 A0.65 0.65 0 0 1 12.05 15.8 H2.35 A0.65 0.65 0 0 1 2.35 14.5 Z";
@@ -398,7 +399,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   var WITCH_BAND = "M6 3.5 H9.2 L9.4 4.3 H5.5 Z";
   function Logo() {
     return h("svg", { className: "pc-label-logo", viewBox: "0 0 16 16", "aria-hidden": "true" },
-      h("path", { className: "pc-label-logo-std", d: BEANIE + " " + CAP + " " + TOP_HAT }),
+      h("g", { className: "pc-label-logo-std" },
+        h("path", { d: BEANIE, style: { fill: "#7B4FB0" } }),
+        h("path", { d: CAP, style: { fill: "#F2A541" } }),
+        h("path", { d: TOP_HAT, style: { fill: "#8BD450" } })),
       h("g", { className: "pc-label-logo-hw" },
         h("path", { d: WITCH_HAT, style: { fill: "#7B4FB0" } }),
         h("path", { d: WITCH_BAND, style: { fill: "#8BD450" } }),
