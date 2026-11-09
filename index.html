@@ -311,7 +311,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
 </script>
 <script>
-// PulseUI: Pulse Check's own button, section label and card (v18 onward).
+// PulseUI: Pulse Check's own button, section label, card and QR code (v18 onward).
 // The template uses them as <x-import component-from-global-scope="PulseUI.Button" ...>; the runtime finds them on
 // window.PulseUI. Plain React calls, no JSX, so the packager inlines this file like any local script.
 // Every color comes from the game's --pc-* custom properties (set per theme on the .pc-root element), so the same
@@ -334,22 +334,27 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     ".pc-btn-sm{font-size:13px;padding:8px 14px;}",
     ".pc-btn-md{font-size:15px;padding:11px 20px;}",
     ".pc-btn-lg{font-size:17px;padding:15px 28px;}",
-    ".pc-btn-outline{--pc-b-bg:transparent;--pc-b-bg-hover:var(--pc-btn-hover);--pc-b-fg:var(--pc-btn-ink);--pc-b-fg-hover:var(--pc-btn-ink);--pc-b-line:var(--pc-btn-line);}",
-    ".pc-btn-ghost{--pc-b-bg:transparent;--pc-b-bg-hover:var(--pc-btn-hover);--pc-b-fg:var(--pc-btn-ink);--pc-b-fg-hover:var(--pc-btn-ink);}",
+    // Ghost: no fill until hovered, ink text. Outline is a ghost with a line.
+    ".pc-btn-ghost,.pc-btn-outline{--pc-b-bg:transparent;--pc-b-bg-hover:var(--pc-btn-hover);--pc-b-fg:var(--pc-btn-ink);--pc-b-fg-hover:var(--pc-btn-ink);}",
+    ".pc-btn-outline{--pc-b-line:var(--pc-btn-line);}",
     // The arrow after a button's text: 0.7 of the font size, square.
     ".pc-btn-arrow{flex:none;display:inline-block;width:.7em;height:.7em;}",
     // Section label: small caps line, optionally led by a short rule.
     ".pc-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-sans);font-size:12px;font-weight:500;line-height:1;letter-spacing:.1em;text-transform:uppercase;color:var(--pc-label);}",
     ".pc-label-rule{flex:none;width:24px;height:2px;background:currentColor;opacity:.9;}",
     // The ManyHats Studios logo: 16 px tall, its 2 px over the 12 px line hang above and below so the label keeps its
-    // height, and it stays beside the first line if the text wraps. One drawing per theme; .pc-hw on the game root
-    // shows Halloween's.
+    // height, and it stays beside the first line if the text wraps. Both themes share the cap and the top hat; the
+    // hat on top and the cap's color are the theme's (.pc-hw on the game root shows Halloween's).
     ".pc-label-logo{flex:none;align-self:flex-start;display:block;width:16px;height:16px;margin:-2px 0;}",
     ".pc-label-logo-hw,.pc-hw .pc-label-logo-std{display:none;}",
     ".pc-hw .pc-label-logo-hw{display:inline;}",
-    // Card: the slate panel (the only variant the game uses) and a plain game card.
-    ".pc-card{box-sizing:border-box;border-radius:8px;padding:32px;border:1px solid var(--pc-line);background:var(--pc-card);}",
-    ".pc-card-slate{border-color:transparent;background:var(--pc-slate);color:#FFFFFF;}"
+    ".pc-label-logo-cap{fill:#F2A541;}",
+    ".pc-hw .pc-label-logo-cap{fill:var(--pc-accent);}",
+    // Card: the slate panel with white text.
+    ".pc-card{box-sizing:border-box;border-radius:8px;padding:32px;border:1px solid transparent;background:var(--pc-slate);color:#FFFFFF;}",
+    // QR code: black modules on a white tile, drawn sharp at any size.
+    ".pc-qr{display:block;flex:none;background:#FFFFFF;border-radius:4px;shape-rendering:crispEdges;}",
+    ".pc-qr path{fill:#000000;}"
   ].join("");
 
   function addCss() {
@@ -397,17 +402,17 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   var WITCH_HAT = "M5.2 4.7 L7.5 1.4 Q8.6 0 10.6 0.5 Q9.2 0.8 8.9 1.9 L9.6 4.7 Z" +
     " M2.8 4.6 H11.6 Q12.3 4.6 12 5.1 Q11.7 5.7 10.9 5.7 H3.5 Q2.7 5.7 2.4 5.1 Q2.1 4.6 2.8 4.6 Z";
   var WITCH_BAND = "M6 3.5 H9.2 L9.4 4.3 H5.5 Z";
+  // Drawn in this order: the theme's hat on top, then the shared cap (orange, the Halloween accent in Halloween) and
+  // top hat.
   function Logo() {
     return h("svg", { className: "pc-label-logo", viewBox: "0 0 16 16", "aria-hidden": "true" },
       h("g", { className: "pc-label-logo-std" },
-        h("path", { d: BEANIE, style: { fill: "#7B4FB0" } }),
-        h("path", { d: CAP, style: { fill: "#F2A541" } }),
-        h("path", { d: TOP_HAT, style: { fill: "#8BD450" } })),
+        h("path", { d: BEANIE, style: { fill: "#7B4FB0" } })),
       h("g", { className: "pc-label-logo-hw" },
         h("path", { d: WITCH_HAT, style: { fill: "#7B4FB0" } }),
-        h("path", { d: WITCH_BAND, style: { fill: "#8BD450" } }),
-        h("path", { d: CAP, style: { fill: "var(--pc-accent)" } }),
-        h("path", { d: TOP_HAT, style: { fill: "#8BD450" } })));
+        h("path", { d: WITCH_BAND, style: { fill: "#8BD450" } })),
+      h("path", { className: "pc-label-logo-cap", d: CAP }),
+      h("path", { d: TOP_HAT, style: { fill: "#8BD450" } }));
   }
   // SectionLabel: rule draws the short line in front of the text; logo draws the ManyHats Studios logo after the rule.
   function SectionLabel(props) {
@@ -416,14 +421,20 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     return h("span", p, props.rule ? h("span", { className: "pc-label-rule", "aria-hidden": "true" }) : null,
       props.logo ? h(Logo) : null, props.children);
   }
-  // Card: variant "slate" is the dark slate panel with white text; style.
+  // Card: the dark slate panel with white text (the only card the game uses).
   function Card(props) {
-    var p = rest(props, ["variant", "children", "className"]);
-    p.className = cls(["pc-card", props.variant === "slate" && "pc-card-slate", props.className]);
+    var p = rest(props, ["children", "className"]);
+    p.className = cls(["pc-card", props.className]);
     return h("div", p, props.children);
   }
+  // Qr: a QR code drawn as one SVG path. path: the dark modules in module units; box: the viewBox, quiet zone
+  // included; size: the drawn width and height (a CSS length); className.
+  function Qr(props) {
+    return h("svg", { className: cls(["pc-qr", props.className]), viewBox: props.box, role: "img", "aria-label": "QR code of the join link",
+      style: { width: props.size, height: props.size } }, h("path", { d: props.path }));
+  }
 
-  window.PulseUI = { Button: Button, SectionLabel: SectionLabel, Card: Card };
+  window.PulseUI = { Button: Button, SectionLabel: SectionLabel, Card: Card, Qr: Qr };
 })();
 
 </script>
@@ -4716,16 +4727,20 @@ if (location.protocol === "file:" && !window.__resources) {
        stick out past the viewport, a 15 px scrollbar included) it hangs inside the corner, beside the question. */
     .pc-spider{right:-58px;top:-46px;animation:hw-dangle 5s ease-in-out infinite;}
     @media (max-width:1008px){.pc-spider{right:2px;top:0;height:70px;overflow:hidden;animation:none;}.pc-spider svg{margin-top:-56px;animation:hw-dangle 5s ease-in-out infinite;}.pc-hw .pc-answer-q{padding-right:12px;}}
+    /* The row under the header on player screens: the screen's label, then a spacer (this ::after, ordered between the
+       label and the rest) that pushes the name and the leave button to the right end. */
+    .pc-prow::after{content:"";flex:1;}.pc-prow-me,.pc-prow-btn{order:1;}
     .pc-head-brand{display:flex;gap:8px;}
     .pc-head::after{content:"";order:1;flex:0 0 100%;display:none;}
     @media (max-width:860px){:root{--pc-web-top:var(--pc-head-b,51px);}.pc-bank-grid,.pc-setup-grid,.pc-lobby-grid{grid-template-columns:minmax(0,1fr);}.pc-head{flex-wrap:wrap;row-gap:5px;}.pc-head-steps{order:2;}.pc-head:has(.pc-head-steps)::after{display:block;}.pc-prow{flex-wrap:wrap;row-gap:6px;}.pc-prow-btn{flex:none;margin-left:auto;}}
     @container pc-host (width < 724px){.pc-setup-grid,.pc-lobby-grid{grid-template-columns:minmax(0,1fr);}}
-    @media (max-width:780px){.pc-start-row{flex-wrap:wrap;}.pc-start-btn{flex:1 1 100%;}.pc-start-hint{flex:1 1 0;min-width:0;}.pc-start-gap{display:none;}.pc-head-fill{display:none;}.pc-head-leave{margin-left:auto;}.pc-head-brand{display:grid;grid-template-columns:auto auto;row-gap:0;line-height:15px;}.pc-head-name{display:contents;}.pc-head-tag{grid-column:1 / -1;}.pc-head-sep{display:none;}.pc-head:has(.pc-head-steps) .pc-head-room{order:2;}}
-    @media (min-width:601px) and (max-width:780px){.pc-head:has(.pc-head-room):not(:has(.pc-head-steps)) .pc-head-fill{display:block;}}
+    @media (max-width:780px){.pc-start-row{flex-wrap:wrap;}.pc-start-btn{flex:1 1 100%;}.pc-start-hint{flex:1 1 0;min-width:0;}.pc-start-gap{display:none;}.pc-head-brand{display:grid;grid-template-columns:auto auto;row-gap:0;line-height:15px;}.pc-head-name{display:contents;}.pc-head-tag{grid-column:1 / -1;}.pc-head-sep{display:none;}.pc-head:has(.pc-head-steps) .pc-head-room{order:2;}}
     @media (max-width:600px){.pc-head-room{order:2;}.pc-head:has(.pc-head-room)::after{display:block;}}
-    /* iPhone Safari zooms into any focused text box or select under 16 px and stays zoomed, so at 560 px and below
-       they all read at 16 px (the 18 px room code box keeps its size). */
-    @media (max-width:560px){.pc-bank-add{flex-wrap:wrap;}.pc-bank-addin{flex:1 1 100% !important;}.pc-bank-row{flex-wrap:wrap;gap:8px !important;}.pc-bank-text,.pc-bank-editin{flex:1 1 100% !important;order:1;}.pc-bank-edit,.pc-bank-save{margin-left:auto;}.pc-bank-sel{flex:1 1 0;}.pc-bank-bar{row-gap:0 !important;}.pc-bank-bar p{margin-top:8px !important;}.pc-bank-brk{display:block;flex:0 0 100%;height:8px;}.pc-bank-namein{flex:1 1 100% !important;max-width:none !important;margin-bottom:8px;}.pc-head{padding-left:16px;padding-right:16px;column-gap:8px;}.pc-main{padding-left:16px !important;padding-right:16px !important;}.pc-ready-row{flex-wrap:wrap;}.pc-name-in{min-width:0;}.pc-qs-row{flex-wrap:wrap;row-gap:2px;}.pc-sel-row{flex-wrap:wrap;row-gap:2px !important;}.pc-qs-pair,.pc-sel-pair{flex:1 1 100%;padding-left:36px;}.pc-prow .pc-label{flex:1 1 100%;}.pc-prow-gap{display:none;}.pc-prow-me{flex:1 1 0;min-width:0;}input:not([type=range]):not([type=file]):not(.pc-code-in),select,textarea{font-size:16px !important;}}
+    @media (max-width:560px){.pc-bank-add{flex-wrap:wrap;}.pc-bank-addin{flex:1 1 100% !important;}.pc-bank-row{flex-wrap:wrap;gap:8px !important;}.pc-bank-text,.pc-bank-editin{flex:1 1 100% !important;order:1;}.pc-bank-edit,.pc-bank-save{margin-left:auto;}.pc-bank-sel{flex:1 1 0;}.pc-bank-bar{row-gap:0 !important;}.pc-bank-bar p{margin-top:8px !important;}.pc-bank-brk{display:block;flex:0 0 100%;height:8px;}.pc-bank-namein{flex:1 1 100% !important;max-width:none !important;margin-bottom:8px;}.pc-head{padding-left:16px;padding-right:16px;column-gap:8px;}.pc-main{padding-left:16px !important;padding-right:16px !important;}.pc-ready-row{flex-wrap:wrap;}.pc-name-in{min-width:0;}.pc-qs-row{flex-wrap:wrap;row-gap:2px;}.pc-sel-row{flex-wrap:wrap;row-gap:2px !important;}.pc-qs-pair,.pc-sel-pair{flex:1 1 100%;padding-left:36px;}.pc-prow .pc-label{flex:1 1 100%;}.pc-prow::after{display:none;}.pc-prow-me{flex:1 1 0;min-width:0;}}
+    /* iPhone Safari zooms into any focused text box or select under 16 px and stays zoomed, so at 560 px and below, and
+       on touch screens of any width (a phone held sideways), they all read at 16 px: each box's font size is
+       var(--pc-input-fs, its own size). The 18 px room code box keeps its size. */
+    @media (max-width:560px), (hover:none) and (pointer:coarse){.pc-root{--pc-input-fs:16px;}}
   </style>
 </helmet>
 <div class="{{ rootClass }}" style="{{ rootStyle }}">
@@ -4792,7 +4807,7 @@ if (location.protocol === "file:" && !window.__resources) {
         <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;position:relative;z-index:1;">
           <div style="flex:1;min-width:200px;"><x-import component-from-global-scope="PulseUI.SectionLabel" rule="{{ true }}" logo="{{ true }}" hint-size="200px,16px">ManyHats Studios™ Presents</x-import></div>
           <label for="pc-theme" style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--pc-muted);">THEME</label>
-          <select id="pc-theme" value="{{ themeVal }}" sc-camel-on-change="{{ onTheme }}" style="font-family:var(--font-sans);height:36px;padding:0 10px;font-size:14px;font-weight:500;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;cursor:pointer;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);outline:none;">
+          <select id="pc-theme" value="{{ themeVal }}" sc-camel-on-change="{{ onTheme }}" style="font-family:var(--font-sans);height:36px;padding:0 10px;font-size:var(--pc-input-fs,14px);font-weight:500;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;cursor:pointer;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);outline:none;">
             <option value="standard">Standard</option>
             <option value="halloween">Halloween</option>
           </select>
@@ -4812,7 +4827,7 @@ if (location.protocol === "file:" && !window.__resources) {
             <div style="font-size:12px;font-weight:500;letter-spacing:0.1em;color:var(--pc-muted);margin-bottom:10px;">JOIN A GAME</div>
             <div style="display:flex;gap:10px;margin-bottom:10px;">
               <input class="pc-code-in" value="{{ joinCode }}" sc-camel-on-change="{{ onJoinCode }}" placeholder="CODE" sc-camel-max-length="4" style="width:92px;height:44px;text-align:center;font-family:var(--font-sans);font-size:18px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
-              <input ref="{{ nameRef }}" value="{{ joinName }}" sc-camel-on-change="{{ onJoinName }}" sc-camel-on-key-down="{{ onJoinKey }}" placeholder="Your name" style="flex:1;min-width:0;height:44px;padding:0 12px;font-family:var(--font-sans);font-size:15px;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
+              <input ref="{{ nameRef }}" value="{{ joinName }}" sc-camel-on-change="{{ onJoinName }}" sc-camel-on-key-down="{{ onJoinKey }}" placeholder="Your name" style="flex:1;min-width:0;height:44px;padding:0 12px;font-family:var(--font-sans);font-size:var(--pc-input-fs,15px);color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
             </div>
             <x-import component-from-global-scope="PulseUI.Button" sc-camel-with-chevron="{{ true }}" disabled="{{ joinDisabled }}" sc-camel-on-click="{{ joinGame }}" hint-size="160px,44px">Join the room</x-import>
             <p style="margin:12px 0 0;font-size:12px;color:var(--pc-muted);">Ask the host for the code on their screen.</p>
@@ -4870,7 +4885,7 @@ if (location.protocol === "file:" && !window.__resources) {
         </div>
         <div class="pc-bank-bar" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 24px;">
           <label for="pc-bank" style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--pc-muted);">BANK</label>
-          <select id="pc-bank" class="pc-bank-sel" value="{{ bankIdVal }}" sc-camel-on-change="{{ onBankPick }}" style="font-family:var(--font-sans);height:36px;padding:0 10px;font-size:14px;font-weight:500;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;cursor:pointer;min-width:0;max-width:100%;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);outline:none;">
+          <select id="pc-bank" class="pc-bank-sel" value="{{ bankIdVal }}" sc-camel-on-change="{{ onBankPick }}" style="font-family:var(--font-sans);height:36px;padding:0 10px;font-size:var(--pc-input-fs,14px);font-weight:500;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;cursor:pointer;min-width:0;max-width:100%;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);outline:none;">
             <sc-for list="{{ bankOpts }}" as="k" hint-placeholder-count="2"><option value="{{ k.id }}">{{ k.name }}</option></sc-for>
           </select>
           <div class="pc-bank-brk"></div>
@@ -4885,7 +4900,7 @@ if (location.protocol === "file:" && !window.__resources) {
             </sc-if>
           </sc-if>
           <sc-if value="{{ bankNaming }}" hint-placeholder-val="{{ false }}">
-            <input class="pc-bank-namein" value="{{ bankNameText }}" sc-camel-on-change="{{ onBankName }}" sc-camel-on-key-down="{{ onBankNameKey }}" sc-camel-auto-focus="{{ true }}" placeholder="Bank name" style="font-family:var(--font-sans);color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;box-sizing:border-box;flex:1;min-width:160px;max-width:360px;height:36px;padding:0 10px;font-size:14px;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
+            <input class="pc-bank-namein" value="{{ bankNameText }}" sc-camel-on-change="{{ onBankName }}" sc-camel-on-key-down="{{ onBankNameKey }}" sc-camel-auto-focus="{{ true }}" placeholder="Bank name" style="font-family:var(--font-sans);color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;box-sizing:border-box;flex:1;min-width:160px;max-width:360px;height:36px;padding:0 10px;font-size:var(--pc-input-fs,14px);" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
             <sc-if value="{{ bankNameOk }}" hint-placeholder-val="{{ true }}">
               <button sc-camel-on-click="{{ saveBankName }}" style="font-family:var(--font-sans);flex:none;height:32px;padding:0 12px;border-radius:4px;font-size:12px;font-weight:600;background:var(--pc-accent);color:var(--pc-on-accent);border:none;cursor:pointer;" style-hover="background:var(--pc-accent-2);">Save</button>
             </sc-if>
@@ -4901,12 +4916,12 @@ if (location.protocol === "file:" && !window.__resources) {
           <div style="background:var(--pc-card);border:1px solid var(--pc-line);border-radius:8px;padding:24px;min-width:0;">
             <div style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--pc-muted);">ADD A QUESTION</div>
             <div class="pc-bank-add" style="display:flex;gap:10px;margin-top:10px;">
-              <input class="pc-bank-addin" value="{{ bankAdd }}" sc-camel-on-change="{{ onBankAdd }}" sc-camel-on-key-down="{{ onBankAddKey }}" placeholder="Subject: This or That" style="font-family:var(--font-sans);color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;box-sizing:border-box;flex:1;min-width:0;height:44px;padding:0 12px;font-size:15px;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
+              <input class="pc-bank-addin" value="{{ bankAdd }}" sc-camel-on-change="{{ onBankAdd }}" sc-camel-on-key-down="{{ onBankAddKey }}" placeholder="Subject: This or That" style="font-family:var(--font-sans);color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;box-sizing:border-box;flex:1;min-width:0;height:44px;padding:0 12px;font-size:var(--pc-input-fs,15px);" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
               <x-import component-from-global-scope="PulseUI.Button" disabled="{{ addDisabled }}" sc-camel-on-click="{{ addToBank }}" hint-size="140px,44px">Add to bank</x-import>
             </div>
             <p style="margin:8px 0 0;font-size:12px;line-height:1.5;color:{{ bankAddHintColor }};">{{ bankAddHint }}</p>
             <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:22px 0 10px;">
-              <input value="{{ bankQ }}" sc-camel-on-change="{{ onBankQ }}" placeholder="Search questions" style="font-family:var(--font-sans);color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;box-sizing:border-box;flex:1;min-width:180px;height:36px;padding:0 12px;font-size:14px;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
+              <input value="{{ bankQ }}" sc-camel-on-change="{{ onBankQ }}" placeholder="Search questions" style="font-family:var(--font-sans);color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;box-sizing:border-box;flex:1;min-width:180px;height:36px;padding:0 12px;font-size:var(--pc-input-fs,14px);" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
               <div style="display:flex;gap:6px;">
                 <button sc-camel-on-click="{{ showAll }}" style="{{ bankAllStyle }}">{{ bankAllLabel }}</button>
                 <button sc-camel-on-click="{{ showDefs }}" style="{{ bankDefStyle }}">{{ bankDefLabel }}</button>
@@ -4941,7 +4956,7 @@ if (location.protocol === "file:" && !window.__resources) {
                     <button sc-camel-on-click="{{ r.remove }}" style="font-family:var(--font-sans);font-size:12px;font-weight:600;color:var(--pc-muted);background:none;border:none;cursor:pointer;padding:4px 6px;flex:none;" style-hover="color:var(--pc-accent-2);">Remove</button>
                   </sc-if>
                   <sc-if value="{{ r.editing }}" hint-placeholder-val="{{ false }}">
-                    <input class="pc-bank-editin" value="{{ bankEditText }}" sc-camel-on-change="{{ onBankEdit }}" sc-camel-on-key-down="{{ onBankEditKey }}" sc-camel-auto-focus="{{ true }}" style="font-family:var(--font-sans);color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;box-sizing:border-box;flex:1;min-width:0;height:38px;padding:0 10px;font-size:14px;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
+                    <input class="pc-bank-editin" value="{{ bankEditText }}" sc-camel-on-change="{{ onBankEdit }}" sc-camel-on-key-down="{{ onBankEditKey }}" sc-camel-auto-focus="{{ true }}" style="font-family:var(--font-sans);color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;box-sizing:border-box;flex:1;min-width:0;height:38px;padding:0 10px;font-size:var(--pc-input-fs,14px);" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
                     <button class="pc-bank-save" sc-camel-on-click="{{ saveEdit }}" style="font-family:var(--font-sans);flex:none;height:32px;padding:0 12px;border-radius:4px;font-size:12px;font-weight:600;background:var(--pc-accent);color:var(--pc-on-accent);border:none;cursor:pointer;" style-hover="background:var(--pc-accent-2);">Save</button>
                     <button sc-camel-on-click="{{ cancelEdit }}" style="font-family:var(--font-sans);font-size:12px;font-weight:600;color:var(--pc-muted);background:none;border:none;cursor:pointer;padding:4px 6px;flex:none;" style-hover="color:var(--pc-accent-2);">Cancel</button>
                   </sc-if>
@@ -4953,7 +4968,7 @@ if (location.protocol === "file:" && !window.__resources) {
             </div>
           </div>
           <div style="display:grid;gap:20px;min-width:0;">
-            <x-import component-from-global-scope="PulseUI.Card" variant="slate" hint-size="100%,300px">
+            <x-import component-from-global-scope="PulseUI.Card" hint-size="100%,300px">
               <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;">
                 <span style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--pc-accent);">DEFAULT GAME</span>
                 <span style="font-size:12px;font-weight:600;color:#FFFFFF;">{{ defCount }}</span>
@@ -4997,7 +5012,7 @@ if (location.protocol === "file:" && !window.__resources) {
           <div style="background:var(--pc-card);border:1px solid var(--pc-line);border-radius:8px;padding:24px;">
             <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
               <label for="pc-game-bank" style="font-size:14px;font-weight:500;color:var(--pc-body);">Questions from</label>
-              <select id="pc-game-bank" value="{{ gameBankVal }}" sc-camel-on-change="{{ onGameBank }}" style="font-family:var(--font-sans);height:36px;padding:0 10px;font-size:14px;font-weight:500;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;cursor:pointer;min-width:0;max-width:100%;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);outline:none;">
+              <select id="pc-game-bank" value="{{ gameBankVal }}" sc-camel-on-change="{{ onGameBank }}" style="font-family:var(--font-sans);height:36px;padding:0 10px;font-size:var(--pc-input-fs,14px);font-weight:500;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;cursor:pointer;min-width:0;max-width:100%;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);outline:none;">
                 <sc-for list="{{ bankOpts }}" as="k" hint-placeholder-count="2"><option value="{{ k.id }}">{{ k.name }}</option></sc-for>
               </select>
               <sc-if value="{{ qsHasPresetNote }}" hint-placeholder-val="{{ true }}">
@@ -5060,7 +5075,7 @@ if (location.protocol === "file:" && !window.__resources) {
                 </div>
               </div>
               <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px;">
-                <input value="{{ selQ }}" sc-camel-on-change="{{ onSelQ }}" placeholder="Search the bank" style="font-family:var(--font-sans);color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;box-sizing:border-box;flex:1;min-width:180px;height:36px;padding:0 12px;font-size:14px;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
+                <input value="{{ selQ }}" sc-camel-on-change="{{ onSelQ }}" placeholder="Search the bank" style="font-family:var(--font-sans);color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;box-sizing:border-box;flex:1;min-width:180px;height:36px;padding:0 12px;font-size:var(--pc-input-fs,14px);" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
                 <span style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:var(--pc-accent);">{{ selCount }}</span>
                 <button sc-camel-on-click="{{ selClear }}" style="font-family:var(--font-sans);font-size:12px;font-weight:600;color:var(--pc-muted);background:none;border:none;cursor:pointer;padding:4px 6px;flex:none;" style-hover="color:var(--pc-accent-2);">Clear</button>
               </div>
@@ -5081,7 +5096,7 @@ if (location.protocol === "file:" && !window.__resources) {
             <sc-if value="{{ qsIsCustom }}" hint-placeholder-val="{{ false }}">
               <textarea value="{{ qDraft }}" sc-camel-on-change="{{ onDraft }}" rows="12" placeholder="Plane seat: Window or aisle
 Pets: Cats or dogs
-…one per line" style="width:100%;box-sizing:border-box;resize:vertical;padding:12px 14px;font-family:var(--font-sans);font-size:14px;line-height:1.7;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);"></textarea>
+…one per line" style="width:100%;box-sizing:border-box;resize:vertical;padding:12px 14px;font-family:var(--font-sans);font-size:var(--pc-input-fs,14px);line-height:1.7;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);"></textarea>
               <p style="font-size:12px;color:var(--pc-muted);margin:10px 0 0;">One per line as "Subject: This or That", up to 20; the first choice becomes the pulse side. <span style="color:{{ qsCountColor }};font-weight:600;">{{ qsCount }}</span></p>
             </sc-if>
             <div class="pc-ready-row" style="display:flex;align-items:center;gap:14px;margin-top:22px;">
@@ -5122,11 +5137,11 @@ Pets: Cats or dogs
             </div>
             <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}">
             <div class="pc-join pc-join-lobby" style="display:flex;flex-direction:column;align-items:center;gap:8px;max-width:240px;min-width:0;">
-              <svg class="pc-join-qr" sc-camel-view-box="{{ qrBox }}" role="img" aria-label="QR code of the join link" shape-rendering="crispEdges" style="width:{{ qrLobbySize }};height:{{ qrLobbySize }};display:block;flex:none;background:#FFFFFF;border-radius:4px;"><path d="{{ qrPath }}" style="fill:#000000;"></path></svg>
+              <x-import component-from-global-scope="PulseUI.Qr" sc-camel-class-name="pc-join-qr" path="{{ qr.path }}" box="{{ qr.box }}" size="{{ qr.lobby }}" hint-size="123px,123px"></x-import>
               <div class="pc-join-addr" style="font-size:11px;line-height:1.45;color:var(--pc-soft-2);text-align:center;overflow-wrap:anywhere;user-select:all;-webkit-user-select:all;cursor:text;">{{ joinBase }}<wbr><span style="color:#FFFFFF;font-weight:600;white-space:nowrap;">?room={{ room }}</span></div>
             </div>
             </sc-if>
-            <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}"><div style="flex:1;min-width:260px;font-size:14px;line-height:1.55;color:var(--pc-text);">Players scan the code with a phone camera, or open the address and enter the room code. Late arrivals jump in on the next open question.</div></sc-if><sc-if value="{{ noJoin }}" hint-placeholder-val="{{ true }}"><div style="flex:1;min-width:260px;font-size:14px;line-height:1.55;color:var(--pc-text);">Players open this same file in any browser, choose Join a game, and enter the code. Late arrivals jump in on the next open question.</div></sc-if>
+            <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}"><div style="flex:1;min-width:260px;font-size:14px;line-height:1.55;color:var(--pc-text);">Players scan the code with a phone camera, or open the address and enter the room code. Late arrivals jump in on the next open question.</div></sc-if><sc-if value="{{ !hasJoin }}" hint-placeholder-val="{{ true }}"><div style="flex:1;min-width:260px;font-size:14px;line-height:1.55;color:var(--pc-text);">Players open this same file in any browser, choose Join a game, and enter the code. Late arrivals jump in on the next open question.</div></sc-if>
             <div title="{{ connTitle }}" style="display:flex;align-items:center;gap:8px;">
               <span style="{{ connDotStyle }}"></span>
               <span style="font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--pc-text);">{{ connLabel }}</span>
@@ -5146,11 +5161,11 @@ Pets: Cats or dogs
             </div>
             <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}">
             <div class="pc-join pc-join-lobby" style="display:flex;flex-direction:column;align-items:center;gap:8px;max-width:240px;min-width:0;padding-bottom:22px;">
-              <svg class="pc-join-qr" sc-camel-view-box="{{ qrBox }}" role="img" aria-label="QR code of the join link" shape-rendering="crispEdges" style="width:{{ qrLobbySize }};height:{{ qrLobbySize }};display:block;flex:none;background:#FFFFFF;border-radius:4px;"><path d="{{ qrPath }}" style="fill:#000000;"></path></svg>
+              <x-import component-from-global-scope="PulseUI.Qr" sc-camel-class-name="pc-join-qr" path="{{ qr.path }}" box="{{ qr.box }}" size="{{ qr.lobby }}" hint-size="123px,123px"></x-import>
               <div class="pc-join-addr" style="font-size:11px;line-height:1.45;color:var(--pc-soft);text-align:center;overflow-wrap:anywhere;user-select:all;-webkit-user-select:all;cursor:text;">{{ joinBase }}<wbr><span style="color:#FFFFFF;font-weight:600;white-space:nowrap;">?room={{ room }}</span></div>
             </div>
             </sc-if>
-            <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}"><div style="flex:1;min-width:260px;font-size:14px;line-height:1.55;color:var(--pc-text);padding-bottom:22px;">Players scan the code with a phone camera, or open the address and enter the room code. Late arrivals jump in on the next open question.</div></sc-if><sc-if value="{{ noJoin }}" hint-placeholder-val="{{ true }}"><div style="flex:1;min-width:260px;font-size:14px;line-height:1.55;color:var(--pc-text);padding-bottom:22px;">Players open this same file in any browser, choose Join a game, and enter the code. Late arrivals jump in on the next open question.</div></sc-if>
+            <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}"><div style="flex:1;min-width:260px;font-size:14px;line-height:1.55;color:var(--pc-text);padding-bottom:22px;">Players scan the code with a phone camera, or open the address and enter the room code. Late arrivals jump in on the next open question.</div></sc-if><sc-if value="{{ !hasJoin }}" hint-placeholder-val="{{ true }}"><div style="flex:1;min-width:260px;font-size:14px;line-height:1.55;color:var(--pc-text);padding-bottom:22px;">Players open this same file in any browser, choose Join a game, and enter the code. Late arrivals jump in on the next open question.</div></sc-if>
             <div title="{{ connTitle }}" style="display:flex;align-items:center;gap:8px;padding-bottom:22px;">
               <span style="{{ connDotStyle }}"></span>
               <span style="font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--pc-text);">{{ connLabel }}</span>
@@ -5166,7 +5181,7 @@ Pets: Cats or dogs
             <sc-if value="{{ isSoloMode }}" hint-placeholder-val="{{ false }}">
               <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0 0;">
                 <label for="pc-solo-bank" style="font-size:14px;font-weight:500;color:var(--pc-body);">Questions from</label>
-                <select id="pc-solo-bank" value="{{ gameBankVal }}" sc-camel-on-change="{{ onGameBank }}" style="font-family:var(--font-sans);height:36px;padding:0 10px;font-size:14px;font-weight:500;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;cursor:pointer;min-width:0;max-width:100%;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);outline:none;">
+                <select id="pc-solo-bank" value="{{ gameBankVal }}" sc-camel-on-change="{{ onGameBank }}" style="font-family:var(--font-sans);height:36px;padding:0 10px;font-size:var(--pc-input-fs,14px);font-weight:500;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;cursor:pointer;min-width:0;max-width:100%;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);outline:none;">
                   <sc-for list="{{ bankOpts }}" as="k" hint-placeholder-count="2"><option value="{{ k.id }}">{{ k.name }}</option></sc-for>
                 </select>
                 <sc-if value="{{ gameBankEmpty }}" hint-placeholder-val="{{ false }}">
@@ -5174,7 +5189,7 @@ Pets: Cats or dogs
                 </sc-if>
               </div>
               <div style="display:flex;gap:10px;margin:12px 0 6px;">
-                <input class="pc-name-in" value="{{ nameInput }}" sc-camel-on-change="{{ onNameInput }}" sc-camel-on-key-down="{{ onNameKey }}" placeholder="Player name" style="flex:1;height:40px;padding:0 12px;font-family:var(--font-sans);font-size:15px;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
+                <input class="pc-name-in" value="{{ nameInput }}" sc-camel-on-change="{{ onNameInput }}" sc-camel-on-key-down="{{ onNameKey }}" placeholder="Player name" style="flex:1;height:40px;padding:0 12px;font-family:var(--font-sans);font-size:var(--pc-input-fs,15px);color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line-3);border-radius:4px;outline:none;" style-focus="border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(var(--pc-accent-rgb),0.35);">
                 <x-import component-from-global-scope="PulseUI.Button" sc-camel-on-click="{{ addLocal }}" hint-size="130px,40px">Add player</x-import>
               </div>
             </sc-if>
@@ -5196,7 +5211,7 @@ Pets: Cats or dogs
               </sc-if>
             </div>
           </div>
-          <x-import component-from-global-scope="PulseUI.Card" variant="slate" hint-size="100%,380px">
+          <x-import component-from-global-scope="PulseUI.Card" hint-size="100%,380px">
             <div style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--pc-accent);margin-bottom:14px;">HOW A ROUND WORKS</div>
             <div style="display:grid;gap:16px;">
               <div style="display:flex;gap:12px;">
@@ -5256,7 +5271,7 @@ Pets: Cats or dogs
               <div><span style="color:var(--pc-body);font-weight:600;">Privacy.</span> Public relays have no password and no encryption at the relay. Anyone who knows the room code can see game traffic, so keep questions low-stakes.</div>
               <div><span style="color:var(--pc-body);font-weight:600;">Host device.</span> This tab runs the game. Keep it open and awake. If it closes or sleeps, play pauses for everyone until you reopen the file.</div>
               <div><span style="color:var(--pc-body);font-weight:600;">Timing.</span> Every device syncs to this clock, so each player gets the full {{ timerSec }} seconds. Answers still in when time runs out lock automatically.</div>
-              <div><span style="color:var(--pc-body);font-weight:600;">Players.</span> Everyone uses Pulse Check v18, from <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}">the address above or </sc-if>the same file, and joins with the room code. Players can leave at any time; closing the room sends everyone back to the start screen.</div>
+              <div><span style="color:var(--pc-body);font-weight:600;">Players.</span> Everyone uses the same version of Pulse Check, from <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}">the address above or </sc-if>the same file, and joins with the room code. Players can leave at any time; closing the room sends everyone back to the start screen.</div>
               <div><span style="color:var(--pc-body);font-weight:600;">Capacity.</span> Built for up to 100 players. Public relays don't guarantee capacity, so run a trial with real devices before a large session.</div>
             </div>
           </div>
@@ -5301,10 +5316,10 @@ Pets: Cats or dogs
               <x-import component-from-global-scope="PulseUI.Button" variant="outline" style="color:var(--pc-text);border-color:var(--pc-line-3);" disabled="{{ revealNowDisabled }}" sc-camel-on-click="{{ revealNow }}" hint-size="150px,44px">Reveal now</x-import>
             </div>
           </div>
-          <x-import component-from-global-scope="PulseUI.Card" variant="slate" style="flex:1 1 260px;min-width:260px;" hint-size="280px,320px">
+          <x-import component-from-global-scope="PulseUI.Card" style="flex:1 1 260px;min-width:260px;" hint-size="280px,320px">
             <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}">
               <div class="pc-join pc-join-tile" style="box-sizing:border-box;width:0;min-width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.12);">
-                <svg class="pc-join-qr" sc-camel-view-box="{{ qrBox }}" role="img" aria-label="QR code of the join link" shape-rendering="crispEdges" style="width:{{ qrTileSize }};height:{{ qrTileSize }};display:block;flex:none;background:#FFFFFF;border-radius:4px;"><path d="{{ qrPath }}" style="fill:#000000;"></path></svg>
+                <x-import component-from-global-scope="PulseUI.Qr" sc-camel-class-name="pc-join-qr" path="{{ qr.path }}" box="{{ qr.box }}" size="{{ qr.tile }}" hint-size="82px,82px"></x-import>
                 <div style="flex:1 1 auto;min-width:0;font-size:14px;line-height:1.4;font-weight:500;color:#FFFFFF;">Scan to join · <span style="font-weight:600;letter-spacing:0.14em;color:var(--pc-accent);">{{ room }}</span></div>
               </div>
             </sc-if>
@@ -5336,7 +5351,6 @@ Pets: Cats or dogs
       <section data-screen-label="Answer card" style="max-width:880px;margin:0 auto;">
         <div class="pc-prow" style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
           <x-import component-from-global-scope="PulseUI.SectionLabel" hint-size="170px,16px">Question {{ qNum }} of {{ qTotal }}</x-import>
-          <div class="pc-prow-gap" style="flex:1;"></div>
           <span class="pc-prow-me" style="font-size:12px;font-weight:600;letter-spacing:0.1em;color:var(--pc-body);">ANSWERING AS <span style="color:var(--pc-accent);">{{ playName }}</span></span>
           <button class="pc-prow-btn" sc-camel-on-click="{{ exitAnswer }}" style="font-family:var(--font-sans);font-size:12px;font-weight:600;color:var(--pc-muted);background:none;border:none;cursor:pointer;padding:4px 2px;" style-hover="color:var(--pc-accent-2);">{{ exitLabel }}</button>
         </div>
@@ -5380,7 +5394,6 @@ Pets: Cats or dogs
       <section data-screen-label="Locked in" style="max-width:720px;margin:0 auto;">
         <div class="pc-prow" style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
           <x-import component-from-global-scope="PulseUI.SectionLabel" rule="{{ true }}" hint-size="170px,16px">Question {{ qNum }} of {{ qTotal }}</x-import>
-          <div class="pc-prow-gap" style="flex:1;"></div>
           <span class="pc-prow-me" style="font-size:12px;font-weight:600;letter-spacing:0.1em;color:var(--pc-body);">YOU ARE <span style="color:var(--pc-accent);">{{ playName }}</span></span>
         </div>
         <div style="background:var(--pc-card);border:1px solid var(--pc-line);border-radius:8px;padding:34px 32px 30px;text-align:center;box-shadow:0 10px 10px rgba(0,0,0,0.05);">
@@ -5402,7 +5415,6 @@ Pets: Cats or dogs
       <section data-screen-label="Waiting lobby" style="max-width:720px;margin:0 auto;">
         <div class="pc-prow" style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
           <x-import component-from-global-scope="PulseUI.SectionLabel" rule="{{ true }}" hint-size="190px,16px">Room {{ room }} · waiting lobby</x-import>
-          <div class="pc-prow-gap" style="flex:1;"></div>
           <span class="pc-prow-me" style="font-size:12px;font-weight:600;letter-spacing:0.1em;color:var(--pc-body);">YOU ARE <span style="color:var(--pc-accent);">{{ playName }}</span></span>
           <button class="pc-prow-btn" sc-camel-on-click="{{ leaveRoom }}" style="font-family:var(--font-sans);font-size:12px;font-weight:600;color:var(--pc-muted);background:none;border:none;cursor:pointer;padding:4px 2px;" style-hover="color:var(--pc-accent-2);">Leave room</button>
         </div>
@@ -5432,7 +5444,6 @@ Pets: Cats or dogs
       <section data-screen-label="Player results" style="max-width:880px;margin:0 auto;">
         <div class="pc-prow" style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
           <x-import component-from-global-scope="PulseUI.SectionLabel" rule="{{ true }}" hint-size="170px,16px">{{ specEyebrow }}</x-import>
-          <div class="pc-prow-gap" style="flex:1;"></div>
           <span class="pc-prow-me" style="font-size:12px;font-weight:600;letter-spacing:0.1em;color:var(--pc-body);">YOU ARE <span style="color:var(--pc-accent);">{{ playName }}</span></span>
           <button class="pc-prow-btn" sc-camel-on-click="{{ leaveRoom }}" style="font-family:var(--font-sans);font-size:12px;font-weight:600;color:var(--pc-muted);background:none;border:none;cursor:pointer;padding:4px 2px;" style-hover="color:var(--pc-accent-2);">Leave room</button>
         </div>
@@ -5628,7 +5639,7 @@ Pets: Cats or dogs
               <x-import component-from-global-scope="PulseUI.Button" size="lg" sc-camel-with-chevron="{{ true }}" sc-camel-on-click="{{ doNext }}" hint-size="200px,48px">{{ nextLabel }}</x-import>
             </div>
           </div>
-          <x-import component-from-global-scope="PulseUI.Card" variant="slate" style="flex:1 1 260px;min-width:260px;" hint-size="280px,320px">
+          <x-import component-from-global-scope="PulseUI.Card" style="flex:1 1 260px;min-width:260px;" hint-size="280px,320px">
             <div style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--pc-accent);margin-bottom:2px;">STANDINGS</div>
             <div style="font-size:12px;color:var(--pc-pale);margin-bottom:12px;">{{ standThrough }}</div>
             <sc-for list="{{ standRows }}" as="s" hint-placeholder-count="4">
@@ -5970,6 +5981,10 @@ class Component extends DCLogic {
       ["Undead: Zombie or ghost?","Zombie","Ghost",0.65,false],["Zombie apocalypse: Fight or hide?","Fight","Hide",0.35,false]
     ];
     this.BROKERS = ["wss://broker.emqx.io:8084/mqtt", "wss://broker.hivemq.com:8884/mqtt", "wss://test.mosquitto.org:8081"];
+    // Every room's channels start with this prefix. It is named after the message format (the payload's v: 14), not
+    // the app version, so later versions keep meeting older hosts. It changes only when the message format changes,
+    // and then together with v.
+    this.CHANNEL = "pulsecheck-game/p14/";
     this.KEY = "pulse-check-v18";
     this.THEME_KEY = "pulse-check-theme";
     this.BANK_KEY = "pulse-check-bank";
@@ -6259,7 +6274,7 @@ class Component extends DCLogic {
     else this.setState({ now });
   }
   // ── network ──
-  base() { return "pulsecheck-game/v18/" + this.state.room; }
+  base() { return this.CHANNEL + this.state.room; }
   whenMqtt(cb, n) { if (window.mqtt) return cb(); if ((n || 0) > 80) { this.setState({ conn: "off" }); return; } setTimeout(() => this.whenMqtt(cb, (n || 0) + 1), 250); }
   connect() { if (this.blocked) return; this.setState({ conn: "connecting" }); this.whenMqtt(() => this.tryBroker(0)); }
   tryBroker(i) {
@@ -6630,10 +6645,8 @@ class Component extends DCLogic {
     // The live question's join tile is width:0 with min-width:100%: it fills the LOCKED IN card without widening it
     // (that card is as wide as its roster), and its text wraps under the QR code when the card is narrow.
     const jl = vals.isHostRoom ? this.joinLink(S.room) : null, qr = jl ? this.qrOf(jl.link) : null;
-    vals.hasJoin = !!qr; vals.noJoin = !qr;
-    vals.joinBase = jl ? jl.base : "";
-    vals.qrPath = qr ? qr.path : ""; vals.qrBox = qr ? qr.box : "0 0 1 1";
-    vals.qrLobbySize = qr ? qr.lobby : "132px"; vals.qrTileSize = qr ? qr.tile : "96px";
+    // qr (path, box and the lobby and tile sizes, for PulseUI.Qr) and joinBase are read only where hasJoin shows them.
+    vals.hasJoin = !!qr; vals.qr = qr; vals.joinBase = jl && jl.base;
     vals.themeVal = S.theme === "halloween" ? "halloween" : "standard";
     vals.onTheme = e => {
       if (this.blocked) return;
