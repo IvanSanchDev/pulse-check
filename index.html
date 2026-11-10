@@ -345,10 +345,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     // The ManyHats Studios logo (v19): 40 px tall, in the space the rule had (the label with the logo has no rule).
     // The label's text sits beside it, centered on it, and wraps beside it, never under it. Both themes share the hard
     // hat, the top hat and the pointer; the hat on top and the hard hat's color are the theme's (.pc-hw on the game
-    // root shows Halloween's). A label with the logo is a block-level flex row, so its line is the logo's 40 px
-    // with no extra line-box space below.
+    // root shows Halloween's). A label with the logo (class pc-label-has-logo) is a block-level flex row, so its line is
+    // the logo's 40 px with no extra line-box space below.
     ".pc-label-logo{flex:none;display:block;width:32px;height:40px;}",
-    ".pc-label:has(> .pc-label-logo){display:flex;gap:10px;}",
+    ".pc-label.pc-label-has-logo{display:flex;gap:10px;}",
     ".pc-label-logo-hw,.pc-hw .pc-label-logo-std{display:none;}",
     ".pc-hw .pc-label-logo-hw{display:inline;}",
     ".pc-label-logo-cap{fill:#F2A541;}",
@@ -427,7 +427,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   // if both are set; the two ManyHats labels have no rule since v19).
   function SectionLabel(props) {
     var p = rest(props, ["rule", "logo", "children", "className"]);
-    p.className = cls(["pc-label", props.className]);
+    p.className = cls(["pc-label", props.logo && "pc-label-has-logo", props.className]);
     return h("span", p, props.rule ? h("span", { className: "pc-label-rule", "aria-hidden": "true" }) : null,
       props.logo ? h(Logo) : null, props.children);
   }
@@ -4740,6 +4740,7 @@ if (location.protocol === "file:" && !window.__resources) {
        the QR code and "Scan to join" with the room code. width:0 with min-width:100% keeps it from widening its card. */
     .pc-join-tile{box-sizing:border-box;width:0;min-width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.12);}
     .pc-join-tile-text{flex:1 1 auto;min-width:0;font-size:14px;line-height:1.4;font-weight:500;color:#FFFFFF;}
+    .pc-join-tile-room{font-weight:600;letter-spacing:0.14em;color:var(--pc-accent);}
     /* The host's question and results headings ("Question 1 of 10 · live" and the question dots): the label can't wrap
        its own text, so the dots move under it when the line can't hold both (before v19 they ran off the page). */
     .pc-qhead{flex-wrap:wrap;row-gap:10px;}
@@ -4749,7 +4750,8 @@ if (location.protocol === "file:" && !window.__resources) {
        (its 660 px cap would hold only about eight players). */
     .pc-res-card{padding:28px 28px 24px;}
     .pc-res-scroll{max-height:660px;}
-    .pc-res-grid{grid-template-columns:minmax(76px,170px) minmax(80px,1fr) minmax(54px,130px) minmax(72px,136px) minmax(80px,120px) 40px;column-gap:6px;padding-right:18px;}
+    .pc-res-grid{grid-template-columns:minmax(76px,170px) minmax(80px,1fr) minmax(54px,130px) minmax(72px,136px) minmax(80px,120px) 40px;grid-template-areas:"name track pick guess res pts";column-gap:6px;padding-right:18px;}
+    .pc-res-grid>:nth-child(1){grid-area:name;}.pc-res-grid>:nth-child(2){grid-area:track;}.pc-res-grid>:nth-child(3){grid-area:pick;}.pc-res-grid>:nth-child(4){grid-area:guess;}.pc-res-grid>:nth-child(5){grid-area:res;}.pc-res-grid>:nth-child(6){grid-area:pts;}
     /* Final results (section 2): the standings' six columns. At 780 px and below each player takes two lines (rank, name
        and points, then the three counts under them; long names end with an ellipsis); at 560 px and below the card's
        side padding, the winner's box and its 44 px line (to 32 px) shrink, the Halloween pumpkin moves into the box's top-right corner with the text
@@ -4757,9 +4759,18 @@ if (location.protocol === "file:" && !window.__resources) {
        scrolling inside the page at 780 px and below. */
     .pc-fin-card{padding-left:24px;padding-right:24px;}
     .pc-fin-scroll{max-height:640px;}
-    .pc-fin-grid{grid-template-columns:56px 1fr 90px 130px 110px 110px;column-gap:12px;}
-    /* A name too long for its line (a single word of 24 letters) breaks inside the word instead of running out of its box. */
-    .pc-fin-win,.pc-fin-ment,.pc-fin-name{overflow-wrap:anywhere;}
+    .pc-fin-grid{grid-template-columns:56px 1fr 90px 130px 110px 110px;grid-template-areas:"rank name pts perf flat sup";column-gap:12px;}
+    .pc-fin-grid>:nth-child(1){grid-area:rank;}.pc-fin-grid>:nth-child(2){grid-area:name;}.pc-fin-grid>:nth-child(3){grid-area:pts;}.pc-fin-grid>:nth-child(4){grid-area:perf;}.pc-fin-grid>:nth-child(5){grid-area:flat;}.pc-fin-grid>:nth-child(6){grid-area:sup;}
+    /* The winner's box: its padding, the 44 px winner's line, the numbers 56 px apart and, in Halloween, the pumpkin
+       floating at its right (each changes at 560 px and below). */
+    .pc-fin-hero{padding:44px 44px 40px;}
+    .pc-fin-win{font-size:44px;}
+    .pc-fin-stats{gap:56px;}
+    .pc-fin-pumpkin{position:absolute;right:56px;top:34px;}
+    .pc-fin-pumpkin svg{width:120px;height:120px;}
+    /* A name too long for its line (a single word of 24 letters) breaks inside the word instead of running out of its box
+       (the winner's line, an honorable mention, a final results name, the lobby's player list). */
+    .pc-break{overflow-wrap:anywhere;}
     /* The Halloween spider on the answer card hangs outside its top-right corner; at 1008 px and below (where it would
        stick out past the viewport, a 15 px scrollbar included) it hangs inside the corner, beside the question. */
     .pc-spider{right:-58px;top:-46px;animation:hw-dangle 5s ease-in-out infinite;}
@@ -4774,23 +4785,27 @@ if (location.protocol === "file:" && !window.__resources) {
     /* Final results' standings on two lines per player (see .pc-fin-grid above): at 780 px and below, and in test mode
        whenever the host column beside the PLAYER VIEW panel is too narrow for the six columns (it needs 650 px with the
        demo names, so from 1007 to about 1100 px of viewport). */
-    @media (max-width:780px){.pc-fin-grid{grid-template-columns:40px repeat(3,minmax(0,1fr));grid-template-areas:"rank name name pts" ". perf flat sup";column-gap:10px;row-gap:2px;}.pc-fin-grid>:nth-child(1){grid-area:rank;}.pc-fin-grid>:nth-child(2){grid-area:name;}.pc-fin-grid>:nth-child(3){grid-area:pts;}.pc-fin-grid>:nth-child(4){grid-area:perf;}.pc-fin-grid>:nth-child(5){grid-area:flat;}.pc-fin-grid>:nth-child(6){grid-area:sup;}.pc-fin-who{min-width:0;}.pc-fin-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.pc-fin-scroll{max-height:none;}}
-    @container pc-host (width < 660px){.pc-fin-grid{grid-template-columns:40px repeat(3,minmax(0,1fr));grid-template-areas:"rank name name pts" ". perf flat sup";column-gap:10px;row-gap:2px;}.pc-fin-grid>:nth-child(1){grid-area:rank;}.pc-fin-grid>:nth-child(2){grid-area:name;}.pc-fin-grid>:nth-child(3){grid-area:pts;}.pc-fin-grid>:nth-child(4){grid-area:perf;}.pc-fin-grid>:nth-child(5){grid-area:flat;}.pc-fin-grid>:nth-child(6){grid-area:sup;}.pc-fin-who{min-width:0;}.pc-fin-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.pc-fin-scroll{max-height:none;}}
+    @media (max-width:780px){.pc-fin-grid{grid-template-columns:40px repeat(3,minmax(0,1fr));grid-template-areas:"rank name name pts" ". perf flat sup";column-gap:10px;row-gap:2px;}.pc-fin-who{min-width:0;}.pc-fin-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.pc-fin-scroll{max-height:none;}}
+    @container pc-host (width < 660px){.pc-fin-grid{grid-template-columns:40px repeat(3,minmax(0,1fr));grid-template-areas:"rank name name pts" ". perf flat sup";column-gap:10px;row-gap:2px;}.pc-fin-who{min-width:0;}.pc-fin-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.pc-fin-scroll{max-height:none;}}
     @media (max-width:780px){.pc-start-row{flex-wrap:wrap;}.pc-start-btn{flex:1 1 100%;}.pc-start-hint{flex:1 1 0;min-width:0;}.pc-start-gap{display:none;}.pc-head-brand{display:grid;grid-template-columns:auto auto;row-gap:0;line-height:15px;}.pc-head-name{display:contents;}.pc-head-tag{grid-column:1 / -1;}.pc-head-sep{display:none;}.pc-head:has(.pc-head-steps) .pc-head-room{order:2;}.pc-res-grid{grid-template-columns:minmax(60px,170px) minmax(60px,1fr) minmax(46px,130px) minmax(60px,136px) minmax(80px,120px) 36px;padding-right:8px;}}
     @media (max-width:600px){.pc-head-room{order:2;}.pc-fin-btns{flex-direction:column;}.pc-head:has(.pc-head-room)::after{display:block;}}
-    @media (max-width:560px){.pc-bank-add{flex-wrap:wrap;}.pc-bank-addin{flex:1 1 100% !important;}.pc-bank-row{flex-wrap:wrap;gap:8px !important;}.pc-bank-text,.pc-bank-editin{flex:1 1 100% !important;order:1;}.pc-bank-edit,.pc-bank-save{margin-left:auto;}.pc-bank-sel{flex:1 1 0;}.pc-bank-bar{row-gap:0 !important;}.pc-bank-bar p{margin-top:8px !important;}.pc-bank-brk{display:block;flex:0 0 100%;height:8px;}.pc-bank-namein{flex:1 1 100% !important;max-width:none !important;margin-bottom:8px;}.pc-head{padding-left:16px;padding-right:16px;column-gap:8px;}.pc-main{padding-left:16px !important;padding-right:16px !important;}.pc-ready-row{flex-wrap:wrap;}.pc-name-in{min-width:0;}.pc-qs-row{flex-wrap:wrap;row-gap:2px;}.pc-sel-row{flex-wrap:wrap;row-gap:2px !important;}.pc-qs-pair,.pc-sel-pair{flex:1 1 100%;padding-left:36px;}.pc-prow .pc-label{flex:1 1 100%;}.pc-prow::after{display:none;}.pc-prow-me{flex:1 1 0;min-width:0;}.pc-res-card{padding:20px 18px 18px;}.pc-res-scroll{max-height:none;}.pc-res-grid{grid-template-columns:minmax(60px,1fr) minmax(0,1fr) minmax(0,1fr) 80px;grid-template-areas:"name name name pts" "track pick guess res";column-gap:8px;row-gap:4px;padding-right:0;}.pc-res-grid>:nth-child(1){grid-area:name;}.pc-res-grid>:nth-child(2){grid-area:track;}.pc-res-grid>:nth-child(3){grid-area:pick;}.pc-res-grid>:nth-child(4){grid-area:guess;}.pc-res-grid>:nth-child(5){grid-area:res;}.pc-res-grid>:nth-child(6){grid-area:pts;}.pc-res-grid>:nth-child(2){margin-left:8px;}.pc-fin-card{padding-left:16px;padding-right:16px;}.pc-fin-hero{padding:28px 22px 26px !important;}.pc-fin-win{font-size:32px !important;}.pc-fin-stats{flex-wrap:wrap;gap:16px 28px !important;}.pc-fin-pumpkin{position:static !important;float:right;margin:0 -4px 6px 10px;}.pc-fin-pumpkin svg{width:64px !important;height:64px !important;}}
+    @media (max-width:560px){.pc-bank-add{flex-wrap:wrap;}.pc-bank-addin{flex:1 1 100% !important;}.pc-bank-row{flex-wrap:wrap;gap:8px !important;}.pc-bank-text,.pc-bank-editin{flex:1 1 100% !important;order:1;}.pc-bank-edit,.pc-bank-save{margin-left:auto;}.pc-bank-sel{flex:1 1 0;}.pc-bank-bar{row-gap:0 !important;}.pc-bank-bar p{margin-top:8px !important;}.pc-bank-brk{display:block;flex:0 0 100%;height:8px;}.pc-bank-namein{flex:1 1 100% !important;max-width:none !important;margin-bottom:8px;}.pc-head{padding-left:16px;padding-right:16px;column-gap:8px;}.pc-main{padding-left:16px !important;padding-right:16px !important;}.pc-ready-row{flex-wrap:wrap;}.pc-name-in{min-width:0;}.pc-qs-row{flex-wrap:wrap;row-gap:2px;}.pc-sel-row{flex-wrap:wrap;row-gap:2px !important;}.pc-qs-pair,.pc-sel-pair{flex:1 1 100%;padding-left:36px;}.pc-prow .pc-label{flex:1 1 100%;}.pc-prow::after{display:none;}.pc-prow-me{flex:1 1 0;min-width:0;}.pc-res-card{padding:20px 18px 18px;}.pc-res-scroll{max-height:none;}.pc-res-grid{grid-template-columns:minmax(60px,1fr) minmax(0,1fr) minmax(0,1fr) 80px;grid-template-areas:"name name name pts" "track pick guess res";column-gap:8px;row-gap:4px;padding-right:0;}.pc-res-grid>:nth-child(2){margin-left:8px;}.pc-fin-card{padding-left:16px;padding-right:16px;}.pc-fin-hero{padding:28px 22px 26px;}.pc-fin-win{font-size:32px;}.pc-fin-stats{flex-wrap:wrap;gap:16px 28px;}.pc-fin-pumpkin{position:static;float:right;margin:0 -4px 6px 10px;}.pc-fin-pumpkin svg{width:64px;height:64px;}}
     /* iPhone Safari zooms into any focused text box or select under 16 px and stays zoomed, so at 560 px and below, and
        on touch screens of any width (a phone held sideways), they all read at 16 px: each box's font size is
        var(--pc-input-fs, its own size). The 18 px room code box keeps its size. */
     @media (max-width:560px), (hover:none) and (pointer:coarse){.pc-root{--pc-input-fs:16px;}}
-    /* v19, player screens at 320 px: under 375 px the answer card's percentage keeps 92 px (room for 100%) and the gap
-       12 px, so the slider row fits inside the card; the slider may shrink below its own default width. */
-    @media (max-width:374px){.pc-pred-row{gap:12px !important;}.pc-pred-row input[type="range"]{min-width:0;}.pc-pred-num{min-width:92px !important;}}
+    /* v19, player screens at 320 px: the answer card's slider row (the slider, which may shrink below its own default
+       width, and the percentage). Under 375 px the percentage keeps 92 px (room for 100%) and the gap 12 px, so the row
+       fits inside the card; from 375 px up the slider is wider than its default width, so its minimum changes nothing. */
+    .pc-pred-row{gap:20px;}.pc-pred-row input[type="range"]{min-width:0;}.pc-pred-num{min-width:120px;}
+    @media (max-width:374px){.pc-pred-row{gap:12px;}.pc-pred-num{min-width:92px;}}
     /* v19, the player's results after a question: each lane's pulse track (the 1fr column) only gets what is left once the
        name and the beats columns reach their 150 and 110 px caps, so it is 0 px under a 418 px page. At 480 px and below
        each lane takes two lines: the name, the beats and the points, then the track the whole width under them, 6 px in
        from each side so a guess of 0 or 100 (its dot centered on the end) stays inside the lane. */
-    @media (max-width:480px){.pc-plane{grid-template-columns:minmax(0,1fr) auto 44px !important;grid-template-areas:"name sub pts" "track track track";}.pc-plane>:nth-child(1){grid-area:name;}.pc-plane>:nth-child(2){grid-area:track;margin:0 6px;}.pc-plane>:nth-child(3){grid-area:sub;}.pc-plane>:nth-child(4){grid-area:pts;}}
+    .pc-plane{grid-template-columns:minmax(80px,150px) minmax(0,1fr) minmax(70px,110px) 44px;grid-template-areas:"name track sub pts";}
+    .pc-plane>:nth-child(1){grid-area:name;}.pc-plane>:nth-child(2){grid-area:track;}.pc-plane>:nth-child(3){grid-area:sub;}.pc-plane>:nth-child(4){grid-area:pts;}
+    @media (max-width:480px){.pc-plane{grid-template-columns:minmax(0,1fr) auto 44px;grid-template-areas:"name sub pts" "track track track";}.pc-plane>:nth-child(2){margin:0 6px;}}
   </style>
 </helmet>
 <div class="{{ rootClass }}" style="{{ rootStyle }}">
@@ -5252,7 +5267,7 @@ Pets: Cats or dogs
               <sc-for list="{{ roster }}" as="p" hint-placeholder-count="4">
                 <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--pc-rule);">
                   <span style="width:10px;height:10px;border-radius:2px;background:{{ p.color }};flex:none;"></span>
-                  <span style="font-size:15px;font-weight:500;color:var(--pc-text);overflow-wrap:anywhere;">{{ p.name }}</span>
+                  <span class="pc-break" style="font-size:15px;font-weight:500;color:var(--pc-text);">{{ p.name }}</span>
                   <span style="{{ p.tagStyle }}">{{ p.tag }}</span>
                   <div style="flex:1;"></div>
                   <button sc-camel-on-click="{{ p.onRemove }}" style="font-family:var(--font-sans);font-size:12px;color:var(--pc-muted);background:none;border:none;cursor:pointer;padding:4px 6px;" style-hover="color:var(--pc-accent-2);">Remove</button>
@@ -5372,7 +5387,7 @@ Pets: Cats or dogs
             <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}">
               <div class="pc-join pc-join-tile">
                 <x-import component-from-global-scope="PulseUI.Qr" sc-camel-class-name="pc-join-qr" path="{{ qr.path }}" box="{{ qr.box }}" size="{{ qr.tile }}" hint-size="82px,82px"></x-import>
-                <div class="pc-join-tile-text">Scan to join · <span style="font-weight:600;letter-spacing:0.14em;color:var(--pc-accent);">{{ room }}</span></div>
+                <div class="pc-join-tile-text">Scan to join · <span class="pc-join-tile-room">{{ room }}</span></div>
               </div>
             </sc-if>
             <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;">
@@ -5422,9 +5437,9 @@ Pets: Cats or dogs
           </div>
           <div style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--pc-muted);margin-bottom:4px;">YOUR PREDICTION</div>
           <p style="margin:0 0 16px;font-size:14px;color:var(--pc-body);">What share of {{ dept }} picks {{ qA }}?</p>
-          <div class="pc-pred-row" style="display:flex;align-items:center;gap:20px;margin-bottom:8px;">
+          <div class="pc-pred-row" style="display:flex;align-items:center;margin-bottom:8px;">
             <input type="range" min="0" max="100" step="1" value="{{ predVal }}" sc-camel-on-change="{{ onPred }}" style="{{ sliderStyle }}">
-            <div class="pc-pred-num" style="min-width:120px;text-align:right;">
+            <div class="pc-pred-num" style="text-align:right;">
               <span style="font-size:38px;line-height:1;font-weight:600;color:#FFFFFF;">{{ predVal }}%</span>
             </div>
           </div>
@@ -5526,7 +5541,7 @@ Pets: Cats or dogs
               <span style="font-size:12px;color:var(--pc-muted);">{{ tallyLine }}</span>
             </div>
             <sc-for list="{{ specLanes }}" as="r" hint-placeholder-count="4">
-              <div class="pc-plane" style="display:grid;grid-template-columns:minmax(80px,150px) minmax(0,1fr) minmax(70px,110px) 44px;gap:0 12px;align-items:center;border-bottom:1px solid var(--pc-rule);padding:6px 0;">
+              <div class="pc-plane" style="display:grid;gap:0 12px;align-items:center;border-bottom:1px solid var(--pc-rule);padding:6px 0;">
                 <span style="{{ r.nameStyle }}">{{ r.name }}</span>
                 <div style="position:relative;height:26px;">
                   <div style="position:absolute;left:0;right:0;top:50%;height:1px;background:var(--pc-line);"></div>
@@ -5695,7 +5710,7 @@ Pets: Cats or dogs
             <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}">
               <div class="pc-join pc-join-tile">
                 <x-import component-from-global-scope="PulseUI.Qr" sc-camel-class-name="pc-join-qr" path="{{ qr.path }}" box="{{ qr.box }}" size="{{ qr.tile }}" hint-size="82px,82px"></x-import>
-                <div class="pc-join-tile-text">Scan to join · <span style="font-weight:600;letter-spacing:0.14em;color:var(--pc-accent);">{{ room }}</span></div>
+                <div class="pc-join-tile-text">Scan to join · <span class="pc-join-tile-room">{{ room }}</span></div>
               </div>
             </sc-if>
             <div style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--pc-accent);margin-bottom:2px;">STANDINGS</div>
@@ -5744,10 +5759,10 @@ Pets: Cats or dogs
             <path d="M0 58 L200 58 l16 -9 l14 9 l9 0 l9 -42 l11 56 l9 -15 l13 0 l18 -11 l16 11 L620 58" style="{{ finalTraceStyle }}"></path>
           </svg>
           <div style="display:flex;align-items:center;gap:10px;font-size:12px;font-weight:500;letter-spacing:0.1em;color:var(--pc-accent);margin-bottom:12px;"><sc-if value="{{ hw }}" hint-placeholder-val="{{ false }}"><svg sc-camel-view-box="0 0 24 24" style="width:20px;height:20px;display:block;flex:none;" aria-hidden="true"><path d="M12 7 C11.4 4.6 12.4 2.8 14.4 2.2" style="fill:none;stroke:#8BD450;stroke-width:2;stroke-linecap:round;"></path><ellipse cx="7.6" cy="14.2" rx="5.4" ry="7" style="fill:var(--pc-accent-2);"></ellipse><ellipse cx="16.4" cy="14.2" rx="5.4" ry="7" style="fill:var(--pc-accent-2);"></ellipse><ellipse cx="12" cy="14.2" rx="5.8" ry="7.6" style="fill:var(--pc-accent);"></ellipse><path d="M8.2 12.4 L9.8 10 L11.2 12.4 Z M12.8 12.4 L14.2 10 L15.8 12.4 Z" style="fill:#131016;"></path><path d="M7.8 15.4 Q12 19.6 16.2 15.4 Q12 17.2 7.8 15.4 Z" style="fill:#131016;"></path></svg></sc-if>FINAL RESULTS{{ T.headPumpkin }}</div>
-          <sc-if value="{{ hw }}" hint-placeholder-val="{{ false }}"><div class="pc-fin-pumpkin" data-hw-motion="1" style="position:absolute;right:56px;top:34px;pointer-events:none;animation:hw-float 4s ease-in-out infinite;"><svg sc-camel-view-box="0 0 24 24" style="width:120px;height:120px;display:block;flex:none;" aria-hidden="true"><path d="M12 7 C11.4 4.6 12.4 2.8 14.4 2.2" style="fill:none;stroke:#8BD450;stroke-width:2;stroke-linecap:round;"></path><ellipse cx="7.6" cy="14.2" rx="5.4" ry="7" style="fill:var(--pc-accent-2);"></ellipse><ellipse cx="16.4" cy="14.2" rx="5.4" ry="7" style="fill:var(--pc-accent-2);"></ellipse><ellipse cx="12" cy="14.2" rx="5.8" ry="7.6" style="fill:var(--pc-accent);"></ellipse><path d="M8.2 12.4 L9.8 10 L11.2 12.4 Z M12.8 12.4 L14.2 10 L15.8 12.4 Z" style="fill:#131016;"></path><path d="M7.8 15.4 Q12 19.6 16.2 15.4 Q12 17.2 7.8 15.4 Z" style="fill:#131016;"></path></svg></div></sc-if>
-          <h1 class="pc-fin-win" style="font-size:44px;line-height:1.18;font-weight:600;color:#FFFFFF;margin:0 0 10px;max-width:720px;">{{ winnerLine }}</h1>
+          <sc-if value="{{ hw }}" hint-placeholder-val="{{ false }}"><div class="pc-fin-pumpkin" data-hw-motion="1" style="pointer-events:none;animation:hw-float 4s ease-in-out infinite;"><svg sc-camel-view-box="0 0 24 24" style="display:block;flex:none;" aria-hidden="true"><path d="M12 7 C11.4 4.6 12.4 2.8 14.4 2.2" style="fill:none;stroke:#8BD450;stroke-width:2;stroke-linecap:round;"></path><ellipse cx="7.6" cy="14.2" rx="5.4" ry="7" style="fill:var(--pc-accent-2);"></ellipse><ellipse cx="16.4" cy="14.2" rx="5.4" ry="7" style="fill:var(--pc-accent-2);"></ellipse><ellipse cx="12" cy="14.2" rx="5.8" ry="7.6" style="fill:var(--pc-accent);"></ellipse><path d="M8.2 12.4 L9.8 10 L11.2 12.4 Z M12.8 12.4 L14.2 10 L15.8 12.4 Z" style="fill:#131016;"></path><path d="M7.8 15.4 Q12 19.6 16.2 15.4 Q12 17.2 7.8 15.4 Z" style="fill:#131016;"></path></svg></div></sc-if>
+          <h1 class="pc-fin-win pc-break" style="line-height:1.18;font-weight:600;color:#FFFFFF;margin:0 0 10px;max-width:720px;">{{ winnerLine }}</h1>
           <p style="font-size:16px;line-height:1.6;color:var(--pc-soft);margin:0 0 28px;max-width:560px;">Closest to the true pulse of {{ dept }} across {{ qTotal }} questions. {{ winnerSub }}</p>
-          <div class="pc-fin-stats" style="display:flex;gap:56px;position:relative;">
+          <div class="pc-fin-stats" style="display:flex;position:relative;">
             <div>
               <div style="font-size:36px;font-weight:600;color:var(--pc-accent);line-height:1;">{{ winnerPts }}</div>
               <div style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--pc-soft);margin-top:6px;">WINNING POINTS</div>
@@ -5769,7 +5784,7 @@ Pets: Cats or dogs
               <sc-for list="{{ mentions }}" as="m" hint-placeholder-count="4">
                 <div style="background:var(--pc-card);border:1px solid var(--pc-line);border-radius:8px;padding:18px 20px;min-width:0;">
                   <div style="font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--pc-accent);">{{ m.label }}</div>
-                  <div class="pc-fin-ment" style="font-size:19px;line-height:1.3;font-weight:600;color:#FFFFFF;margin:8px 0 6px;text-wrap:pretty;">{{ m.names }}</div>
+                  <div class="pc-fin-ment pc-break" style="font-size:19px;line-height:1.3;font-weight:600;color:#FFFFFF;margin:8px 0 6px;text-wrap:pretty;">{{ m.names }}</div>
                   <div style="font-size:13px;line-height:1.5;color:var(--pc-body);text-wrap:pretty;">{{ m.stat }}</div>
                 </div>
               </sc-for>
@@ -5789,7 +5804,7 @@ Pets: Cats or dogs
           <sc-for list="{{ finalRows }}" as="f" hint-placeholder-count="4">
             <div class="pc-fin-grid" style="display:grid;align-items:center;padding:11px 0;border-bottom:1px solid var(--pc-rule);">
               <span style="font-size:14px;font-weight:600;color:{{ f.rankColor }};">{{ f.rank }}</span>
-              <span class="pc-fin-who" style="display:flex;align-items:center;gap:9px;font-size:15px;font-weight:500;color:var(--pc-text);"><span style="width:9px;height:9px;border-radius:2px;background:{{ f.color }};flex:none;"></span><span class="pc-fin-name">{{ f.name }}</span></span>
+              <span class="pc-fin-who" style="display:flex;align-items:center;gap:9px;font-size:15px;font-weight:500;color:var(--pc-text);"><span style="width:9px;height:9px;border-radius:2px;background:{{ f.color }};flex:none;"></span><span class="pc-fin-name pc-break">{{ f.name }}</span></span>
               <span style="font-size:16px;font-weight:600;color:var(--pc-text);text-align:right;">{{ f.pts }}</span>
               <span style="font-size:14px;color:var(--pc-label);text-align:right;">{{ f.perfect }}</span>
               <span style="font-size:14px;color:var(--pc-label);text-align:right;">{{ f.flat }}</span>
@@ -6051,14 +6066,15 @@ class Component extends DCLogic {
     this.FAIR_MS = 6000; this.AGAIN_MS = 1000;
     // A player connected to a relay that has no state for the room within NOROOM_MS moves on to the next relay: the room's
     // state is retained, so on the host's relay it arrives right after subscribing, and a host may sit on any relay.
-    this.NOROOM_MS = 5000;
+    // After a whole round in which no relay had the room (no host yet, or a code no host uses), the next round waits
+    // NOROOM_WAIT_MS (v19 spec section 6, release review fix).
+    this.NOROOM_MS = 5000; this.NOROOM_WAIT_MS = 15000;
     // Every room's channels start with this prefix. It is named after the message format (the payload's v: 14), not
     // the app version, so later versions keep meeting older hosts. It changes only when the message format changes,
     // and then together with v.
     this.CHANNEL = "pulsecheck-game/p14/";
     this.KEY = "pulse-check-v19";
-    // The version shown at the bottom of the start page. The packager sets it to the packaged version's label (v19,
-    // or v12-B for a branch), the same one the tab title uses, so a packaged file always shows its own number.
+    // The version shown at the bottom of the start page; the packager fills it in (package.js, above stampVersion).
     this.VERSION = "v19";
     this.THEME_KEY = "pulse-check-theme";
     this.BANK_KEY = "pulse-check-bank";
@@ -6359,14 +6375,23 @@ class Component extends DCLogic {
   // who finds no room state on a relay moves on until it finds the host's. From then on that relay is home (_home: the
   // host's relay once connected, a player's once the room's state arrived there): a lost connection retries only home,
   // OFFLINE after OFFLINE_MS, LIVE again when it answers, and never moves away, as the others are there.
+  // A player's move to the next relay in search of the room leaves the status as it was (LIVE stays LIVE while the next
+  // relay is tried), and a round in which no relay had the room waits NOROOM_WAIT_MS before the next, a pause that does
+  // not count toward OFFLINE. Timers: _rt the next try, _gT the guard on a try, _nsT the no-room move, _offT OFFLINE.
   netStop() {
-    this._gen = (this._gen || 0) + 1; this._home = null;
-    clearTimeout(this._rt); clearTimeout(this._nsT); clearTimeout(this._offT); this._offT = null;
-    const c = this.client; this.client = null;
-    if (c) { try { c.end(true); } catch (e) {} }
+    this._gen = (this._gen || 0) + 1; this._home = null; this._roomless = false;
+    clearTimeout(this._rt); clearTimeout(this._gT); clearTimeout(this._nsT); clearTimeout(this._offT); this._offT = null;
+    this.endClient(this.client);
   }
-  // OFFLINE once OFFLINE_MS pass without a relay connecting (a connection cancels it).
-  offlineSoon() { if (!this._offT) this._offT = setTimeout(() => { this._offT = null; if (this.state.conn === "connecting") this.setState({ conn: "off" }); }, this.OFFLINE_MS); }
+  // Ends client c at once, and forgets it if it is the current one.
+  endClient(c) {
+    if (!c) return;
+    if (this.client === c) this.client = null;
+    try { c.end(true); } catch (e) {}
+  }
+  // OFFLINE once OFFLINE_MS pass without a relay connecting (a connection cancels it). It only runs while no relay is
+  // connected, so it also ends a LIVE kept through a player's move between relays.
+  offlineSoon() { if (!this._offT) this._offT = setTimeout(() => { this._offT = null; if (this.state.conn !== "off") this.setState({ conn: "off" }); }, this.OFFLINE_MS); }
   whenMqtt(cb, gen, n) { if (gen !== this._gen) return; if (window.mqtt) return cb(); if ((n || 0) > 80) { this.setState({ conn: "off" }); return; } this._rt = setTimeout(() => this.whenMqtt(cb, gen, (n || 0) + 1), 250); }
   connect() { if (this.blocked) return; this.netStop(); const gen = this._gen; this.setState({ conn: "connecting" }); this.offlineSoon(); this.whenMqtt(() => this.tryBroker(0, this.BROKERS.length, gen), gen); }
   // Tries relay i (counted round the list); left: how many relays this round still has to try. A try that fails before
@@ -6375,17 +6400,22 @@ class Component extends DCLogic {
   tryBroker(i, left, gen, until, pause) {
     if (this.blocked || gen !== this._gen) return;
     const n = this.BROKERS.length, k = i % n;
-    if (left <= 0) { this._rt = setTimeout(() => this.tryBroker(k, n, gen), this.RETRY_MS); return; }
+    if (left <= 0) {
+      // A round in which some relay was reached but none had the room waits longer, and nothing failed in it, so the
+      // pause does not count toward OFFLINE (it starts again with the next round).
+      const roomless = this._roomless; this._roomless = false;
+      if (roomless) { clearTimeout(this._offT); this._offT = null; }
+      this._rt = setTimeout(() => { if (gen !== this._gen) return; if (roomless) this.offlineSoon(); this.tryBroker(k, n, gen); }, roomless ? this.NOROOM_WAIT_MS : this.RETRY_MS);
+      return;
+    }
     if (!until) { until = Date.now() + this.FAIR_MS; pause = this.AGAIN_MS; }
-    const old = this.client; this.client = null;
-    if (old) { try { old.end(true); } catch (e) {} }
+    this.endClient(this.client);
     let ever = false, failed = false, c;
     // This try closed or failed before connecting: end its client, then this relay again or the next one (see until).
     const fail = () => {
       if (ever || failed || gen !== this._gen) return;
-      failed = true; clearTimeout(this._rt);
-      if (this.client === c) this.client = null;
-      try { c.end(true); } catch (e) {}
+      failed = true; clearTimeout(this._gT);
+      this.endClient(c);
       if (Date.now() + pause < until) this._rt = setTimeout(() => this.tryBroker(k, left, gen, until, pause), pause);
       else this.tryBroker(k + 1, left - 1, gen);
     };
@@ -6394,34 +6424,36 @@ class Component extends DCLogic {
     } catch (e) { this.tryBroker(k + 1, left - 1, gen); return; }
     this.client = c;
     // A guard for a try that neither connects nor fails (MQTT.js gives up by itself after connectTimeout).
-    this._rt = setTimeout(fail, this.FAIR_MS + 2000);
+    this._gT = setTimeout(fail, this.FAIR_MS + 2000);
     c.on("connect", () => {
       if (failed || gen !== this._gen) return;
-      ever = true; clearTimeout(this._rt); clearTimeout(this._offT); this._offT = null;
+      ever = true; clearTimeout(this._gT); clearTimeout(this._offT); this._offT = null;
       this.setState({ conn: "on", brokerIdx: k });
       const b = this.base();
       if (this.state.mode === "host") { this._home = k; c.subscribe(b + "/evt"); this.publishState(); }
       else if (this.state.mode === "player") {
         c.subscribe(b + "/state"); this.sendHello(); this.sendSync();
         // Before the room's state first arrives: no state here within NOROOM_MS means its host is on another relay, so
-        // this counts as a failed try and the next relay is tried (round after round while no relay has the room).
+        // this counts as a failed try and the next relay is tried (round after round while no relay has the room). The
+        // status stays as it is meanwhile; OFFLINE still follows if no relay connects for OFFLINE_MS.
         clearTimeout(this._nsT);
         if (this._home == null) this._nsT = setTimeout(() => {
           if (gen !== this._gen || this.client !== c) return;
-          this.client = null; try { c.end(true); } catch (e) {}
-          this.setState({ conn: "connecting" }); this.offlineSoon(); this.tryBroker(k + 1, left - 1, gen);
+          this.endClient(c); this._roomless = true;
+          this.offlineSoon(); this.tryBroker(k + 1, left - 1, gen);
         }, this.NOROOM_MS);
       }
     });
-    c.on("message", (topic, msg, packet) => { if (gen !== this._gen) return; if (topic === this.base() + "/state") { clearTimeout(this._nsT); this._home = k; } this.onMsg(topic, msg, packet); });
+    // Only the current client's messages count: one already ended (moved on from, or replaced) can still deliver a
+    // message it had received, which must not make its relay home or stop the current relay's no-room move.
+    c.on("message", (topic, msg, packet) => { if (gen !== this._gen || this.client !== c) return; if (topic === this.base() + "/state") { clearTimeout(this._nsT); this._home = k; } this.onMsg(topic, msg, packet); });
     c.on("error", fail);
     c.on("close", () => {
       if (!ever) { fail(); return; }
       if (gen !== this._gen || this.client !== c) return;
       // A connection was lost: CONNECTING, OFFLINE after OFFLINE_MS without a relay. Home (the room is there): only it is
       // tried again, every RETRY_MS, for good. A player's relay that never brought the room's state: the next relay.
-      this.client = null; clearTimeout(this._nsT);
-      try { c.end(true); } catch (e) {}
+      clearTimeout(this._nsT); this.endClient(c);
       this.setState({ conn: "connecting" }); this.offlineSoon();
       if (this._home === k) this._rt = setTimeout(() => this.tryBroker(k, n, gen, Infinity, this.RETRY_MS), this.RETRY_MS);
       else this.tryBroker(k + 1, left - 1, gen);
@@ -6771,7 +6803,7 @@ class Component extends DCLogic {
     Object.assign(vals, this.bgStyles(hwT));
     vals.headerStyle = (hwT ? "background:#221D27;border-bottom:1px solid #3E3348;" : "background:var(--pc-card);border-bottom:1px solid var(--pc-line);") + "position:relative;z-index:2;";
     vals.ekgUnderStyle = "fill:none;stroke:" + (hwT ? "rgba(139,212,80,0.28)" : "rgba(var(--pc-accent-rgb),0.16)") + ";stroke-width:3;stroke-linecap:round;stroke-linejoin:round;";
-    vals.finalHeroStyle = (hwT ? "background:#2E2338;border:1px solid #4A3A5C;" : "background:var(--pc-rule);") + "border-radius:8px;padding:44px 44px 40px;margin-bottom:24px;position:relative;overflow:hidden;";
+    vals.finalHeroStyle = (hwT ? "background:#2E2338;border:1px solid #4A3A5C;" : "background:var(--pc-rule);") + "border-radius:8px;margin-bottom:24px;position:relative;overflow:hidden;";
     vals.finalTraceStyle = "fill:none;stroke:" + (hwT ? "rgba(139,212,80,0.45)" : "rgba(var(--pc-accent-rgb),0.35)") + ";stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;";
     vals.hostRoomStd = vals.isHostRoom && !hwT; vals.hostRoomHw = vals.isHostRoom && hwT;
     // ── join link and QR code (hosting only: not test mode, not "Play on this device") ──
