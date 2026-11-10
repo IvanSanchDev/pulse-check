@@ -4736,6 +4736,10 @@ if (location.protocol === "file:" && !window.__resources) {
     /* The LOCKED IN card (live question) and the STANDINGS card (question results) beside the question card. The runtime
        drops a style written on a component, so their width comes from this class. */
     .pc-side-card{flex:1 1 260px;min-width:260px;}
+    /* The compact join tile at the top of the LOCKED IN card (live question) and of the STANDINGS card (question results):
+       the QR code and "Scan to join" with the room code. width:0 with min-width:100% keeps it from widening its card. */
+    .pc-join-tile{box-sizing:border-box;width:0;min-width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.12);}
+    .pc-join-tile-text{flex:1 1 auto;min-width:0;font-size:14px;line-height:1.4;font-weight:500;color:#FFFFFF;}
     /* The host's question and results headings ("Question 1 of 10 · live" and the question dots): the label can't wrap
        its own text, so the dots move under it when the line can't hold both (before v19 they ran off the page). */
     .pc-qhead{flex-wrap:wrap;row-gap:10px;}
@@ -5366,9 +5370,9 @@ Pets: Cats or dogs
           </div>
           <x-import component-from-global-scope="PulseUI.Card" sc-camel-class-name="pc-side-card" hint-size="280px,320px">
             <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}">
-              <div class="pc-join pc-join-tile" style="box-sizing:border-box;width:0;min-width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.12);">
+              <div class="pc-join pc-join-tile">
                 <x-import component-from-global-scope="PulseUI.Qr" sc-camel-class-name="pc-join-qr" path="{{ qr.path }}" box="{{ qr.box }}" size="{{ qr.tile }}" hint-size="82px,82px"></x-import>
-                <div style="flex:1 1 auto;min-width:0;font-size:14px;line-height:1.4;font-weight:500;color:#FFFFFF;">Scan to join · <span style="font-weight:600;letter-spacing:0.14em;color:var(--pc-accent);">{{ room }}</span></div>
+                <div class="pc-join-tile-text">Scan to join · <span style="font-weight:600;letter-spacing:0.14em;color:var(--pc-accent);">{{ room }}</span></div>
               </div>
             </sc-if>
             <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;">
@@ -5688,6 +5692,12 @@ Pets: Cats or dogs
             </div>
           </div>
           <x-import component-from-global-scope="PulseUI.Card" sc-camel-class-name="pc-side-card" hint-size="280px,320px">
+            <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}">
+              <div class="pc-join pc-join-tile">
+                <x-import component-from-global-scope="PulseUI.Qr" sc-camel-class-name="pc-join-qr" path="{{ qr.path }}" box="{{ qr.box }}" size="{{ qr.tile }}" hint-size="82px,82px"></x-import>
+                <div class="pc-join-tile-text">Scan to join · <span style="font-weight:600;letter-spacing:0.14em;color:var(--pc-accent);">{{ room }}</span></div>
+              </div>
+            </sc-if>
             <div style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--pc-accent);margin-bottom:2px;">STANDINGS</div>
             <div style="font-size:12px;color:var(--pc-pale);margin-bottom:12px;">{{ standThrough }}</div>
             <sc-for list="{{ standRows }}" as="s" hint-placeholder-count="4">
