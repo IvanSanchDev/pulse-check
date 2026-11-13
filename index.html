@@ -2,10 +2,11 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Pulse Check v19</title>
+<title>Pulse Check v20</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 24'%3E%3Cpath d='M13 22.2 C11.6 21.2 2 15 2 8.3 C2 4.9 4.5 2.4 7.6 2.4 C10 2.4 11.9 3.8 13 5.7 C14.1 3.8 16 2.4 18.4 2.4 C21.5 2.4 24 4.9 24 8.3 C24 15 14.4 21.2 13 22.2 Z' fill='%233DD68C'/%3E%3Cpath d='M3.4 12 L8.4 12 L10 9 L12.4 16 L14.8 6.6 L16.6 12 L22.6 12' fill='none' stroke='%230E1A14' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="darkreader-lock">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%231E2127'/%3E%3Crect x='0.75' y='0.75' width='46.5' height='46.5' rx='10.25' fill='none' stroke='%235A6272' stroke-width='1.5'/%3E%3Cg transform='translate(4.8779 5.7211) scale(0.7452)'%3E%3Cg transform='translate(34 39) rotate(10) scale(1.5) translate(-10 -18)'%3E%3Cpath fill='%238BD450' d='M3.5 1 H16.5 L16 15.5 H4 Z M0 14.5 H20 A2 2 0 0 1 20 18.5 H0 A2 2 0 0 1 0 14.5 Z'/%3E%3C/g%3E%3Cg transform='translate(14 41) rotate(-12) scale(1.35) translate(-12 -14)'%3E%3Cpath fill='%23F2A541' d='M3 11 C3 5 7 1.5 12 1.5 C17 1.5 21 5 21 11 Z M1 11 H23 A1.5 1.5 0 0 1 23 14 H1 A1.5 1.5 0 0 1 1 11 Z'/%3E%3C/g%3E%3Cg transform='translate(25 29) rotate(-6) scale(1.3) translate(-11 -22)'%3E%3Cpath fill='%237B4FB0' d='M3.5 20 L10.5 2.5 Q12.2 -0.5 15.5 1.2 Q17 2 18.5 0.5 Q18.4 5.2 14 5 L18.5 20 Z M0 18.5 H22 A2 2 0 0 1 22 22.5 H0 A2 2 0 0 1 0 18.5 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
 <script>
 /**
  * @license React
@@ -342,17 +343,15 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     // Section label: small caps line, optionally led by a short rule.
     ".pc-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-sans);font-size:12px;font-weight:500;line-height:1;letter-spacing:.1em;text-transform:uppercase;color:var(--pc-label);}",
     ".pc-label-rule{flex:none;width:24px;height:2px;background:currentColor;opacity:.9;}",
-    // The ManyHats Studios logo (v19): 40 px tall, in the space the rule had (the label with the logo has no rule).
-    // The label's text sits beside it, centered on it, and wraps beside it, never under it. Both themes share the hard
-    // hat, the top hat and the pointer; the hat on top and the hard hat's color are the theme's (.pc-hw on the game
-    // root shows Halloween's). A label with the logo (class pc-label-has-logo) is a block-level flex row, so its line is
-    // the logo's 40 px with no extra line-box space below.
-    ".pc-label-logo{flex:none;display:block;width:32px;height:40px;}",
+    // The ManyHats Studios logo (v20): the shared master drawing in a 40 x 40 box, in the space the rule had (the label
+    // with the logo has no rule). The label's text sits beside it, centered on it, and wraps beside it, never under it.
+    // Both themes' drawings are in the page; the theme's (.pc-hw on the game root shows Halloween's) is the one shown.
+    // A label with the logo (class pc-label-has-logo) is a block-level flex row, so its line is the logo's 40 px with no
+    // extra line-box space below.
+    ".pc-label-logo{flex:none;display:block;width:40px;height:40px;}",
     ".pc-label.pc-label-has-logo{display:flex;gap:10px;}",
     ".pc-label-logo-hw,.pc-hw .pc-label-logo-std{display:none;}",
     ".pc-hw .pc-label-logo-hw{display:inline;}",
-    ".pc-label-logo-cap{fill:#F2A541;}",
-    ".pc-hw .pc-label-logo-cap{fill:var(--pc-accent);}",
     // Card: the slate panel with white text.
     ".pc-card{box-sizing:border-box;border-radius:8px;padding:32px;border:1px solid transparent;background:var(--pc-slate);color:#FFFFFF;}",
     // QR code: black modules on a white tile, drawn sharp at any size.
@@ -393,35 +392,15 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h("path", { d: ARROW, fill: "currentColor" })) : null;
     return h("button", p, props.children, arrow);
   }
-  // The ManyHats Studios logo (v19), three hats stacked in a 32 x 40 box (viewBox x 4 to 36), each outline drawn
-  // clockwise, flat colors with gaps for detail. From the bottom up: the green top hat (the gap in the crown is its
-  // band), the orange hard hat (two gaps set off its ridge; #F2A541, not the Halloween accent, which stays out of the
-  // standard theme, spec section 2) and the purple wizard hat with a green star, its point curled to the right where a
-  // white mouse pointer with a dark outline clicks it. Halloween: a purple witch's hat with a green band in place of
-  // the wizard hat, and the hard hat in the Halloween accent.
-  var TOP_HAT = "M10.6 24.4 H23.4 Q24.2 24.4 24.1 25.2 L23.5 31.2 H10.5 L9.9 25.2 Q9.8 24.4 10.6 24.4 Z M10.4 32.6 H23.6 L23.7 35.6 H10.3 Z" +
-    " M7.5 35.2 H26.5 A1.6 1.6 0 0 1 26.5 38.4 H7.5 A1.6 1.6 0 0 1 7.5 35.2 Z";
-  var HARD_HAT = "M6.8 21.4 H27.2 A1 1 0 0 1 27.2 23.4 H6.8 A1 1 0 0 1 6.8 21.4 Z" +
-    " M9.4 21.4 C9.4 18.3 11.6 16.1 14.9 15.5 V21.4 Z M16 21.4 V15.4 Q16 14.5 17 14.5 Q18 14.5 18 15.4 V21.4 Z M19.1 15.5 C22.4 16.1 24.6 18.3 24.6 21.4 H19.1 Z";
-  var WIZARD_HAT = "M12.6 12 C14.4 9 16.2 6.2 19 4.3 C21.2 2.8 24 2.2 26.6 2.6 C24.4 3.4 22.8 5 22.4 7.2 L23 12 Z" +
-    " M10.8 11.8 H24.2 A0.8 0.8 0 0 1 24.2 13.4 H10.8 A0.8 0.8 0 0 1 10.8 11.8 Z";
-  var WIZARD_STAR = "M17.7 6.5 L18.3 8.1 L19.9 8.7 L18.3 9.3 L17.7 10.9 L17.1 9.3 L15.5 8.7 L17.1 8.1 Z";
-  var WITCH_HAT = "M13.4 12 L18.6 4.8 Q20.8 1.8 26.6 2.6 Q23.4 3.2 22.6 5.8 L22.6 12 Z" +
-    " M7.4 11.8 H27.6 Q28.6 11.8 28.2 12.6 Q27.8 13.4 26.8 13.4 H8.2 Q7.2 13.4 6.8 12.6 Q6.4 11.8 7.4 11.8 Z";
-  var WITCH_BAND = "M15.3 9.4 H22.6 V11.4 H13.9 Z";
-  var POINTER = "M26.8 2.8 L34 9.9 H30.9 L32.4 13.3 L30.6 14 L29.1 10.5 L26.8 12.7 Z";
-  // Drawn in this order: the theme's hat on top, then the shared hard hat, top hat and, last, the pointer.
+  // The ManyHats Studios logo (v20): the master drawings from the studio's shared brand folder (manyhats-logo.svg and
+  // manyhats-logo-halloween.svg), copied as they are (same paths, fills and transforms) without the width, height,
+  // title and ids, so two logos on a page repeat no id. Decorative next to the "ManyHats Studios" text, so aria-hidden.
+  var LOGO_STD = "<rect width=\"48\" height=\"48\" rx=\"11\" fill=\"#1E2127\"/><rect x=\"0.75\" y=\"0.75\" width=\"46.5\" height=\"46.5\" rx=\"10.25\" fill=\"none\" stroke=\"#5A6272\" stroke-width=\"1.5\"/><g transform=\"translate(5.0235 4.9911) scale(0.7673)\"><g transform=\"translate(34 39) rotate(10) scale(1.5) translate(-10 -18)\"><path fill=\"#8BD450\" d=\"M4.5 1 H15.5 Q16 1 16 1.5 L15.4 15 H4.6 L4 1.5 Q4 1 4.5 1 Z M1 15 H19 A1.5 1.5 0 0 1 19 18 H1 A1.5 1.5 0 0 1 1 15 Z\"/><path fill=\"#4E8A22\" d=\"M4.4 10.5 H15.6 L15.5 13 H4.5 Z\"/></g><g transform=\"translate(14 41) rotate(-12) scale(1.35) translate(-12 -14)\"><path fill=\"#F2A541\" d=\"M3 11 C3 5 7 1.5 12 1.5 C17 1.5 21 5 21 11 Z M1 11 H23 A1.5 1.5 0 0 1 23 14 H1 A1.5 1.5 0 0 1 1 11 Z\"/><path fill=\"#D4862A\" d=\"M10.6 2 Q12 1.2 13.4 2 V11 H10.6 Z\"/></g><g transform=\"translate(25 29) rotate(-6) scale(1.3) translate(-11 -22)\"><path fill=\"#7B4FB0\" d=\"M4.5 20 L10.8 3.4 Q12.2 0.4 15 1.6 Q16.6 2.2 18 0.8 Q17.6 4.6 13.8 4.6 L17.5 20 Z M1 19 H21 A1.5 1.5 0 0 1 21 22 H1 A1.5 1.5 0 0 1 1 19 Z\"/><path fill=\"#FFFFFF\" d=\"M11 9.4 L12 12 L14.6 13 L12 14 L11 16.6 L10 14 L7.4 13 L10 12 Z\"/></g></g>";
+  var LOGO_HW = "<rect width=\"48\" height=\"48\" rx=\"11\" fill=\"#1E2127\"/><rect x=\"0.75\" y=\"0.75\" width=\"46.5\" height=\"46.5\" rx=\"10.25\" fill=\"none\" stroke=\"#EE8A2A\" stroke-width=\"1.5\"/><circle cx=\"11\" cy=\"11.5\" r=\"4.2\" fill=\"#FFE9A8\"/><circle cx=\"13\" cy=\"10.2\" r=\"3.6\" fill=\"#1E2127\"/><g transform=\"translate(5.0235 4.9911) scale(0.7673)\"><g transform=\"translate(34 39) rotate(10) scale(1.5) translate(-10 -18)\"><path fill=\"#8BD450\" d=\"M4.5 1 H15.5 Q16 1 16 1.5 L15.4 15 H4.6 L4 1.5 Q4 1 4.5 1 Z M1 15 H19 A1.5 1.5 0 0 1 19 18 H1 A1.5 1.5 0 0 1 1 15 Z\"/><path fill=\"#EE8A2A\" d=\"M4.4 10.5 H15.6 L15.5 13 H4.5 Z\"/></g><g transform=\"translate(14 41) rotate(-12) scale(1.35) translate(-12 -14)\"><path fill=\"#EE8A2A\" d=\"M3 11 C3 5 7 1.5 12 1.5 C17 1.5 21 5 21 11 Z M1 11 H23 A1.5 1.5 0 0 1 23 14 H1 A1.5 1.5 0 0 1 1 11 Z\"/><path fill=\"#4E8A22\" d=\"M11.2 2 Q11.4 -0.6 14 -1 L14.3 0.2 Q12.8 0.5 12.8 2 Z\"/><path fill=\"#3A1D08\" d=\"M6.5 7.4 L8.6 4.2 L10.2 7.4 Z M13.8 7.4 L15.4 4.2 L17.5 7.4 Z M6.4 8.6 Q12 12 17.6 8.6 L16.2 10.5 L14.8 9.7 L13.2 10.8 L10.8 10.8 L9.2 9.7 L7.8 10.5 Z\"/></g><g transform=\"translate(25 29) rotate(-6) scale(1.3) translate(-11 -22)\"><path fill=\"#7B4FB0\" d=\"M5 20 L9.6 8 Q10.8 4.4 13.4 3 Q16.4 1.4 20 2.6 Q16.6 3.6 15.2 6.6 L17 20 Z M-1.5 19 H23.5 Q24.6 19 24 20.5 Q23.4 22 21.5 22 H0.5 Q-1.4 22 -2 20.5 Q-2.6 19 -1.5 19 Z\"/><path fill=\"#8BD450\" d=\"M6.7 15.6 H16.4 L16.8 18.6 H5.6 Z\"/><path fill=\"#FFD43B\" d=\"M10 15.2 H13 V19 H10 Z M10.8 16 V18.2 H12.2 V16 Z\" fill-rule=\"evenodd\"/></g></g>";
   function Logo() {
-    return h("svg", { className: "pc-label-logo", viewBox: "4 0 32 40", "aria-hidden": "true" },
-      h("g", { className: "pc-label-logo-std" },
-        h("path", { d: WIZARD_HAT, style: { fill: "#7B4FB0" } }),
-        h("path", { d: WIZARD_STAR, style: { fill: "#8BD450" } })),
-      h("g", { className: "pc-label-logo-hw" },
-        h("path", { d: WITCH_HAT, style: { fill: "#7B4FB0" } }),
-        h("path", { d: WITCH_BAND, style: { fill: "#8BD450" } })),
-      h("path", { className: "pc-label-logo-cap", d: HARD_HAT }),
-      h("path", { d: TOP_HAT, style: { fill: "#8BD450" } }),
-      h("path", { d: POINTER, style: { fill: "#FFFFFF", stroke: "#15171A", strokeWidth: 1.3, strokeLinejoin: "round" } }));
+    return h("svg", { className: "pc-label-logo", viewBox: "0 0 48 48", "aria-hidden": "true" },
+      h("g", { className: "pc-label-logo-std", dangerouslySetInnerHTML: { __html: LOGO_STD } }),
+      h("g", { className: "pc-label-logo-hw", dangerouslySetInnerHTML: { __html: LOGO_HW } }));
   }
   // SectionLabel: rule draws the short line in front of the text; logo draws the ManyHats Studios logo (after the rule
   // if both are set; the two ManyHats labels have no rule since v19).
@@ -4710,8 +4689,8 @@ if (location.protocol === "file:" && !window.__resources) {
     button,input,select,textarea{font-family:inherit;}
     body{margin:0;font-family:var(--font-sans);font-size:16px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;background-color:#111214;background-image:repeating-linear-gradient(0deg,rgba(244,246,248,0.022) 0 1px,transparent 1px 26px),repeating-linear-gradient(90deg,rgba(244,246,248,0.022) 0 1px,transparent 1px 26px),repeating-linear-gradient(0deg,rgba(244,246,248,0.035) 0 1px,transparent 1px 130px),repeating-linear-gradient(90deg,rgba(244,246,248,0.035) 0 1px,transparent 1px 130px);}
     /* The palette (docs/specs/v18-phone-join.md, section 2): every themed color, standard first, Halloween on .pc-hw (v17's values). */
-    .pc-root{--pc-accent:#3DD68C;--pc-accent-2:#2BB673;--pc-accent-3:#1F8F5A;--pc-accent-rgb:61,214,140;--pc-on-accent:#0E1A14;--pc-accent-dim:#254532;--pc-warn:#E87A64;--pc-ok:#328A5C;--pc-bg:#111214;--pc-field:#1E2021;--pc-card-alt:#232426;--pc-card:#28292B;--pc-raised:#2F3132;--pc-rule:#36383A;--pc-line:#3A3C3E;--pc-line-2:#454749;--pc-line-3:#4F5153;--pc-faint:#56585A;--pc-slate:#67696B;--pc-muted:#888A8C;--pc-muted-2:#959799;--pc-label:#A1A3A5;--pc-body:#B1B3B6;--pc-pale:#C8CACD;--pc-soft:#D3D5D7;--pc-soft-2:#DDDFE2;--pc-text:#ECEEF0;--pc-btn-ink:#67696B;--pc-btn-line:#C8CACD;--pc-btn-hover:#E8EAEC;--pc-test:#BFE0FF;--pc-test-line:#436282;--pc-test-fill:#304760;--pc-test-bg:#21282F;--pc-player-1:#4789AA;--pc-player-2:#F48C90;--pc-player-3:#47856E;--pc-player-4:#4D4E79;--pc-player-5:#E0843E;--pc-player-6:#8FA8A0;--pc-player-7:#B5B838;--pc-player-8:#A1A3A5;}
-    .pc-root.pc-hw{--pc-accent:#FAAF3F;--pc-accent-2:#D98A1F;--pc-accent-3:#B06A15;--pc-accent-rgb:250,175,63;--pc-on-accent:#FFFFFF;--pc-accent-dim:#4A3A1C;--pc-warn:#D98A1F;--pc-ok:#3E8579;--pc-bg:#131211;--pc-field:#211F1D;--pc-card-alt:#26241F;--pc-card:#2B2926;--pc-raised:#33302C;--pc-rule:#3A3733;--pc-line:#3E3B37;--pc-line-2:#4A4642;--pc-line-3:#55504A;--pc-faint:#5C5751;--pc-slate:#6C6864;--pc-muted:#8F8983;--pc-muted-2:#9C968F;--pc-label:#A9A19C;--pc-body:#B8B2AC;--pc-pale:#CFC9C3;--pc-soft:#D9D4CF;--pc-soft-2:#E3DED9;--pc-text:#F0EDEA;--pc-btn-ink:#6C6864;--pc-btn-line:#CFC9C3;--pc-btn-hover:#ECE9E7;--pc-test:#AEE9E8;--pc-test-line:#2E6B68;--pc-test-fill:#1F4E4C;--pc-test-bg:#1E2A29;--pc-player-1:#3B8DA1;--pc-player-2:#F48F7B;--pc-player-3:#3E8579;--pc-player-4:#42527A;--pc-player-5:#D98A1F;--pc-player-6:#8FA8A0;--pc-player-7:#B5B838;--pc-player-8:#A9A19C;}
+    .pc-root{--pc-accent:#3DD68C;--pc-accent-2:#2BB673;--pc-accent-3:#1F8F5A;--pc-accent-rgb:61,214,140;--pc-heart:#F0524F;--pc-heart-rgb:240,82,79;--pc-on-accent:#0E1A14;--pc-accent-dim:#254532;--pc-warn:#E87A64;--pc-ok:#328A5C;--pc-bg:#111214;--pc-field:#1E2021;--pc-card-alt:#232426;--pc-card:#28292B;--pc-raised:#2F3132;--pc-rule:#36383A;--pc-line:#3A3C3E;--pc-line-2:#454749;--pc-line-3:#4F5153;--pc-faint:#56585A;--pc-slate:#67696B;--pc-muted:#888A8C;--pc-muted-2:#959799;--pc-label:#A1A3A5;--pc-body:#B1B3B6;--pc-pale:#C8CACD;--pc-soft:#D3D5D7;--pc-soft-2:#DDDFE2;--pc-text:#ECEEF0;--pc-btn-ink:#67696B;--pc-btn-line:#C8CACD;--pc-btn-hover:#E8EAEC;--pc-test:#BFE0FF;--pc-test-line:#436282;--pc-test-fill:#304760;--pc-test-bg:#21282F;--pc-player-1:#4789AA;--pc-player-2:#F48C90;--pc-player-3:#47856E;--pc-player-4:#4D4E79;--pc-player-5:#E0843E;--pc-player-6:#8FA8A0;--pc-player-7:#B5B838;--pc-player-8:#A1A3A5;}
+    .pc-root.pc-hw{--pc-accent:#FAAF3F;--pc-accent-2:#D98A1F;--pc-accent-3:#B06A15;--pc-accent-rgb:250,175,63;--pc-heart:#FAAF3F;--pc-heart-rgb:250,175,63;--pc-on-accent:#FFFFFF;--pc-accent-dim:#4A3A1C;--pc-warn:#D98A1F;--pc-ok:#3E8579;--pc-bg:#131211;--pc-field:#211F1D;--pc-card-alt:#26241F;--pc-card:#2B2926;--pc-raised:#33302C;--pc-rule:#3A3733;--pc-line:#3E3B37;--pc-line-2:#4A4642;--pc-line-3:#55504A;--pc-faint:#5C5751;--pc-slate:#6C6864;--pc-muted:#8F8983;--pc-muted-2:#9C968F;--pc-label:#A9A19C;--pc-body:#B8B2AC;--pc-pale:#CFC9C3;--pc-soft:#D9D4CF;--pc-soft-2:#E3DED9;--pc-text:#F0EDEA;--pc-btn-ink:#6C6864;--pc-btn-line:#CFC9C3;--pc-btn-hover:#ECE9E7;--pc-test:#AEE9E8;--pc-test-line:#2E6B68;--pc-test-fill:#1F4E4C;--pc-test-bg:#1E2A29;--pc-player-1:#3B8DA1;--pc-player-2:#F48F7B;--pc-player-3:#3E8579;--pc-player-4:#42527A;--pc-player-5:#D98A1F;--pc-player-6:#8FA8A0;--pc-player-7:#B5B838;--pc-player-8:#A9A19C;}
     a{color:var(--pc-accent-2);text-decoration:none;} a:hover{color:var(--pc-accent-3);}
     @keyframes pc-beat{0%,100%{transform:scale(1);opacity:1;}14%{transform:scale(1.45);}28%{transform:scale(1);}42%{transform:scale(1.3);opacity:0.85;}60%{transform:scale(1);}}
     @keyframes pc-draw{from{stroke-dashoffset:1300;}to{stroke-dashoffset:0;}}
@@ -4736,6 +4715,13 @@ if (location.protocol === "file:" && !window.__resources) {
     /* The LOCKED IN card (live question) and the STANDINGS card (question results) beside the question card. The runtime
        drops a style written on a component, so their width comes from this class. */
     .pc-side-card{flex:1 1 260px;min-width:260px;}
+    /* Eight outline buttons keep the page's text color and a stronger line instead of the Button's gray ink (the Empty bank
+       button turns accent while it asks to be tapped again). The runtime drops a style written on a component, so the colors
+       come from these classes (passed as className). They set the Button's own color variables, so its hover fill and focus
+       ring work on top. */
+    .pc-btn.pc-btn-ink{--pc-b-fg:var(--pc-text);--pc-b-fg-hover:var(--pc-text);--pc-b-line:var(--pc-line-3);}
+    .pc-btn.pc-btn-ink-test{--pc-b-fg:var(--pc-text);--pc-b-fg-hover:var(--pc-text);--pc-b-line:var(--pc-test-line);}
+    .pc-btn.pc-btn-ink-accent{--pc-b-fg:var(--pc-accent);--pc-b-fg-hover:var(--pc-accent);--pc-b-line:var(--pc-accent);}
     /* The compact join tile at the top of the LOCKED IN card (live question) and of the STANDINGS card (question results):
        the QR code and "Scan to join" with the room code. width:0 with min-width:100% keeps it from widening its card. */
     .pc-join-tile{box-sizing:border-box;width:0;min-width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.12);}
@@ -4794,11 +4780,19 @@ if (location.protocol === "file:" && !window.__resources) {
        on touch screens of any width (a phone held sideways), they all read at 16 px: each box's font size is
        var(--pc-input-fs, its own size). The 18 px room code box keeps its size. */
     @media (max-width:560px), (hover:none) and (pointer:coarse){.pc-root{--pc-input-fs:16px;}}
-    /* v19, player screens at 320 px: the answer card's slider row (the slider, which may shrink below its own default
-       width, and the percentage). Under 375 px the percentage keeps 92 px (room for 100%) and the gap 12 px, so the row
-       fits inside the card; from 375 px up the slider is wider than its default width, so its minimum changes nothing. */
-    .pc-pred-row{gap:20px;}.pc-pred-row input[type="range"]{min-width:0;}.pc-pred-num{min-width:120px;}
-    @media (max-width:374px){.pc-pred-row{gap:12px;}.pc-pred-num{min-width:92px;}}
+    /* v20, the player's answer card on phones (560 px and below, the player screens' phone width): the timer row (the bar and
+       the seconds) stays pinned at the top of the screen while the card scrolls under it, on a solid strip of the page's
+       background (the standard body color; Halloween's own page color) that also covers the gap above the card. The window
+       is what scrolls and no ancestor clips, so sticky pins. Wide screens: a plain row with its 16 px gap. */
+    .pc-timer-pin{margin-bottom:16px;}
+    @media (max-width:560px){.pc-timer-pin{position:sticky;top:0;z-index:5;background-color:#111214;padding:8px 0 12px;margin-bottom:0;}.pc-hw .pc-timer-pin{background-color:#131016;}}
+    /* v20, player screens on phones (560 px and below, the breakpoint of the pinned timer): the answer card's slider row
+       stacks. The percentage goes above (order:-1, right-aligned by its own text-align) and the slider takes the card's whole
+       content width on its own row; the row's display, align-items and the slider's flex:1 are plain class rules above, so these override them without !important. The slider keeps
+       min-width:0 and zero side margins so it can never push past the card, and the percentage needs no reserved width because
+       it no longer shares a row. Above 560 px the row is v19's (side by side, 20 px gap, percentage at least 120 px wide). */
+    .pc-pred-row{display:flex;align-items:center;margin-bottom:8px;gap:20px;}.pc-pred-row input[type="range"]{flex:1;min-width:0;}.pc-pred-num{min-width:120px;}
+    @media (max-width:560px){.pc-pred-row{flex-direction:column;align-items:stretch;gap:6px;}.pc-pred-row input[type="range"]{flex:none;width:100%;box-sizing:border-box;margin-left:0;margin-right:0;}.pc-pred-num{order:-1;min-width:0;}}
     /* v19, the player's results after a question: each lane's pulse track (the 1fr column) only gets what is left once the
        name and the beats columns reach their 150 and 110 px caps, so it is 0 px under a 418 px page. At 480 px and below
        each lane takes two lines: the name, the beats and the points, then the track the whole width under them, 6 px in
@@ -4833,7 +4827,7 @@ if (location.protocol === "file:" && !window.__resources) {
   <sc-if value="{{ tabOpen }}" hint-placeholder-val="{{ true }}">
   <header ref="{{ headRef }}" style="{{ headerStyle }}">
     <div class="pc-head" style="max-width:1440px;margin:0 auto;display:flex;align-items:center;">
-      <svg class="pc-head-mark" sc-camel-view-box="0 0 26 24" role="img" aria-label="Pulse Check" style="width:26px;height:24px;display:block;flex:none;"><path d="M13 22.2 C11.6 21.2 2 15 2 8.3 C2 4.9 4.5 2.4 7.6 2.4 C10 2.4 11.9 3.8 13 5.7 C14.1 3.8 16 2.4 18.4 2.4 C21.5 2.4 24 4.9 24 8.3 C24 15 14.4 21.2 13 22.2 Z" style="fill:var(--pc-accent);"></path><path d="M3.4 12 L8.4 12 L10 9 L12.4 16 L14.8 6.6 L16.6 12 L22.6 12" style="fill:none;stroke:var(--pc-on-accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;"></path></svg>
+      <svg class="pc-head-mark" sc-camel-view-box="0 0 26 24" role="img" aria-label="Pulse Check" style="width:26px;height:24px;display:block;flex:none;"><path d="M13 22.2 C11.6 21.2 2 15 2 8.3 C2 4.9 4.5 2.4 7.6 2.4 C10 2.4 11.9 3.8 13 5.7 C14.1 3.8 16 2.4 18.4 2.4 C21.5 2.4 24 4.9 24 8.3 C24 15 14.4 21.2 13 22.2 Z" style="fill:var(--pc-heart);"></path><path d="M3.4 12 L8.4 12 L10 9 L12.4 16 L14.8 6.6 L16.6 12 L22.6 12" style="fill:none;stroke:var(--pc-on-accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;"></path></svg>
       <div class="pc-head-brand" style="align-items:center;">
         <sc-if value="{{ std }}" hint-placeholder-val="{{ true }}"><span style="width:8px;height:8px;border-radius:50%;background:var(--pc-accent);animation:pc-beat 1.4s ease-in-out infinite;"></span></sc-if><sc-if value="{{ hw }}" hint-placeholder-val="{{ false }}"><span data-hw-motion="1" style="display:block;animation:pc-beat 1.4s ease-in-out infinite;"><svg sc-camel-view-box="0 0 24 24" style="width:16px;height:16px;display:block;flex:none;" aria-hidden="true"><path d="M12 7 C11.4 4.6 12.4 2.8 14.4 2.2" style="fill:none;stroke:#8BD450;stroke-width:2;stroke-linecap:round;"></path><ellipse cx="7.6" cy="14.2" rx="5.4" ry="7" style="fill:var(--pc-accent-2);"></ellipse><ellipse cx="16.4" cy="14.2" rx="5.4" ry="7" style="fill:var(--pc-accent-2);"></ellipse><ellipse cx="12" cy="14.2" rx="5.8" ry="7.6" style="fill:var(--pc-accent);"></ellipse><path d="M8.2 12.4 L9.8 10 L11.2 12.4 Z M12.8 12.4 L14.2 10 L15.8 12.4 Z" style="fill:#131016;"></path><path d="M7.8 15.4 Q12 19.6 16.2 15.4 Q12 17.2 7.8 15.4 Z" style="fill:#131016;"></path></svg></span></sc-if>
         <span class="pc-head-name" style="font-size:12px;font-weight:600;letter-spacing:0.14em;color:var(--pc-text);">PULSE CHECK<span class="pc-head-tag" style="color:#B79CE0;"><span class="pc-head-sep">{{ T.headerSep }}</span>{{ T.headerTag }}</span></span>
@@ -4902,7 +4896,7 @@ if (location.protocol === "file:" && !window.__resources) {
           <div style="background:var(--pc-card-alt);border:1px solid var(--pc-line);border-radius:8px;padding:24px;">
             <div style="font-size:12px;font-weight:500;letter-spacing:0.1em;color:var(--pc-muted);margin-bottom:10px;">ONE DEVICE</div>
             <p style="margin:0 0 18px;font-size:14px;line-height:1.6;color:var(--pc-body);">No connection needed, pass this device around on each question. Every turn gets its own clock.</p>
-            <x-import component-from-global-scope="PulseUI.Button" variant="outline" style="color:var(--pc-text);border-color:var(--pc-line-3);" sc-camel-on-click="{{ goSolo }}" hint-size="190px,44px">Play on this device</x-import>
+            <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="pc-btn-ink" sc-camel-on-click="{{ goSolo }}" hint-size="190px,44px">Play on this device</x-import>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:20px;padding:18px 24px;background:var(--pc-test-bg);border:1px solid var(--pc-test-line);border-radius:8px;">
@@ -4910,14 +4904,14 @@ if (location.protocol === "file:" && !window.__resources) {
             <div style="font-size:12px;font-weight:500;letter-spacing:0.1em;color:var(--pc-test);">TEST MODE</div>
             <div style="font-size:14px;line-height:1.5;color:var(--pc-body);margin-top:4px;">Host a practice game with 12 demo players on this device. The host screen and one player's phone screen sit side by side, and you answer as that player. Nothing goes online.</div>
           </div>
-          <x-import component-from-global-scope="PulseUI.Button" variant="outline" style="color:var(--pc-text);border-color:var(--pc-test-line);" sc-camel-on-click="{{ testGame }}" hint-size="180px,44px">Start test mode</x-import>
+          <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="pc-btn-ink-test" sc-camel-on-click="{{ testGame }}" hint-size="180px,44px">Start test mode</x-import>
         </div>
         <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:20px;padding:18px 24px;background:var(--pc-card);border:1px solid var(--pc-line);border-radius:8px;">
           <div style="flex:1;min-width:240px;">
             <div style="font-size:12px;font-weight:500;letter-spacing:0.1em;color:var(--pc-muted);">QUESTION BANK</div>
             <div style="font-size:14px;line-height:1.5;color:var(--pc-body);margin-top:4px;">{{ bankSummary }}</div>
           </div>
-          <x-import component-from-global-scope="PulseUI.Button" variant="outline" style="color:var(--pc-text);border-color:var(--pc-line-3);" sc-camel-on-click="{{ openBank }}" hint-size="230px,44px">View and edit questions</x-import>
+          <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="pc-btn-ink" sc-camel-on-click="{{ openBank }}" hint-size="230px,44px">View and edit questions</x-import>
         </div>
         <div style="margin-top:40px;">
           <x-import component-from-global-scope="PulseUI.SectionLabel" rule="{{ true }}" hint-size="200px,16px">About the authors</x-import>
@@ -4948,7 +4942,7 @@ if (location.protocol === "file:" && !window.__resources) {
             <h1 style="font-size:30px;line-height:1.18;font-weight:600;color:var(--pc-accent);margin:10px 0 8px;">Question bank</h1>
             <p style="max-width:760px;margin:0;font-size:16px;line-height:1.6;color:var(--pc-body);">Each bank is its own list of questions. A game draws from one bank: random picks, hand-picked sets and the defaults new games start with. Changes save automatically in this browser.</p>
           </div>
-          <x-import component-from-global-scope="PulseUI.Button" variant="outline" style="color:var(--pc-text);border-color:var(--pc-line-3);" sc-camel-on-click="{{ closeBank }}" hint-size="160px,44px">Back to start</x-import>
+          <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="pc-btn-ink" sc-camel-on-click="{{ closeBank }}" hint-size="160px,44px">Back to start</x-import>
         </div>
         <div class="pc-bank-bar" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 24px;">
           <label for="pc-bank" style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--pc-muted);">BANK</label>
@@ -5056,8 +5050,8 @@ if (location.protocol === "file:" && !window.__resources) {
               <p style="margin:0 0 14px;font-size:13px;line-height:1.55;color:var(--pc-body);">Banks are saved in this browser only. Export this bank to back it up, move it to another computer or share it with another host, who can then import the file here.</p>
               <div style="display:flex;gap:10px;flex-wrap:wrap;">
                 <x-import component-from-global-scope="PulseUI.Button" sc-camel-on-click="{{ exportBank }}" hint-size="140px,44px">Export bank</x-import>
-                <x-import component-from-global-scope="PulseUI.Button" variant="outline" style="color:var(--pc-text);border-color:var(--pc-line-3);" sc-camel-on-click="{{ importBank }}" hint-size="150px,44px">Import a file</x-import>
-                <x-import component-from-global-scope="PulseUI.Button" variant="outline" style="{{ emptyBtnStyle }}" disabled="{{ emptyDisabled }}" sc-camel-on-click="{{ emptyBank }}" hint-size="150px,44px">{{ emptyLabel }}</x-import>
+                <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="pc-btn-ink" sc-camel-on-click="{{ importBank }}" hint-size="150px,44px">Import a file</x-import>
+                <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="{{ emptyBtnClass }}" disabled="{{ emptyDisabled }}" sc-camel-on-click="{{ emptyBank }}" hint-size="150px,44px">{{ emptyLabel }}</x-import>
                 <input type="file" accept=".json,.txt,application/json,text/plain" ref="{{ fileRef }}" sc-camel-on-change="{{ onImportFile }}" style="display:none;">
               </div>
               <p style="margin:12px 0 16px;font-size:12px;line-height:1.55;color:var(--pc-muted);">Importing adds new questions and keeps everything already here, in its current order. To load an exported bank in its saved order, import it into a new or empty bank. Import accepts an exported bank (.json) or a text file with one "Subject: This or That" per line.</p>
@@ -5205,7 +5199,7 @@ Pets: Cats or dogs
             <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}">
             <div class="pc-join pc-join-lobby" style="display:flex;flex-direction:column;align-items:center;gap:8px;max-width:240px;min-width:0;">
               <x-import component-from-global-scope="PulseUI.Qr" sc-camel-class-name="pc-join-qr" path="{{ qr.path }}" box="{{ qr.box }}" size="{{ qr.lobby }}" hint-size="123px,123px"></x-import>
-              <div class="pc-join-addr" style="font-size:11px;line-height:1.45;color:var(--pc-soft-2);text-align:center;overflow-wrap:anywhere;user-select:all;-webkit-user-select:all;cursor:text;">{{ joinBase }}<wbr><span style="color:#FFFFFF;font-weight:600;white-space:nowrap;">?room={{ room }}</span></div>
+              <div class="pc-join-addr" style="font-size:11px;line-height:1.45;color:var(--pc-soft-2);text-align:center;overflow-wrap:anywhere;user-select:all;-webkit-user-select:all;cursor:text;">{{ joinBase }}<wbr><span style="color:#FFFFFF;font-weight:600;white-space:nowrap;">{{ joinQuery }}</span></div>
             </div>
             </sc-if>
             <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}"><div style="flex:1;min-width:260px;font-size:14px;line-height:1.55;color:var(--pc-text);">Players scan the code with a phone camera, or open the address and enter the room code. Late arrivals jump in on the next open question.</div></sc-if><sc-if value="{{ !hasJoin }}" hint-placeholder-val="{{ true }}"><div style="flex:1;min-width:260px;font-size:14px;line-height:1.55;color:var(--pc-text);">Players open this same file in any browser, choose Join a game, and enter the code. Late arrivals jump in on the next open question.</div></sc-if>
@@ -5229,7 +5223,7 @@ Pets: Cats or dogs
             <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}">
             <div class="pc-join pc-join-lobby" style="display:flex;flex-direction:column;align-items:center;gap:8px;max-width:240px;min-width:0;padding-bottom:22px;">
               <x-import component-from-global-scope="PulseUI.Qr" sc-camel-class-name="pc-join-qr" path="{{ qr.path }}" box="{{ qr.box }}" size="{{ qr.lobby }}" hint-size="123px,123px"></x-import>
-              <div class="pc-join-addr" style="font-size:11px;line-height:1.45;color:var(--pc-soft);text-align:center;overflow-wrap:anywhere;user-select:all;-webkit-user-select:all;cursor:text;">{{ joinBase }}<wbr><span style="color:#FFFFFF;font-weight:600;white-space:nowrap;">?room={{ room }}</span></div>
+              <div class="pc-join-addr" style="font-size:11px;line-height:1.45;color:var(--pc-soft);text-align:center;overflow-wrap:anywhere;user-select:all;-webkit-user-select:all;cursor:text;">{{ joinBase }}<wbr><span style="color:#FFFFFF;font-weight:600;white-space:nowrap;">{{ joinQuery }}</span></div>
             </div>
             </sc-if>
             <sc-if value="{{ hasJoin }}" hint-placeholder-val="{{ false }}"><div style="flex:1;min-width:260px;font-size:14px;line-height:1.55;color:var(--pc-text);padding-bottom:22px;">Players scan the code with a phone camera, or open the address and enter the room code. Late arrivals jump in on the next open question.</div></sc-if><sc-if value="{{ !hasJoin }}" hint-placeholder-val="{{ true }}"><div style="flex:1;min-width:260px;font-size:14px;line-height:1.55;color:var(--pc-text);padding-bottom:22px;">Players open this same file in any browser, choose Join a game, and enter the code. Late arrivals jump in on the next open question.</div></sc-if>
@@ -5380,7 +5374,7 @@ Pets: Cats or dogs
               <span style="width:8px;height:8px;border-radius:50%;background:var(--pc-accent);animation:pc-beat 1.4s ease-in-out infinite;flex:none;"></span>
               <span style="font-size:14px;color:var(--pc-body);">{{ hostQLine }}</span>
               <div style="flex:1;"></div>
-              <x-import component-from-global-scope="PulseUI.Button" variant="outline" style="color:var(--pc-text);border-color:var(--pc-line-3);" disabled="{{ revealNowDisabled }}" sc-camel-on-click="{{ revealNow }}" hint-size="150px,44px">Reveal now</x-import>
+              <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="pc-btn-ink" disabled="{{ revealNowDisabled }}" sc-camel-on-click="{{ revealNow }}" hint-size="150px,44px">Reveal now</x-import>
             </div>
           </div>
           <x-import component-from-global-scope="PulseUI.Card" sc-camel-class-name="pc-side-card" hint-size="280px,320px">
@@ -5421,7 +5415,7 @@ Pets: Cats or dogs
           <span class="pc-prow-me" style="font-size:12px;font-weight:600;letter-spacing:0.1em;color:var(--pc-body);">ANSWERING AS <span style="color:var(--pc-accent);">{{ playName }}</span></span>
           <button class="pc-prow-btn" sc-camel-on-click="{{ exitAnswer }}" style="font-family:var(--font-sans);font-size:12px;font-weight:600;color:var(--pc-muted);background:none;border:none;cursor:pointer;padding:4px 2px;" style-hover="color:var(--pc-accent-2);">{{ exitLabel }}</button>
         </div>
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+        <div class="pc-timer-pin" style="display:flex;align-items:center;gap:14px;">
           <div style="flex:1;height:8px;border-radius:4px;background:var(--pc-line);overflow:hidden;">
             <div style="{{ timerBarStyle }}"></div>
           </div>
@@ -5437,7 +5431,7 @@ Pets: Cats or dogs
           </div>
           <div style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--pc-muted);margin-bottom:4px;">YOUR PREDICTION</div>
           <p style="margin:0 0 16px;font-size:14px;color:var(--pc-body);">What share of {{ dept }} picks {{ qA }}?</p>
-          <div class="pc-pred-row" style="display:flex;align-items:center;margin-bottom:8px;">
+          <div class="pc-pred-row">
             <input type="range" min="0" max="100" step="1" value="{{ predVal }}" sc-camel-on-change="{{ onPred }}" style="{{ sliderStyle }}">
             <div class="pc-pred-num" style="text-align:right;">
               <span style="font-size:38px;line-height:1;font-weight:600;color:#FFFFFF;">{{ predVal }}%</span>
@@ -5649,7 +5643,7 @@ Pets: Cats or dogs
             <sc-if value="{{ showTrace }}" hint-placeholder-val="{{ true }}">
               <svg sc-camel-view-box="0 0 1000 64" sc-camel-preserve-aspect-ratio="none" style="width:100%;height:52px;display:block;margin-bottom:4px;">
                 <path d="{{ ekgPath }}" style="{{ ekgUnderStyle }}"></path>
-                <path d="{{ ekgPath }}" style="fill:none;stroke:var(--pc-accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1300;stroke-dashoffset:0;animation:pc-draw 900ms ease-out both,pc-sweep 3.4s linear 1500ms infinite;"></path>
+                <path d="{{ ekgPath }}" style="fill:none;stroke:var(--pc-heart);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1300;stroke-dashoffset:0;animation:pc-draw 900ms ease-out both,pc-sweep 3.4s linear 1500ms infinite;"></path>
               </svg>
             </sc-if>
             <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:18px;flex-wrap:wrap;">
@@ -5815,7 +5809,7 @@ Pets: Cats or dogs
         </div>
         <div class="pc-fin-btns" style="display:flex;gap:14px;">
           <x-import component-from-global-scope="PulseUI.Button" size="lg" sc-camel-with-chevron="{{ true }}" sc-camel-on-click="{{ playAgain }}" hint-size="250px,48px">Play again with this room</x-import>
-          <x-import component-from-global-scope="PulseUI.Button" size="lg" variant="outline" style="color:var(--pc-text);border-color:var(--pc-line-3);" sc-camel-on-click="{{ newGame }}" hint-size="170px,48px">Start a new game</x-import>
+          <x-import component-from-global-scope="PulseUI.Button" size="lg" variant="outline" sc-camel-class-name="pc-btn-ink" sc-camel-on-click="{{ newGame }}" hint-size="170px,48px">Start a new game</x-import>
         </div>
       </section>
     </sc-if>
@@ -6069,13 +6063,21 @@ class Component extends DCLogic {
     // After a whole round in which no relay had the room (no host yet, or a code no host uses), the next round waits
     // NOROOM_WAIT_MS (v19 spec section 6, release review fix).
     this.NOROOM_MS = 5000; this.NOROOM_WAIT_MS = 15000;
+    // The MQTT keepalive, in seconds. A network that drops without a word (Wi-Fi turned off) closes no socket: MQTT.js
+    // learns it only when the relay stops answering, after 1.5 keepalives with nothing back (it pings after one). At its
+    // default of 60 s a host stayed LIVE for 90 s; at 10 s a silent drop closes the client within 15 s, and OFFLINE then
+    // counts from the last packet heard (v20 spec section 7).
+    this.KEEPALIVE_S = 10;
+    // A room state older than the one shown by less than this is a late copy and is dropped (playerState): a host's old
+    // connection can deliver what waited in it after the new connection's state, once its network is back.
+    this.STALE_MS = 120000;
     // Every room's channels start with this prefix. It is named after the message format (the payload's v: 14), not
     // the app version, so later versions keep meeting older hosts. It changes only when the message format changes,
     // and then together with v.
     this.CHANNEL = "pulsecheck-game/p14/";
-    this.KEY = "pulse-check-v19";
+    this.KEY = "pulse-check-v20";
     // The version shown at the bottom of the start page; the packager fills it in (package.js, above stampVersion).
-    this.VERSION = "v19";
+    this.VERSION = "v20";
     this.THEME_KEY = "pulse-check-theme";
     this.BANK_KEY = "pulse-check-bank";
     this.BANKS_KEY = "pulse-check-banks";
@@ -6106,11 +6108,12 @@ class Component extends DCLogic {
     this.blocked = !claim && this.tabTaken();
     if (this.blocked) { this.state = Object.assign(this.blank(), { theme: th, tabBlock: "already" }); return; }
     this.tabWrite();
-    // A join link (?room=ABCD) leaves the address bar on every load, so a reload does not use it again. A blocked tab
-    // returned above and keeps it for Use it here.
-    let jr = null;
-    try { const u = new URL(location.href); if (u.searchParams.has("room")) { jr = u.searchParams.get("room"); u.searchParams.delete("room"); history.replaceState(history.state, "", u.href); } } catch (e) {}
-    const joinTo = jr && /^[A-Za-z]{4}$/.test(jr) ? jr.toUpperCase() : null;
+    // A join link (?room=ABCD&r=1) leaves the address bar on every load, room and r together, so a reload does not use it
+    // again. A blocked tab returned above and keeps it for Use it here. r is the host's relay (its index in BROKERS),
+    // the one a player tries first; it counts only with a valid room and when it is a whole number in range.
+    let jr = null, jk = null;
+    try { const u = new URL(location.href), q = u.searchParams; if (q.has("room") || q.has("r")) { jr = q.get("room"); jk = q.get("r"); q.delete("room"); q.delete("r"); history.replaceState(history.state, "", u.href); } } catch (e) {}
+    const joinTo = jr && /^[A-Za-z]{4}$/.test(jr) ? jr.toUpperCase() : null, joinRelay = joinTo ? this.relayIdx(jk) : null;
     const base = this.blank();
     let saved = null;
     try { saved = JSON.parse(localStorage.getItem(this.KEY) || "null"); } catch (e) {}
@@ -6119,10 +6122,14 @@ class Component extends DCLogic {
     // the start page. The same room within 12 hours resumes; a saved host, test mode or one-device game always wins.
     if (saved && saved.mode === "player" && ((joinTo && saved.room !== joinTo) || !(typeof saved.savedAt === "number" && Date.now() - saved.savedAt < this.PLAYER_SAVE_MS))) { saved = null; try { localStorage.removeItem(this.KEY); } catch (e) {} }
     if (saved && (saved.mode === "player" ? !!saved.me : ((saved.mode === "host" || saved.mode === "solo") && Array.isArray(saved.players)))) {
-      this.state = Object.assign(base, saved, { conn: "off", net: null, drawn: true, nameInput: "", joinCode: "", joinName: "", now: Date.now() });
+      // A saved player game in the link's room resumes and takes the link's relay as the one to try first, saved at once
+      // so a reload during the search keeps it.
+      if (saved.mode === "player" && joinRelay != null) { saved.linkRelay = joinRelay; try { localStorage.setItem(this.KEY, JSON.stringify(saved)); } catch (e) {} }
+      this.state = Object.assign(base, saved, { conn: "off", net: null, drawn: true, nameInput: "", joinCode: "", joinName: "", linkRelay: saved.mode === "player" ? this.relayIdx(saved.linkRelay) : null, now: Date.now() });
     } else { this.state = base; }
-    // On the start page the link fills the code and puts the cursor in the name box.
-    if (joinTo && !this.state.mode) { this.state.joinCode = joinTo; this._focusName = true; }
+    // On the start page the link fills the code (with the host's relay, kept while the code is the link's) and puts the
+    // cursor in the name box.
+    if (joinTo && !this.state.mode) { this.state.joinCode = joinTo; this.state.joinRelay = joinRelay; this._focusName = true; }
     const bm = this.loadBanks();
     Object.assign(this.state, { banks: bm.banks, gameBank: bm.gameBank, bankId: bm.gameBank, bank: this.findBank(bm.gameBank, bm).items });
     Object.assign(this.state, this.capPatch(this.state));
@@ -6149,11 +6156,21 @@ class Component extends DCLogic {
     try { localStorage.setItem(this.TAB_KEY, JSON.stringify({ id: this.tabId, at: Date.now() })); sessionStorage.setItem("pulse-check-claim", "1"); } catch (e) {}
     location.reload();
   }
+  // The tab icon is the small ManyHats logo of the theme on screen (the host's theme for a player). The standard one is
+  // the page's own <link rel="icon">, read once; Halloween's replaces its href and back. Called on every render.
+  tabIcon(hw) {
+    const el = document.querySelector('link[rel="icon"]');
+    if (!el) return;
+    if (this.favStd == null) this.favStd = el.getAttribute("href");
+    const want = hw ? "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%231E2127'/%3E%3Crect x='0.75' y='0.75' width='46.5' height='46.5' rx='10.25' fill='none' stroke='%23EE8A2A' stroke-width='1.5'/%3E%3Cg transform='translate(4.8779 5.7211) scale(0.7452)'%3E%3Cg transform='translate(34 39) rotate(10) scale(1.5) translate(-10 -18)'%3E%3Cpath fill='%238BD450' d='M4.5 1 H15.5 Q16 1 16 1.5 L15.4 15 H4.6 L4 1.5 Q4 1 4.5 1 Z M1 15 H19 A1.5 1.5 0 0 1 19 18 H1 A1.5 1.5 0 0 1 1 15 Z'/%3E%3Cpath fill='%23EE8A2A' d='M4.4 10.5 H15.6 L15.5 13 H4.5 Z'/%3E%3C/g%3E%3Cg transform='translate(14 41) rotate(-12) scale(1.35) translate(-12 -14)'%3E%3Cpath fill='%23EE8A2A' d='M3 11 C3 5 7 1.5 12 1.5 C17 1.5 21 5 21 11 Z M1 11 H23 A1.5 1.5 0 0 1 23 14 H1 A1.5 1.5 0 0 1 1 11 Z'/%3E%3Cpath fill='%234E8A22' d='M11.2 2 Q11.4 -0.6 14 -1 L14.3 0.2 Q12.8 0.5 12.8 2 Z'/%3E%3Cpath fill='%233A1D08' d='M6.5 7.4 L8.6 4.2 L10.2 7.4 Z M13.8 7.4 L15.4 4.2 L17.5 7.4 Z'/%3E%3C/g%3E%3Cg transform='translate(25 29) rotate(-6) scale(1.3) translate(-11 -22)'%3E%3Cpath fill='%237B4FB0' d='M5 20 L9.6 8 Q10.8 4.4 13.4 3 Q16.4 1.4 20 2.6 Q16.6 3.6 15.2 6.6 L17 20 Z M-1.5 19 H23.5 Q24.6 19 24 20.5 Q23.4 22 21.5 22 H0.5 Q-1.4 22 -2 20.5 Q-2.6 19 -1.5 19 Z'/%3E%3Cpath fill='%238BD450' d='M6.7 15.6 H16.4 L16.8 18.6 H5.6 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E" : this.favStd;
+    if (el.getAttribute("href") !== want) el.setAttribute("href", want);
+  }
   bgStyles(hw) {
+    this.tabIcon(hw);
     return {
       rootClass: hw ? "pc-root pc-hw" : "pc-root",
       rootStyle: "min-height:100vh;font-family:var(--font-sans);color:var(--pc-body);" + (hw ? "background-color:#131016;background-image:repeating-linear-gradient(0deg,rgba(183,156,224,0.03) 0 1px,transparent 1px 26px),repeating-linear-gradient(90deg,rgba(183,156,224,0.03) 0 1px,transparent 1px 26px),repeating-linear-gradient(0deg,rgba(183,156,224,0.05) 0 1px,transparent 1px 130px),repeating-linear-gradient(90deg,rgba(183,156,224,0.05) 0 1px,transparent 1px 130px);" : ""),
-      traceStyle: "fill:none;stroke:" + (hw ? "rgba(139,212,80,0.22)" : "rgba(var(--pc-accent-rgb),0.16)") + ";stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;"
+      traceStyle: "fill:none;stroke:" + (hw ? "rgba(139,212,80,0.22)" : "rgba(var(--pc-heart-rgb),0.16)") + ";stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;"
     };
   }
   // A blocked tab draws only the background and the message.
@@ -6278,7 +6295,7 @@ class Component extends DCLogic {
     }).catch(() => this.setState({ bankMsg: { text: "That file couldn’t be read." } }));
   }
   blank() {
-    return { mode: null, room: "", conn: "off", net: null, me: null, joinCode: "", joinName: "", round: 0, phase: "lobby", questions: null, qMode: "preset", qDraft: "", qNum: 10, players: [], currentQ: 0, deadline: null, trues: [], tallyA: [], tallyN: [], drawn: true, nameInput: "", activeId: null, turnDeadline: null, draft: null, notice: "", confirmClose: false, timerSec: null, superSet: null, test: false, tpId: null, tpDraft: null, now: Date.now() };
+    return { mode: null, room: "", conn: "off", net: null, me: null, joinCode: "", joinRelay: null, joinName: "", linkRelay: null, brokerIdx: null, round: 0, phase: "lobby", questions: null, qMode: "preset", qDraft: "", qNum: 10, players: [], currentQ: 0, deadline: null, trues: [], tallyA: [], tallyN: [], drawn: true, nameInput: "", activeId: null, turnDeadline: null, draft: null, notice: "", confirmClose: false, timerSec: null, superSet: null, test: false, tpId: null, tpDraft: null, now: Date.now() };
   }
   componentDidMount() {
     // Closing or reloading frees the record; a page back from the back/forward cache checks again.
@@ -6292,6 +6309,10 @@ class Component extends DCLogic {
       else if (e.key === this.TAB_KEY && e.newValue) { let r = null; try { r = JSON.parse(e.newValue); } catch (err) {} if (r && r.id && r.id !== this.tabId) this.block("now"); }
     };
     window.addEventListener("storage", this._onStorage);
+    // The network went away or came back (v20 spec section 7): a working connection counts as lost at once, and a try
+    // waiting for its turn is made at once.
+    this._onOffline = () => this.onNetGone(); this._onOnline = () => this.onNetBack();
+    window.addEventListener("offline", this._onOffline); window.addEventListener("online", this._onOnline);
     this._tab = setInterval(() => this.checkIn(), 2000);
     if ((this.state.mode === "host" || this.state.mode === "player") && this.state.room && !this.state.test) this.connect();
     this._clock = setInterval(() => this.tick(), 250);
@@ -6307,6 +6328,7 @@ class Component extends DCLogic {
   }
   componentWillUnmount() {
     window.removeEventListener("storage", this._onStorage); window.removeEventListener("pagehide", this._onHide); window.removeEventListener("pageshow", this._onShow);
+    window.removeEventListener("offline", this._onOffline); window.removeEventListener("online", this._onOnline);
     clearInterval(this._tab); clearInterval(this._clock); clearInterval(this._hb); clearInterval(this._qhb); clearTimeout(this._cc); clearTimeout(this._rb); clearTimeout(this._eb); clearTimeout(this._pub); clearTimeout(this._syncT);
     this.netStop();
   }
@@ -6314,7 +6336,7 @@ class Component extends DCLogic {
     if (this.blocked) return;
     const S = this.state;
     try {
-      if (S.mode === "player") localStorage.setItem(this.KEY, JSON.stringify({ mode: "player", room: S.room, me: S.me, savedAt: Date.now() }));
+      if (S.mode === "player") localStorage.setItem(this.KEY, JSON.stringify(Object.assign({ mode: "player", room: S.room, me: S.me, savedAt: Date.now() }, S.linkRelay != null ? { linkRelay: S.linkRelay } : {})));
       else if (S.mode) localStorage.setItem(this.KEY, JSON.stringify({ mode: S.mode, room: S.room, round: S.round, phase: S.phase, questions: S.questions, qNum: S.qNum, qSrc: S.qSrc, players: S.players, timerSec: S.timerSec, superSet: S.superSet, test: !!S.test, tpId: S.tpId, currentQ: S.currentQ, deadline: S.deadline, trues: S.trues, tallyA: S.tallyA, tallyN: S.tallyN }));
     } catch (e) {}
     if (S.mode === "host") this.publishState();
@@ -6378,11 +6400,17 @@ class Component extends DCLogic {
   // A player's move to the next relay in search of the room leaves the status as it was (LIVE stays LIVE while the next
   // relay is tried), and a round in which no relay had the room waits NOROOM_WAIT_MS before the next, a pause that does
   // not count toward OFFLINE. Timers: _rt the next try, _gT the guard on a try, _nsT the no-room move, _offT OFFLINE.
+  // A silent drop (v20 spec section 7): the browser's offline event ends a working connection at once as a lost one
+  // (_lost), and its online event makes a waiting try at once (_again, the try _rt waits to make).
   netStop() {
-    this._gen = (this._gen || 0) + 1; this._home = null; this._roomless = false;
+    this._gen = (this._gen || 0) + 1; this._home = null; this._roomless = false; this._again = null; this._lost = null;
     clearTimeout(this._rt); clearTimeout(this._gT); clearTimeout(this._nsT); clearTimeout(this._offT); this._offT = null;
     this.endClient(this.client);
   }
+  // The next try f after ms, made at once if the network comes back first (onNetBack).
+  later(f, ms) { const g = () => { this._again = null; f(); }; this._again = g; this._rt = setTimeout(g, ms); }
+  onNetBack() { const g = this._again; if (!g || this.blocked) return; clearTimeout(this._rt); g(); }
+  onNetGone() { if (this._lost) this._lost(); }
   // Ends client c at once, and forgets it if it is the current one.
   endClient(c) {
     if (!c) return;
@@ -6390,10 +6418,22 @@ class Component extends DCLogic {
     try { c.end(true); } catch (e) {}
   }
   // OFFLINE once OFFLINE_MS pass without a relay connecting (a connection cancels it). It only runs while no relay is
-  // connected, so it also ends a LIVE kept through a player's move between relays.
-  offlineSoon() { if (!this._offT) this._offT = setTimeout(() => { this._offT = null; if (this.state.conn !== "off") this.setState({ conn: "off" }); }, this.OFFLINE_MS); }
+  // connected, so it also ends a LIVE kept through a player's move between relays. since: when the connection was last
+  // known to work, if earlier than now (a silent drop: the last packet heard), and OFFLINE_MS count from then.
+  offlineSoon(since) { if (!this._offT) this._offT = setTimeout(() => { this._offT = null; if (this.state.conn !== "off") this.setState({ conn: "off" }); }, since ? Math.max(0, since + this.OFFLINE_MS - Date.now()) : this.OFFLINE_MS); }
   whenMqtt(cb, gen, n) { if (gen !== this._gen) return; if (window.mqtt) return cb(); if ((n || 0) > 80) { this.setState({ conn: "off" }); return; } this._rt = setTimeout(() => this.whenMqtt(cb, gen, (n || 0) + 1), 250); }
-  connect() { if (this.blocked) return; this.netStop(); const gen = this._gen; this.setState({ conn: "connecting" }); this.offlineSoon(); this.whenMqtt(() => this.tryBroker(0, this.BROKERS.length, gen), gen); }
+  // A fresh start tries the first relay first, or for a player who came from a join link the host's relay it named
+  // (linkRelay, _linkK while connecting), then the next ones in turn, every round starting there. brokerIdx (the relay
+  // connected to, which the host's join link names) is cleared until a relay connects.
+  connect() {
+    if (this.blocked) return; this.netStop(); const gen = this._gen, S = this.state;
+    const first = S.mode === "player" ? this.relayIdx(S.linkRelay) : null;
+    this._linkK = first;
+    this.setState({ conn: "connecting", brokerIdx: null }); this.offlineSoon(); this.whenMqtt(() => this.tryBroker(first || 0, this.BROKERS.length, gen), gen);
+  }
+  // A relay's index in BROKERS from a number or the text of one (a join link's r), or null when it is not a whole number
+  // in range.
+  relayIdx(v) { const t = String(v); return /^\d+$/.test(t) && +t < this.BROKERS.length ? +t : null; }
   // Tries relay i (counted round the list); left: how many relays this round still has to try. A try that fails before
   // until is made again on the same relay after pause (by default the relay's fair chance: FAIR_MS from now, every
   // AGAIN_MS; home after a lost connection: for good, every RETRY_MS), and after until the next relay is tried.
@@ -6405,29 +6445,29 @@ class Component extends DCLogic {
       // pause does not count toward OFFLINE (it starts again with the next round).
       const roomless = this._roomless; this._roomless = false;
       if (roomless) { clearTimeout(this._offT); this._offT = null; }
-      this._rt = setTimeout(() => { if (gen !== this._gen) return; if (roomless) this.offlineSoon(); this.tryBroker(k, n, gen); }, roomless ? this.NOROOM_WAIT_MS : this.RETRY_MS);
+      this.later(() => { if (gen !== this._gen) return; if (roomless) this.offlineSoon(); this.tryBroker(k, n, gen); }, roomless ? this.NOROOM_WAIT_MS : this.RETRY_MS);
       return;
     }
     if (!until) { until = Date.now() + this.FAIR_MS; pause = this.AGAIN_MS; }
     this.endClient(this.client);
-    let ever = false, failed = false, c;
+    let ever = false, failed = false, held = false, silent = false, heard = 0, c;
     // This try closed or failed before connecting: end its client, then this relay again or the next one (see until).
     const fail = () => {
       if (ever || failed || gen !== this._gen) return;
       failed = true; clearTimeout(this._gT);
       this.endClient(c);
-      if (Date.now() + pause < until) this._rt = setTimeout(() => this.tryBroker(k, left, gen, until, pause), pause);
+      if (Date.now() + pause < until) this.later(() => this.tryBroker(k, left, gen, until, pause), pause);
       else this.tryBroker(k + 1, left - 1, gen);
     };
     try {
-      c = window.mqtt.connect(this.BROKERS[k], { connectTimeout: this.FAIR_MS, reconnectPeriod: 0, clean: true, queueQoSZero: true, clientId: "pc_" + Math.random().toString(36).slice(2, 12) });
+      c = window.mqtt.connect(this.BROKERS[k], { keepalive: this.KEEPALIVE_S, connectTimeout: this.FAIR_MS, reconnectPeriod: 0, clean: true, queueQoSZero: true, clientId: "pc_" + Math.random().toString(36).slice(2, 12) });
     } catch (e) { this.tryBroker(k + 1, left - 1, gen); return; }
     this.client = c;
     // A guard for a try that neither connects nor fails (MQTT.js gives up by itself after connectTimeout).
     this._gT = setTimeout(fail, this.FAIR_MS + 2000);
     c.on("connect", () => {
       if (failed || gen !== this._gen) return;
-      ever = true; clearTimeout(this._gT); clearTimeout(this._offT); this._offT = null;
+      ever = true; heard = Date.now(); this._lost = () => lost(0); clearTimeout(this._gT); clearTimeout(this._offT); this._offT = null;
       this.setState({ conn: "on", brokerIdx: k });
       const b = this.base();
       if (this.state.mode === "host") { this._home = k; c.subscribe(b + "/evt"); this.publishState(); }
@@ -6439,25 +6479,45 @@ class Component extends DCLogic {
         clearTimeout(this._nsT);
         if (this._home == null) this._nsT = setTimeout(() => {
           if (gen !== this._gen || this.client !== c) return;
-          this.endClient(c); this._roomless = true;
+          this.endClient(c); this._lost = null; this._roomless = true;
           this.offlineSoon(); this.tryBroker(k + 1, left - 1, gen);
         }, this.NOROOM_MS);
       }
     });
     // Only the current client's messages count: one already ended (moved on from, or replaced) can still deliver a
     // message it had received, which must not make its relay home or stop the current relay's no-room move.
-    c.on("message", (topic, msg, packet) => { if (gen !== this._gen || this.client !== c) return; if (topic === this.base() + "/state") { clearTimeout(this._nsT); this._home = k; } this.onMsg(topic, msg, packet); });
-    c.on("error", fail);
-    c.on("close", () => {
-      if (!ever) { fail(); return; }
+    // On the join link's relay, before home, a retained room state alone does not count (it is not shown either): it
+    // may be one the host left there before moving to another relay (a reload). Only a state the host sends while the
+    // player is there (it answers the player's hello at once) makes it home; a closed room counts either way.
+    c.on("message", (topic, msg, packet) => {
       if (gen !== this._gen || this.client !== c) return;
-      // A connection was lost: CONNECTING, OFFLINE after OFFLINE_MS without a relay. Home (the room is there): only it is
-      // tried again, every RETRY_MS, for good. A player's relay that never brought the room's state: the next relay.
-      clearTimeout(this._nsT); this.endClient(c);
-      this.setState({ conn: "connecting" }); this.offlineSoon();
-      if (this._home === k) this._rt = setTimeout(() => this.tryBroker(k, n, gen, Infinity, this.RETRY_MS), this.RETRY_MS);
-      else this.tryBroker(k + 1, left - 1, gen);
+      if (topic === this.base() + "/state") {
+        if (this._home == null && k === this._linkK && packet && packet.retain && !held) { let d = null; try { d = JSON.parse(msg.toString()); } catch (e) {} if (!(d && d.closed)) { held = true; return; } }
+        clearTimeout(this._nsT); this._home = k;
+      }
+      this.onMsg(topic, msg, packet);
     });
+    // Every packet from the relay shows the link works (heard). MQTT.js reports a relay that stopped answering with a
+    // "Keepalive timeout" error and then closes: that connection went silent when it was last heard.
+    c.on("packetreceive", () => { heard = Date.now(); });
+    c.on("error", e => { if (ever && e && /keepalive/i.test(e.message || "")) silent = true; fail(); });
+    // A connection was lost: CONNECTING, OFFLINE after OFFLINE_MS without a relay (from the last packet heard if it went
+    // silent, so at once when that is already OFFLINE_MS ago; see the close handler for when it counts as silent). Home (the room is there): only it is tried again, every
+    // RETRY_MS, for good. A player's relay that never brought the room's state: the next relay. The browser's offline
+    // event calls it too (onNetGone), as a loss now.
+    const lost = since => {
+      if (gen !== this._gen || this.client !== c) return;
+      this._lost = null; clearTimeout(this._nsT); this.endClient(c);
+      const over = since > 0 && since + this.OFFLINE_MS <= Date.now();
+      this.setState({ conn: over ? "off" : "connecting" }); if (!over) this.offlineSoon(since);
+      if (this._home === k) this.later(() => this.tryBroker(k, n, gen, Infinity, this.RETRY_MS), this.RETRY_MS);
+      else this.tryBroker(k + 1, left - 1, gen);
+    };
+    // A keepalive close counts as a silent drop only when it comes about when the keepalive says it should: 1.5
+    // keepalives after the last packet heard, plus 5 s of slack. Much later means the page's timers were frozen (a phone
+    // locked, a laptop asleep) and woke on a socket that died meanwhile, while the network may be fine: then it is an
+    // ordinary loss (CONNECTING, OFFLINE after OFFLINE_MS), not OFFLINE at once.
+    c.on("close", () => { if (!ever) fail(); else lost(silent && Date.now() - heard < this.KEEPALIVE_S * 1500 + 5000 ? heard : 0); });
   }
   onMsg(topic, msg, packet) {
     let d = null;
@@ -6493,6 +6553,12 @@ class Component extends DCLogic {
   playerState(d, retained) {
     if (!d) return;
     if (d.closed) { this.leave("The host closed room " + this.state.room + ". Thanks for playing.", true); return; }
+    // A state the host sent before the one shown is a late copy and is dropped: once a host's network is back, its old
+    // connection can still deliver what waited in it, after the new connection's state (v20 spec section 7). sentAt is
+    // the host's clock, so a host clock set back by more than STALE_MS is not taken for one, and a state from a later
+    // round than the one shown is never a late copy (the host's clock may have been set back meanwhile).
+    const last = this.state.net;
+    if (last && last.sentAt && d.sentAt && d.sentAt < last.sentAt && last.sentAt - d.sentAt < this.STALE_MS && !(d.round > last.round)) return;
     // Deadlines are host-clock timestamps; shift them onto this device's clock so skewed clocks don't shorten the timer.
     if (d.sentAt && (!retained || this.clockOff == null)) this.clockOff = Date.now() - d.sentAt;
     if (d.deadline) d = Object.assign({}, d, { deadline: d.deadline + (this.clockOff || 0) });
@@ -6681,11 +6747,12 @@ class Component extends DCLogic {
     const x = Math.max(80, Math.min(920, t * 10));
     return "M0 46 L" + (x - 60) + " 46 l12 -6 l10 6 l6 0 l7 -34 l8 46 l7 -12 l10 0 l14 -8 l12 8 L1000 46";
   }
-  // The join link for a room: <base>?room=CODE. The base is the page's own address over https, otherwise SITE_URL
+  // The join link for a room: <base>?room=CODE, and &r=K while the host is on a relay (K its index in BROKERS, 0
+  // included), so a player tries the host's relay first. The base is the page's own address over https, otherwise SITE_URL
   // (window.PULSE_SITE_URL, when a string, is a test hook that stands in for it, an empty one for no base). null when there is no base.
-  joinLink(room) {
+  joinLink(room, relay) {
     const base = location.protocol === "https:" ? location.origin + location.pathname : (typeof window.PULSE_SITE_URL === "string" ? window.PULSE_SITE_URL : this.SITE_URL);
-    return base && room ? { base, link: base + "?room=" + room } : null;
+    return base && room ? { base, link: base + "?room=" + room + (this.relayIdx(relay) != null ? "&r=" + relay : "") } : null;
   }
   // The QR code of a text (qrcode-generator: smallest version, level M, byte mode) as one SVG path in module units, with
   // the 4-module quiet zone in its viewBox. null if the library is missing or the text does not fit. Kept for the last text.
@@ -6747,7 +6814,7 @@ class Component extends DCLogic {
     const colorOf = i => this.COLORS[Math.max(0, i) % this.COLORS.length];
     const cur = phase === "final" ? 2 : ((phase === "question" || phase === "results") ? 1 : 0);
     const steps = (solo || S.mode === "host") ? ["LOBBY", "LIVE", "RESULTS"].map((label, o) => ({
-      label, style: "font-size:11px;font-weight:600;letter-spacing:0.12em;padding:6px 10px;border-radius:4px;background:" + (o === cur ? "var(--pc-accent)" : "transparent") + ";color:" + (o === cur ? "var(--pc-on-accent)" : (o < cur ? "var(--pc-text)" : "var(--pc-faint)")) + ";"
+      label, style: "font-size:11px;font-weight:600;letter-spacing:0.12em;padding:6px 10px;border-radius:4px;background-color:" + (o === cur ? "var(--pc-accent)" : "transparent") + ";color:" + (o === cur ? "var(--pc-on-accent)" : (o < cur ? "var(--pc-text)" : "var(--pc-faint)")) + ";"
     })) : [];
     const connDot = S.test ? "width:8px;height:8px;border-radius:50%;flex:none;background:var(--pc-test);" : "width:8px;height:8px;border-radius:50%;flex:none;background:" + (S.conn === "on" ? "var(--pc-accent)" : (S.conn === "connecting" ? "var(--pc-muted)" : "var(--pc-faint)")) + ";" + (S.conn === "on" ? "animation:pc-beat 1.4s ease-in-out infinite;" : "");
     const vals = {
@@ -6802,16 +6869,19 @@ class Component extends DCLogic {
     };
     Object.assign(vals, this.bgStyles(hwT));
     vals.headerStyle = (hwT ? "background:#221D27;border-bottom:1px solid #3E3348;" : "background:var(--pc-card);border-bottom:1px solid var(--pc-line);") + "position:relative;z-index:2;";
-    vals.ekgUnderStyle = "fill:none;stroke:" + (hwT ? "rgba(139,212,80,0.28)" : "rgba(var(--pc-accent-rgb),0.16)") + ";stroke-width:3;stroke-linecap:round;stroke-linejoin:round;";
+    vals.ekgUnderStyle = "fill:none;stroke:" + (hwT ? "rgba(139,212,80,0.28)" : "rgba(var(--pc-heart-rgb),0.16)") + ";stroke-width:3;stroke-linecap:round;stroke-linejoin:round;";
     vals.finalHeroStyle = (hwT ? "background:#2E2338;border:1px solid #4A3A5C;" : "background:var(--pc-rule);") + "border-radius:8px;margin-bottom:24px;position:relative;overflow:hidden;";
-    vals.finalTraceStyle = "fill:none;stroke:" + (hwT ? "rgba(139,212,80,0.45)" : "rgba(var(--pc-accent-rgb),0.35)") + ";stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;";
+    vals.finalTraceStyle = "fill:none;stroke:" + (hwT ? "rgba(139,212,80,0.45)" : "rgba(var(--pc-heart-rgb),0.35)") + ";stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;";
     vals.hostRoomStd = vals.isHostRoom && !hwT; vals.hostRoomHw = vals.isHostRoom && hwT;
     // ── join link and QR code (hosting only: not test mode, not "Play on this device") ──
     // The live question's join tile is width:0 with min-width:100%: it fills the LOCKED IN card without widening it
     // (that card is as wide as its roster), and its text wraps under the QR code when the card is narrow.
-    const jl = vals.isHostRoom ? this.joinLink(S.room) : null, qr = jl ? this.qrOf(jl.link) : null;
-    // qr (path, box and the lobby and tile sizes, for PulseUI.Qr) and joinBase are read only where hasJoin shows them.
-    vals.hasJoin = !!qr; vals.qr = qr; vals.joinBase = jl && jl.base;
+    // The link names the host's relay (brokerIdx, set while a relay is connected and kept through a lost connection, as
+    // the host comes back to it), so the QR code and the address follow it when it changes (for example after a reload).
+    const jl = vals.isHostRoom ? this.joinLink(S.room, S.brokerIdx) : null, qr = jl ? this.qrOf(jl.link) : null;
+    // qr (path, box and the lobby and tile sizes, for PulseUI.Qr), joinBase and joinQuery (the address after the base:
+    // ?room=CODE and &r=K) are read only where hasJoin shows them.
+    vals.hasJoin = !!qr; vals.qr = qr; vals.joinBase = jl && jl.base; vals.joinQuery = jl && jl.link.slice(jl.base.length);
     vals.themeVal = S.theme === "halloween" ? "halloween" : "standard";
     vals.onTheme = e => {
       if (this.blocked) return;
@@ -6821,14 +6891,15 @@ class Component extends DCLogic {
     };
     // ── landing ──
     vals.joinCode = S.joinCode; vals.joinName = S.joinName; vals.nameRef = this.nameRef;
-    vals.onJoinCode = e => this.setState({ joinCode: e.target.value.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 4) });
+    // A typed code drops the join link's relay as soon as it differs from the link's code (typed codes search as before).
+    vals.onJoinCode = e => { const v = e.target.value.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 4); this.setState(St => ({ joinCode: v, joinRelay: v === St.joinCode ? St.joinRelay : null })); };
     vals.onJoinName = e => this.setState({ joinName: e.target.value });
     vals.joinDisabled = S.joinCode.length !== 4 || !S.joinName.trim();
     const doJoin = () => {
       const code = this.state.joinCode, name = this.state.joinName.trim();
       if (code.length !== 4 || !name) return;
       const me = { id: "r" + Date.now() + Math.floor(Math.random() * 100000), name: name.slice(0, 24), answers: {}, preds: {}, supers: [] };
-      this.setState({ mode: "player", room: code, me, net: null, draft: null }, () => { this.save(); this.connect(); });
+      this.setState({ mode: "player", room: code, me, net: null, draft: null, linkRelay: this.relayIdx(this.state.joinRelay), joinRelay: null }, () => { this.save(); this.connect(); });
     };
     vals.joinGame = doJoin;
     vals.onJoinKey = e => { if (e.key === "Enter") doJoin(); };
@@ -6981,7 +7052,9 @@ class Component extends DCLogic {
         moveDown: () => { if (nextB) this.moveBank(b.id, nextB.id, true); },
         text: b.t, pair: b.a + " · " + b.b, editing, notEditing: !editing,
         defTitle: b.def ? "Plays in new games by default. Tap to remove." : "Tap to play this question in new games by default.",
-        defStyle: "font-family:var(--font-sans);flex:none;height:26px;min-width:78px;padding:0 8px;border-radius:3px;font-size:10px;font-weight:600;letter-spacing:0.1em;cursor:pointer;" + (b.def ? "background:var(--pc-accent);color:var(--pc-on-accent);border:1px solid var(--pc-accent);" : "background:transparent;color:var(--pc-muted);border:1px solid var(--pc-line-3);"),
+        // The fill uses background-color in both states, never the background shorthand: the Dark Reader extension keeps its
+        // copy of a shorthand that holds a var() after the page changes it, so the off button stayed green (v20 spec section 2).
+        defStyle: "font-family:var(--font-sans);flex:none;height:26px;min-width:78px;padding:0 8px;border-radius:3px;font-size:10px;font-weight:600;letter-spacing:0.1em;cursor:pointer;" + (b.def ? "background-color:var(--pc-accent);color:var(--pc-on-accent);border:1px solid var(--pc-accent);" : "background-color:transparent;color:var(--pc-muted);border:1px solid var(--pc-line-3);"),
         toggleDef: () => {
           const cur = this.state.bank || [];
           const it = cur.find(x => x.id === b.id); if (!it) return;
@@ -7032,7 +7105,7 @@ class Component extends DCLogic {
     vals.onImportFile = e => { const f = e.target.files && e.target.files[0]; e.target.value = ""; if (f) this.importBank(f); };
     vals.emptyLabel = S.bankConfirmEmpty ? "Tap again to empty" : "Empty bank";
     vals.emptyDisabled = bank.length === 0;
-    vals.emptyBtnStyle = S.bankConfirmEmpty ? "color:var(--pc-accent);border-color:var(--pc-accent);" : "color:var(--pc-text);border-color:var(--pc-line-3);";
+    vals.emptyBtnClass = S.bankConfirmEmpty ? "pc-btn-ink-accent" : "pc-btn-ink";
     vals.emptyBank = () => {
       const prev = this.state.bank || [];
       if (!prev.length) return;
@@ -7077,7 +7150,7 @@ class Component extends DCLogic {
       const k = sel.indexOf(b.id), on = k >= 0;
       return {
         text: b.t, pair: b.a + " · " + b.b, mark: on ? String(k + 1) : "",
-        rowStyle: "font-family:var(--font-sans);width:100%;display:flex;align-items:center;gap:12px;padding:9px 8px 9px 4px;text-align:left;background:" + (on ? "rgba(var(--pc-accent-rgb),0.08)" : "transparent") + ";border:none;border-bottom:1px solid var(--pc-rule);cursor:pointer;",
+        rowStyle: "font-family:var(--font-sans);width:100%;display:flex;align-items:center;gap:12px;padding:9px 8px 9px 4px;text-align:left;background-color:" + (on ? "rgba(var(--pc-accent-rgb),0.08)" : "transparent") + ";border:none;border-bottom:1px solid var(--pc-rule);cursor:pointer;",
         boxStyle: "flex:none;width:24px;height:24px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;" + (on ? "background:var(--pc-accent);color:var(--pc-on-accent);border:1px solid var(--pc-accent);" : "background:var(--pc-field);color:transparent;border:1px solid var(--pc-line-3);"),
         toggle: () => {
           const cur = (this.state.selIds || []).filter(id => this.gameItems().some(x => x.id === id));
@@ -7242,7 +7315,7 @@ class Component extends DCLogic {
     const pct = remaining == null ? 100 : Math.max(0, Math.min(100, remaining / (T * 1000) * 100));
     const urgent = remaining != null && secs <= 5 && secs > 0;
     vals.timerLeft = String(secs);
-    vals.timerBarStyle = "height:100%;border-radius:4px;background:var(--pc-accent);width:" + pct + "%;transition:width 250ms linear;";
+    vals.timerBarStyle = "height:100%;border-radius:4px;background:var(--pc-heart);width:" + pct + "%;transition:width 250ms linear;";
     vals.timerNumStyle = "font-size:22px;font-weight:600;min-width:44px;text-align:right;display:inline-block;color:" + (urgent ? "var(--pc-accent)" : "var(--pc-text)") + ";" + (urgent ? "animation:pc-beat 1s ease-in-out infinite;" : "");
     vals.timerBigStyle = "font-size:72px;line-height:1;font-weight:600;min-width:100px;display:inline-block;color:" + (urgent || secs === 0 ? "var(--pc-accent)" : "#FFFFFF") + ";" + (urgent ? "animation:pc-beat 1s ease-in-out infinite;" : "");
     // ── host live question ──
@@ -7284,7 +7357,7 @@ class Component extends DCLogic {
     vals.pickA = () => upd(d => { d.a = "A"; });
     vals.pickB = () => upd(d => { d.a = "B"; });
     vals.predVal = String(draft.pred);
-    vals.sliderStyle = "flex:1;background:linear-gradient(to right,var(--pc-accent) 0%,var(--pc-accent) " + draft.pred + "%,var(--pc-line-2) " + draft.pred + "%,var(--pc-line-2) 100%);";
+    vals.sliderStyle = "background:linear-gradient(to right,var(--pc-accent) 0%,var(--pc-accent) " + draft.pred + "%,var(--pc-line-2) " + draft.pred + "%,var(--pc-line-2) 100%);";
     vals.onPred = e => { const v = Math.min(100, Math.max(0, Math.round(parseFloat(e.target.value) || 0))); upd(d => { d.pred = v; }); };
     const used = answerer ? (answerer.supers || []).length : 0;
     const blocked = !draft.sup && used >= limit;
