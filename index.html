@@ -4689,8 +4689,8 @@ if (location.protocol === "file:" && !window.__resources) {
     button,input,select,textarea{font-family:inherit;}
     body{margin:0;font-family:var(--font-sans);font-size:16px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;background-color:#111214;background-image:repeating-linear-gradient(0deg,rgba(244,246,248,0.022) 0 1px,transparent 1px 26px),repeating-linear-gradient(90deg,rgba(244,246,248,0.022) 0 1px,transparent 1px 26px),repeating-linear-gradient(0deg,rgba(244,246,248,0.035) 0 1px,transparent 1px 130px),repeating-linear-gradient(90deg,rgba(244,246,248,0.035) 0 1px,transparent 1px 130px);}
     /* The palette (docs/specs/v18-phone-join.md, section 2): every themed color, standard first, Halloween on .pc-hw (v17's values). */
-    .pc-root{--pc-accent:#3DD68C;--pc-accent-2:#2BB673;--pc-accent-3:#1F8F5A;--pc-accent-rgb:61,214,140;--pc-heart:#F0524F;--pc-heart-rgb:240,82,79;--pc-on-accent:#0E1A14;--pc-accent-dim:#254532;--pc-warn:#E87A64;--pc-ok:#328A5C;--pc-bg:#111214;--pc-field:#1E2021;--pc-card-alt:#232426;--pc-card:#28292B;--pc-raised:#2F3132;--pc-rule:#36383A;--pc-line:#3A3C3E;--pc-line-2:#454749;--pc-line-3:#4F5153;--pc-faint:#56585A;--pc-slate:#67696B;--pc-muted:#888A8C;--pc-muted-2:#959799;--pc-label:#A1A3A5;--pc-body:#B1B3B6;--pc-pale:#C8CACD;--pc-soft:#D3D5D7;--pc-soft-2:#DDDFE2;--pc-text:#ECEEF0;--pc-btn-ink:#67696B;--pc-btn-line:#C8CACD;--pc-btn-hover:#E8EAEC;--pc-test:#BFE0FF;--pc-test-line:#436282;--pc-test-fill:#304760;--pc-test-bg:#21282F;--pc-player-1:#4789AA;--pc-player-2:#F48C90;--pc-player-3:#47856E;--pc-player-4:#4D4E79;--pc-player-5:#E0843E;--pc-player-6:#8FA8A0;--pc-player-7:#B5B838;--pc-player-8:#A1A3A5;}
-    .pc-root.pc-hw{--pc-accent:#FAAF3F;--pc-accent-2:#D98A1F;--pc-accent-3:#B06A15;--pc-accent-rgb:250,175,63;--pc-heart:#FAAF3F;--pc-heart-rgb:250,175,63;--pc-on-accent:#FFFFFF;--pc-accent-dim:#4A3A1C;--pc-warn:#D98A1F;--pc-ok:#3E8579;--pc-bg:#131211;--pc-field:#211F1D;--pc-card-alt:#26241F;--pc-card:#2B2926;--pc-raised:#33302C;--pc-rule:#3A3733;--pc-line:#3E3B37;--pc-line-2:#4A4642;--pc-line-3:#55504A;--pc-faint:#5C5751;--pc-slate:#6C6864;--pc-muted:#8F8983;--pc-muted-2:#9C968F;--pc-label:#A9A19C;--pc-body:#B8B2AC;--pc-pale:#CFC9C3;--pc-soft:#D9D4CF;--pc-soft-2:#E3DED9;--pc-text:#F0EDEA;--pc-btn-ink:#6C6864;--pc-btn-line:#CFC9C3;--pc-btn-hover:#ECE9E7;--pc-test:#AEE9E8;--pc-test-line:#2E6B68;--pc-test-fill:#1F4E4C;--pc-test-bg:#1E2A29;--pc-player-1:#3B8DA1;--pc-player-2:#F48F7B;--pc-player-3:#3E8579;--pc-player-4:#42527A;--pc-player-5:#D98A1F;--pc-player-6:#8FA8A0;--pc-player-7:#B5B838;--pc-player-8:#A9A19C;}
+    .pc-root{--pc-accent:#3DD68C;--pc-accent-2:#2BB673;--pc-accent-3:#1F8F5A;--pc-accent-rgb:61,214,140;--pc-heart:#F0524F;--pc-heart-rgb:240,82,79;--pc-name:var(--pc-heart);--pc-on-accent:#0E1A14;--pc-accent-dim:#254532;--pc-warn:#E87A64;--pc-ok:#328A5C;--pc-bg:#111214;--pc-field:#1E2021;--pc-card-alt:#232426;--pc-card:#28292B;--pc-raised:#2F3132;--pc-rule:#36383A;--pc-line:#3A3C3E;--pc-line-2:#454749;--pc-line-3:#4F5153;--pc-faint:#56585A;--pc-slate:#67696B;--pc-muted:#888A8C;--pc-muted-2:#959799;--pc-label:#A1A3A5;--pc-body:#B1B3B6;--pc-pale:#C8CACD;--pc-soft:#D3D5D7;--pc-soft-2:#DDDFE2;--pc-text:#ECEEF0;--pc-btn-ink:#67696B;--pc-btn-line:#C8CACD;--pc-btn-hover:#E8EAEC;--pc-test:#BFE0FF;--pc-test-line:#436282;--pc-test-fill:#304760;--pc-test-bg:#21282F;--pc-player-1:#4789AA;--pc-player-2:#F48C90;--pc-player-3:#47856E;--pc-player-4:#4D4E79;--pc-player-5:#E0843E;--pc-player-6:#8FA8A0;--pc-player-7:#B5B838;--pc-player-8:#A1A3A5;}
+    .pc-root.pc-hw{--pc-accent:#FAAF3F;--pc-accent-2:#D98A1F;--pc-accent-3:#B06A15;--pc-accent-rgb:250,175,63;--pc-heart:#FAAF3F;--pc-heart-rgb:250,175,63;--pc-name:var(--pc-text);--pc-on-accent:#FFFFFF;--pc-accent-dim:#4A3A1C;--pc-warn:#D98A1F;--pc-ok:#3E8579;--pc-bg:#131211;--pc-field:#211F1D;--pc-card-alt:#26241F;--pc-card:#2B2926;--pc-raised:#33302C;--pc-rule:#3A3733;--pc-line:#3E3B37;--pc-line-2:#4A4642;--pc-line-3:#55504A;--pc-faint:#5C5751;--pc-slate:#6C6864;--pc-muted:#8F8983;--pc-muted-2:#9C968F;--pc-label:#A9A19C;--pc-body:#B8B2AC;--pc-pale:#CFC9C3;--pc-soft:#D9D4CF;--pc-soft-2:#E3DED9;--pc-text:#F0EDEA;--pc-btn-ink:#6C6864;--pc-btn-line:#CFC9C3;--pc-btn-hover:#ECE9E7;--pc-test:#AEE9E8;--pc-test-line:#2E6B68;--pc-test-fill:#1F4E4C;--pc-test-bg:#1E2A29;--pc-player-1:#3B8DA1;--pc-player-2:#F48F7B;--pc-player-3:#3E8579;--pc-player-4:#42527A;--pc-player-5:#D98A1F;--pc-player-6:#8FA8A0;--pc-player-7:#B5B838;--pc-player-8:#A9A19C;}
     a{color:var(--pc-accent-2);text-decoration:none;} a:hover{color:var(--pc-accent-3);}
     @keyframes pc-beat{0%,100%{transform:scale(1);opacity:1;}14%{transform:scale(1.45);}28%{transform:scale(1);}42%{transform:scale(1.3);opacity:0.85;}60%{transform:scale(1);}}
     @keyframes pc-draw{from{stroke-dashoffset:1300;}to{stroke-dashoffset:0;}}
@@ -4715,13 +4715,10 @@ if (location.protocol === "file:" && !window.__resources) {
     /* The LOCKED IN card (live question) and the STANDINGS card (question results) beside the question card. The runtime
        drops a style written on a component, so their width comes from this class. */
     .pc-side-card{flex:1 1 260px;min-width:260px;}
-    /* Eight outline buttons keep the page's text color and a stronger line instead of the Button's gray ink (the Empty bank
-       button turns accent while it asks to be tapped again). The runtime drops a style written on a component, so the colors
-       come from these classes (passed as className). They set the Button's own color variables, so its hover fill and focus
-       ring work on top. */
-    .pc-btn.pc-btn-ink{--pc-b-fg:var(--pc-text);--pc-b-fg-hover:var(--pc-text);--pc-b-line:var(--pc-line-3);}
-    .pc-btn.pc-btn-ink-test{--pc-b-fg:var(--pc-text);--pc-b-fg-hover:var(--pc-text);--pc-b-line:var(--pc-test-line);}
-    .pc-btn.pc-btn-ink-accent{--pc-b-fg:var(--pc-accent);--pc-b-fg-hover:var(--pc-accent);--pc-b-line:var(--pc-accent);}
+    /* Every Button is filled like "Host a live game" (green in the standard theme, orange in Halloween, with its hover
+       highlight). The one exception is Empty bank while it asks to be tapped again: it keeps an outlined accent look so the
+       warning stays distinct. The runtime drops a style written on a component, so this comes from a class (className). */
+    .pc-btn.pc-btn-armed{--pc-b-bg:transparent;--pc-b-bg-hover:var(--pc-accent-dim);--pc-b-fg:var(--pc-accent);--pc-b-fg-hover:var(--pc-accent);--pc-b-line:var(--pc-accent);}
     /* The compact join tile at the top of the LOCKED IN card (live question) and of the STANDINGS card (question results):
        the QR code and "Scan to join" with the room code. width:0 with min-width:100% keeps it from widening its card. */
     .pc-join-tile{box-sizing:border-box;width:0;min-width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.12);}
@@ -4830,7 +4827,7 @@ if (location.protocol === "file:" && !window.__resources) {
       <svg class="pc-head-mark" sc-camel-view-box="0 0 26 24" role="img" aria-label="Pulse Check" style="width:26px;height:24px;display:block;flex:none;"><path d="M13 22.2 C11.6 21.2 2 15 2 8.3 C2 4.9 4.5 2.4 7.6 2.4 C10 2.4 11.9 3.8 13 5.7 C14.1 3.8 16 2.4 18.4 2.4 C21.5 2.4 24 4.9 24 8.3 C24 15 14.4 21.2 13 22.2 Z" style="fill:var(--pc-heart);"></path><path d="M3.4 12 L8.4 12 L10 9 L12.4 16 L14.8 6.6 L16.6 12 L22.6 12" style="fill:none;stroke:var(--pc-on-accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;"></path></svg>
       <div class="pc-head-brand" style="align-items:center;">
         <sc-if value="{{ std }}" hint-placeholder-val="{{ true }}"><span style="width:8px;height:8px;border-radius:50%;background:var(--pc-accent);animation:pc-beat 1.4s ease-in-out infinite;"></span></sc-if><sc-if value="{{ hw }}" hint-placeholder-val="{{ false }}"><span data-hw-motion="1" style="display:block;animation:pc-beat 1.4s ease-in-out infinite;"><svg sc-camel-view-box="0 0 24 24" style="width:16px;height:16px;display:block;flex:none;" aria-hidden="true"><path d="M12 7 C11.4 4.6 12.4 2.8 14.4 2.2" style="fill:none;stroke:#8BD450;stroke-width:2;stroke-linecap:round;"></path><ellipse cx="7.6" cy="14.2" rx="5.4" ry="7" style="fill:var(--pc-accent-2);"></ellipse><ellipse cx="16.4" cy="14.2" rx="5.4" ry="7" style="fill:var(--pc-accent-2);"></ellipse><ellipse cx="12" cy="14.2" rx="5.8" ry="7.6" style="fill:var(--pc-accent);"></ellipse><path d="M8.2 12.4 L9.8 10 L11.2 12.4 Z M12.8 12.4 L14.2 10 L15.8 12.4 Z" style="fill:#131016;"></path><path d="M7.8 15.4 Q12 19.6 16.2 15.4 Q12 17.2 7.8 15.4 Z" style="fill:#131016;"></path></svg></span></sc-if>
-        <span class="pc-head-name" style="font-size:12px;font-weight:600;letter-spacing:0.14em;color:var(--pc-text);">PULSE CHECK<span class="pc-head-tag" style="color:#B79CE0;"><span class="pc-head-sep">{{ T.headerSep }}</span>{{ T.headerTag }}</span></span>
+        <span class="pc-head-name" style="font-size:12px;font-weight:600;letter-spacing:0.14em;color:var(--pc-name);">PULSE CHECK<span class="pc-head-tag" style="color:#B79CE0;"><span class="pc-head-sep">{{ T.headerSep }}</span>{{ T.headerTag }}</span></span>
       </div>
       <div class="pc-head-fill" style="flex:1;"></div>
       <sc-if value="{{ hasRoom }}" hint-placeholder-val="{{ false }}">
@@ -4875,7 +4872,7 @@ if (location.protocol === "file:" && !window.__resources) {
         </div>
         <div style="position:relative;">
           <sc-if value="{{ hw }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;right:30px;top:-40px;width:240px;height:240px;pointer-events:none;z-index:0;" aria-hidden="true"><div style="position:absolute;left:40px;top:20px;width:150px;height:150px;border-radius:50%;background:#EDE6D6;box-shadow:0 0 60px 18px rgba(183,156,224,0.25),0 0 120px 40px rgba(139,212,80,0.08);"></div><div style="position:absolute;left:78px;top:62px;width:26px;height:26px;border-radius:50%;background:rgba(169,161,156,0.25);"></div><div style="position:absolute;left:128px;top:106px;width:16px;height:16px;border-radius:50%;background:rgba(169,161,156,0.22);"></div><div data-hw-motion="1" style="position:absolute;left:4px;top:70px;animation:hw-bob 6s ease-in-out infinite;"><svg sc-camel-view-box="6 6 52 18" style="width:54px;height:19px;display:block;" aria-hidden="true"><path d="M32 12 C30.6 12 29.6 13.2 29.4 14.6 C25.6 9.6 17.6 7.6 8 9.4 C12.2 11.4 14.2 14.6 14 18.4 C17.4 16.4 21.6 16.6 23.8 19.4 C25.8 18.2 28.6 18.6 30 20.6 C30.8 19 31.6 17.4 32 15.6 C32.4 17.4 33.2 19 34 20.6 C35.4 18.6 38.2 18.2 40.2 19.4 C42.4 16.6 46.6 16.4 50 18.4 C49.8 14.6 51.8 11.4 56 9.4 C46.4 7.6 38.4 9.6 34.6 14.6 C34.4 13.2 33.4 12 32 12 Z M30.4 12.6 L29.6 9.6 L31.4 11.8 Z M33.6 12.6 L34.4 9.6 L32.6 11.8 Z" style="fill:#131016;"></path></svg></div><div data-hw-motion="1" style="position:absolute;left:160px;top:24px;animation:hw-bob 8s ease-in-out -2s infinite;"><svg sc-camel-view-box="6 6 52 18" style="width:30px;height:10px;display:block;" aria-hidden="true"><path d="M32 12 C30.6 12 29.6 13.2 29.4 14.6 C25.6 9.6 17.6 7.6 8 9.4 C12.2 11.4 14.2 14.6 14 18.4 C17.4 16.4 21.6 16.6 23.8 19.4 C25.8 18.2 28.6 18.6 30 20.6 C30.8 19 31.6 17.4 32 15.6 C32.4 17.4 33.2 19 34 20.6 C35.4 18.6 38.2 18.2 40.2 19.4 C42.4 16.6 46.6 16.4 50 18.4 C49.8 14.6 51.8 11.4 56 9.4 C46.4 7.6 38.4 9.6 34.6 14.6 C34.4 13.2 33.4 12 32 12 Z M30.4 12.6 L29.6 9.6 L31.4 11.8 Z M33.6 12.6 L34.4 9.6 L32.6 11.8 Z" style="fill:#131016;"></path></svg></div></div></sc-if>
-        <h1 style="position:relative;font-size:36px;line-height:1.18;font-weight:600;color:var(--pc-accent);margin:10px 0 8px;">Pulse Check{{ T.titleColon }}<span style="color:#B79CE0;">{{ T.titleNight }}</span></h1>
+        <h1 style="position:relative;font-size:36px;line-height:1.18;font-weight:600;color:var(--pc-heart);margin:10px 0 8px;">Pulse Check{{ T.titleColon }}<span style="color:#B79CE0;">{{ T.titleNight }}</span></h1>
         <p style="position:relative;max-width:760px;margin:0 0 30px;font-size:16px;line-height:1.6;color:var(--pc-body);">A live round of either-or questions, played together one at a time. Everyone answers for themselves, then predicts how the room splits, {{ timerSec }} seconds on the clock. The closest read of the room wins.<br><br>Do you have <i>your </i>finger on the pulse{{ T.ledeTail }}?</p>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px;align-items:stretch;">
@@ -4896,7 +4893,7 @@ if (location.protocol === "file:" && !window.__resources) {
           <div style="background:var(--pc-card-alt);border:1px solid var(--pc-line);border-radius:8px;padding:24px;">
             <div style="font-size:12px;font-weight:500;letter-spacing:0.1em;color:var(--pc-muted);margin-bottom:10px;">ONE DEVICE</div>
             <p style="margin:0 0 18px;font-size:14px;line-height:1.6;color:var(--pc-body);">No connection needed, pass this device around on each question. Every turn gets its own clock.</p>
-            <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="pc-btn-ink" sc-camel-on-click="{{ goSolo }}" hint-size="190px,44px">Play on this device</x-import>
+            <x-import component-from-global-scope="PulseUI.Button" sc-camel-on-click="{{ goSolo }}" hint-size="190px,44px">Play on this device</x-import>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:20px;padding:18px 24px;background:var(--pc-test-bg);border:1px solid var(--pc-test-line);border-radius:8px;">
@@ -4904,14 +4901,14 @@ if (location.protocol === "file:" && !window.__resources) {
             <div style="font-size:12px;font-weight:500;letter-spacing:0.1em;color:var(--pc-test);">TEST MODE</div>
             <div style="font-size:14px;line-height:1.5;color:var(--pc-body);margin-top:4px;">Host a practice game with 12 demo players on this device. The host screen and one player's phone screen sit side by side, and you answer as that player. Nothing goes online.</div>
           </div>
-          <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="pc-btn-ink-test" sc-camel-on-click="{{ testGame }}" hint-size="180px,44px">Start test mode</x-import>
+          <x-import component-from-global-scope="PulseUI.Button" sc-camel-on-click="{{ testGame }}" hint-size="180px,44px">Start test mode</x-import>
         </div>
         <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:20px;padding:18px 24px;background:var(--pc-card);border:1px solid var(--pc-line);border-radius:8px;">
           <div style="flex:1;min-width:240px;">
             <div style="font-size:12px;font-weight:500;letter-spacing:0.1em;color:var(--pc-muted);">QUESTION BANK</div>
             <div style="font-size:14px;line-height:1.5;color:var(--pc-body);margin-top:4px;">{{ bankSummary }}</div>
           </div>
-          <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="pc-btn-ink" sc-camel-on-click="{{ openBank }}" hint-size="230px,44px">View and edit questions</x-import>
+          <x-import component-from-global-scope="PulseUI.Button" sc-camel-on-click="{{ openBank }}" hint-size="230px,44px">View and edit questions</x-import>
         </div>
         <div style="margin-top:40px;">
           <x-import component-from-global-scope="PulseUI.SectionLabel" rule="{{ true }}" hint-size="200px,16px">About the authors</x-import>
@@ -4942,7 +4939,7 @@ if (location.protocol === "file:" && !window.__resources) {
             <h1 style="font-size:30px;line-height:1.18;font-weight:600;color:var(--pc-accent);margin:10px 0 8px;">Question bank</h1>
             <p style="max-width:760px;margin:0;font-size:16px;line-height:1.6;color:var(--pc-body);">Each bank is its own list of questions. A game draws from one bank: random picks, hand-picked sets and the defaults new games start with. Changes save automatically in this browser.</p>
           </div>
-          <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="pc-btn-ink" sc-camel-on-click="{{ closeBank }}" hint-size="160px,44px">Back to start</x-import>
+          <x-import component-from-global-scope="PulseUI.Button" sc-camel-on-click="{{ closeBank }}" hint-size="160px,44px">Back to start</x-import>
         </div>
         <div class="pc-bank-bar" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 24px;">
           <label for="pc-bank" style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--pc-muted);">BANK</label>
@@ -5050,8 +5047,8 @@ if (location.protocol === "file:" && !window.__resources) {
               <p style="margin:0 0 14px;font-size:13px;line-height:1.55;color:var(--pc-body);">Banks are saved in this browser only. Export this bank to back it up, move it to another computer or share it with another host, who can then import the file here.</p>
               <div style="display:flex;gap:10px;flex-wrap:wrap;">
                 <x-import component-from-global-scope="PulseUI.Button" sc-camel-on-click="{{ exportBank }}" hint-size="140px,44px">Export bank</x-import>
-                <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="pc-btn-ink" sc-camel-on-click="{{ importBank }}" hint-size="150px,44px">Import a file</x-import>
-                <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="{{ emptyBtnClass }}" disabled="{{ emptyDisabled }}" sc-camel-on-click="{{ emptyBank }}" hint-size="150px,44px">{{ emptyLabel }}</x-import>
+                <x-import component-from-global-scope="PulseUI.Button" sc-camel-on-click="{{ importBank }}" hint-size="150px,44px">Import a file</x-import>
+                <x-import component-from-global-scope="PulseUI.Button" sc-camel-class-name="{{ emptyBtnClass }}" disabled="{{ emptyDisabled }}" sc-camel-on-click="{{ emptyBank }}" hint-size="150px,44px">{{ emptyLabel }}</x-import>
                 <input type="file" accept=".json,.txt,application/json,text/plain" ref="{{ fileRef }}" sc-camel-on-change="{{ onImportFile }}" style="display:none;">
               </div>
               <p style="margin:12px 0 16px;font-size:12px;line-height:1.55;color:var(--pc-muted);">Importing adds new questions and keeps everything already here, in its current order. To load an exported bank in its saved order, import it into a new or empty bank. Import accepts an exported bank (.json) or a text file with one "Subject: This or That" per line.</p>
@@ -5374,7 +5371,7 @@ Pets: Cats or dogs
               <span style="width:8px;height:8px;border-radius:50%;background:var(--pc-accent);animation:pc-beat 1.4s ease-in-out infinite;flex:none;"></span>
               <span style="font-size:14px;color:var(--pc-body);">{{ hostQLine }}</span>
               <div style="flex:1;"></div>
-              <x-import component-from-global-scope="PulseUI.Button" variant="outline" sc-camel-class-name="pc-btn-ink" disabled="{{ revealNowDisabled }}" sc-camel-on-click="{{ revealNow }}" hint-size="150px,44px">Reveal now</x-import>
+              <x-import component-from-global-scope="PulseUI.Button" disabled="{{ revealNowDisabled }}" sc-camel-on-click="{{ revealNow }}" hint-size="150px,44px">Reveal now</x-import>
             </div>
           </div>
           <x-import component-from-global-scope="PulseUI.Card" sc-camel-class-name="pc-side-card" hint-size="280px,320px">
@@ -5437,7 +5434,7 @@ Pets: Cats or dogs
               <span style="font-size:38px;line-height:1;font-weight:600;color:#FFFFFF;">{{ predVal }}%</span>
             </div>
           </div>
-          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--pc-faint);margin-bottom:22px;">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--pc-label);margin-bottom:22px;">
             <span>0 · all {{ qB }}</span><span>50 · split room</span><span>100 · all {{ qA }}</span>
           </div>
           <div style="display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px solid var(--pc-rule);flex-wrap:wrap;">
@@ -5809,7 +5806,7 @@ Pets: Cats or dogs
         </div>
         <div class="pc-fin-btns" style="display:flex;gap:14px;">
           <x-import component-from-global-scope="PulseUI.Button" size="lg" sc-camel-with-chevron="{{ true }}" sc-camel-on-click="{{ playAgain }}" hint-size="250px,48px">Play again with this room</x-import>
-          <x-import component-from-global-scope="PulseUI.Button" size="lg" variant="outline" sc-camel-class-name="pc-btn-ink" sc-camel-on-click="{{ newGame }}" hint-size="170px,48px">Start a new game</x-import>
+          <x-import component-from-global-scope="PulseUI.Button" size="lg" sc-camel-on-click="{{ newGame }}" hint-size="170px,48px">Start a new game</x-import>
         </div>
       </section>
     </sc-if>
@@ -5829,7 +5826,7 @@ Pets: Cats or dogs
       <div style="background:var(--pc-bg);border:1px solid var(--pc-line-2);border-radius:20px;padding:14px 18px 20px;box-shadow:0 10px 10px rgba(0,0,0,0.05);">
         <div style="display:flex;align-items:center;gap:8px;padding:0 0 12px;margin-bottom:16px;border-bottom:1px solid var(--pc-rule);">
           <span style="width:7px;height:7px;border-radius:50%;background:var(--pc-accent);animation:pc-beat 1.4s ease-in-out infinite;"></span>
-          <span style="font-size:11px;font-weight:600;letter-spacing:0.14em;color:var(--pc-text);">PULSE CHECK</span>
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.14em;color:var(--pc-name);">PULSE CHECK</span>
           <div style="flex:1;"></div>
           <span style="font-size:10px;font-weight:600;letter-spacing:0.12em;color:var(--pc-text);background:var(--pc-field);border:1px solid var(--pc-line);border-radius:4px;padding:3px 8px;">{{ tpName }}</span>
         </div>
@@ -7105,7 +7102,7 @@ class Component extends DCLogic {
     vals.onImportFile = e => { const f = e.target.files && e.target.files[0]; e.target.value = ""; if (f) this.importBank(f); };
     vals.emptyLabel = S.bankConfirmEmpty ? "Tap again to empty" : "Empty bank";
     vals.emptyDisabled = bank.length === 0;
-    vals.emptyBtnClass = S.bankConfirmEmpty ? "pc-btn-ink-accent" : "pc-btn-ink";
+    vals.emptyBtnClass = S.bankConfirmEmpty ? "pc-btn-armed" : "";
     vals.emptyBank = () => {
       const prev = this.state.bank || [];
       if (!prev.length) return;
