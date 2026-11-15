@@ -335,9 +335,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     ".pc-btn-sm{font-size:13px;padding:8px 14px;}",
     ".pc-btn-md{font-size:15px;padding:11px 20px;}",
     ".pc-btn-lg{font-size:17px;padding:15px 28px;}",
-    // Ghost: no fill until hovered, ink text. Outline is a ghost with a line.
-    ".pc-btn-ghost,.pc-btn-outline{--pc-b-bg:transparent;--pc-b-bg-hover:var(--pc-btn-hover);--pc-b-fg:var(--pc-btn-ink);--pc-b-fg-hover:var(--pc-btn-ink);}",
-    ".pc-btn-outline{--pc-b-line:var(--pc-btn-line);}",
+    // Ghost: no fill until hovered, body text.
+    ".pc-btn-ghost{--pc-b-bg:transparent;--pc-b-bg-hover:var(--pc-btn-hover);--pc-b-fg:var(--pc-body);--pc-b-fg-hover:var(--pc-body);}",
     // The arrow after a button's text: 0.7 of the font size, square.
     ".pc-btn-arrow{flex:none;display:inline-block;width:.7em;height:.7em;}",
     // Section label: small caps line, optionally led by a short rule.
@@ -379,10 +378,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
   // A filled right-pointing chevron in a 10 x 10 box.
   var ARROW = "M1.6 2.3 L3 0.9 L7.9 5 L3 9.1 L1.6 7.7 L5.1 5 Z";
-  // Button: variant "default" (accent fill), "outline" or "ghost"; size "sm", "default" or "lg"; withChevron adds
+  // Button: variant "default" (accent fill) or "ghost"; size "sm", "default" or "lg"; withChevron adds
   // the arrow after the text; disabled; onClick; style.
   function Button(props) {
-    var variant = props.variant === "outline" || props.variant === "ghost" ? props.variant : "default";
+    var variant = props.variant === "ghost" ? "ghost" : "default";
     var size = props.size === "sm" || props.size === "lg" ? props.size : "md";
     var p = rest(props, ["variant", "size", "withChevron", "children", "className", "disabled"]);
     p.className = cls(["pc-btn", "pc-btn-" + size, variant !== "default" && "pc-btn-" + variant, props.className]);
@@ -4689,8 +4688,8 @@ if (location.protocol === "file:" && !window.__resources) {
     button,input,select,textarea{font-family:inherit;}
     body{margin:0;font-family:var(--font-sans);font-size:16px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;background-color:#111214;background-image:repeating-linear-gradient(0deg,rgba(244,246,248,0.022) 0 1px,transparent 1px 26px),repeating-linear-gradient(90deg,rgba(244,246,248,0.022) 0 1px,transparent 1px 26px),repeating-linear-gradient(0deg,rgba(244,246,248,0.035) 0 1px,transparent 1px 130px),repeating-linear-gradient(90deg,rgba(244,246,248,0.035) 0 1px,transparent 1px 130px);}
     /* The palette (docs/specs/v18-phone-join.md, section 2): every themed color, standard first, Halloween on .pc-hw (v17's values). */
-    .pc-root{--pc-accent:#3DD68C;--pc-accent-2:#2BB673;--pc-accent-3:#1F8F5A;--pc-accent-rgb:61,214,140;--pc-heart:#F0524F;--pc-heart-rgb:240,82,79;--pc-name:var(--pc-heart);--pc-on-accent:#0E1A14;--pc-accent-dim:#254532;--pc-warn:#E87A64;--pc-ok:#328A5C;--pc-bg:#111214;--pc-field:#1E2021;--pc-card-alt:#232426;--pc-card:#28292B;--pc-raised:#2F3132;--pc-rule:#36383A;--pc-line:#3A3C3E;--pc-line-2:#454749;--pc-line-3:#4F5153;--pc-faint:#56585A;--pc-slate:#67696B;--pc-muted:#888A8C;--pc-muted-2:#959799;--pc-label:#A1A3A5;--pc-body:#B1B3B6;--pc-pale:#C8CACD;--pc-soft:#D3D5D7;--pc-soft-2:#DDDFE2;--pc-text:#ECEEF0;--pc-btn-ink:#67696B;--pc-btn-line:#C8CACD;--pc-btn-hover:#E8EAEC;--pc-test:#BFE0FF;--pc-test-line:#436282;--pc-test-fill:#304760;--pc-test-bg:#21282F;--pc-player-1:#4789AA;--pc-player-2:#F48C90;--pc-player-3:#47856E;--pc-player-4:#4D4E79;--pc-player-5:#E0843E;--pc-player-6:#8FA8A0;--pc-player-7:#B5B838;--pc-player-8:#A1A3A5;}
-    .pc-root.pc-hw{--pc-accent:#FAAF3F;--pc-accent-2:#D98A1F;--pc-accent-3:#B06A15;--pc-accent-rgb:250,175,63;--pc-heart:#FAAF3F;--pc-heart-rgb:250,175,63;--pc-name:var(--pc-text);--pc-on-accent:#FFFFFF;--pc-accent-dim:#4A3A1C;--pc-warn:#D98A1F;--pc-ok:#3E8579;--pc-bg:#131211;--pc-field:#211F1D;--pc-card-alt:#26241F;--pc-card:#2B2926;--pc-raised:#33302C;--pc-rule:#3A3733;--pc-line:#3E3B37;--pc-line-2:#4A4642;--pc-line-3:#55504A;--pc-faint:#5C5751;--pc-slate:#6C6864;--pc-muted:#8F8983;--pc-muted-2:#9C968F;--pc-label:#A9A19C;--pc-body:#B8B2AC;--pc-pale:#CFC9C3;--pc-soft:#D9D4CF;--pc-soft-2:#E3DED9;--pc-text:#F0EDEA;--pc-btn-ink:#6C6864;--pc-btn-line:#CFC9C3;--pc-btn-hover:#ECE9E7;--pc-test:#AEE9E8;--pc-test-line:#2E6B68;--pc-test-fill:#1F4E4C;--pc-test-bg:#1E2A29;--pc-player-1:#3B8DA1;--pc-player-2:#F48F7B;--pc-player-3:#3E8579;--pc-player-4:#42527A;--pc-player-5:#D98A1F;--pc-player-6:#8FA8A0;--pc-player-7:#B5B838;--pc-player-8:#A9A19C;}
+    .pc-root{--pc-accent:#3DD68C;--pc-accent-2:#2BB673;--pc-accent-3:#1F8F5A;--pc-accent-rgb:61,214,140;--pc-heart:#F0524F;--pc-heart-rgb:240,82,79;--pc-name:var(--pc-heart);--pc-on-accent:#0E1A14;--pc-accent-dim:#254532;--pc-warn:#E87A64;--pc-ok:#328A5C;--pc-bg:#111214;--pc-page:var(--pc-bg);--pc-field:#1E2021;--pc-card-alt:#232426;--pc-card:#28292B;--pc-raised:#2F3132;--pc-rule:#36383A;--pc-line:#3A3C3E;--pc-line-2:#454749;--pc-line-3:#4F5153;--pc-faint:#56585A;--pc-slate:#67696B;--pc-muted:#888A8C;--pc-muted-2:#959799;--pc-label:#A1A3A5;--pc-body:#B1B3B6;--pc-pale:#C8CACD;--pc-soft:#D3D5D7;--pc-soft-2:#DDDFE2;--pc-text:#ECEEF0;--pc-btn-hover:#E8EAEC;--pc-test:#BFE0FF;--pc-test-line:#436282;--pc-test-fill:#304760;--pc-test-bg:#21282F;--pc-player-1:#4789AA;--pc-player-2:#F48C90;--pc-player-3:#47856E;--pc-player-4:#4D4E79;--pc-player-5:#E0843E;--pc-player-6:#8FA8A0;--pc-player-7:#B5B838;--pc-player-8:#A1A3A5;}
+    .pc-root.pc-hw{--pc-accent:#FAAF3F;--pc-accent-2:#D98A1F;--pc-accent-3:#B06A15;--pc-accent-rgb:250,175,63;--pc-heart:var(--pc-accent);--pc-name:var(--pc-text);--pc-on-accent:#FFFFFF;--pc-accent-dim:#4A3A1C;--pc-warn:#D98A1F;--pc-ok:#3E8579;--pc-bg:#131211;--pc-page:#131016;--pc-field:#211F1D;--pc-card-alt:#26241F;--pc-card:#2B2926;--pc-raised:#33302C;--pc-rule:#3A3733;--pc-line:#3E3B37;--pc-line-2:#4A4642;--pc-line-3:#55504A;--pc-faint:#5C5751;--pc-slate:#6C6864;--pc-muted:#8F8983;--pc-muted-2:#9C968F;--pc-label:#A9A19C;--pc-body:#B8B2AC;--pc-pale:#CFC9C3;--pc-soft:#D9D4CF;--pc-soft-2:#E3DED9;--pc-text:#F0EDEA;--pc-btn-hover:#ECE9E7;--pc-test:#AEE9E8;--pc-test-line:#2E6B68;--pc-test-fill:#1F4E4C;--pc-test-bg:#1E2A29;--pc-player-1:#3B8DA1;--pc-player-2:#F48F7B;--pc-player-3:#3E8579;--pc-player-4:#42527A;--pc-player-5:#D98A1F;--pc-player-6:#8FA8A0;--pc-player-7:#B5B838;--pc-player-8:#A9A19C;}
     a{color:var(--pc-accent-2);text-decoration:none;} a:hover{color:var(--pc-accent-3);}
     @keyframes pc-beat{0%,100%{transform:scale(1);opacity:1;}14%{transform:scale(1.45);}28%{transform:scale(1);}42%{transform:scale(1.3);opacity:0.85;}60%{transform:scale(1);}}
     @keyframes pc-draw{from{stroke-dashoffset:1300;}to{stroke-dashoffset:0;}}
@@ -4715,9 +4714,8 @@ if (location.protocol === "file:" && !window.__resources) {
     /* The LOCKED IN card (live question) and the STANDINGS card (question results) beside the question card. The runtime
        drops a style written on a component, so their width comes from this class. */
     .pc-side-card{flex:1 1 260px;min-width:260px;}
-    /* Every Button is filled like "Host a live game" (green in the standard theme, orange in Halloween, with its hover
-       highlight). The one exception is Empty bank while it asks to be tapped again: it keeps an outlined accent look so the
-       warning stays distinct. The runtime drops a style written on a component, so this comes from a class (className). */
+    /* Every Button is filled like "Host a live game"; only Empty bank, while it asks to be tapped again, keeps an outlined
+       accent look (a class, since the runtime drops a style written on a component). */
     .pc-btn.pc-btn-armed{--pc-b-bg:transparent;--pc-b-bg-hover:var(--pc-accent-dim);--pc-b-fg:var(--pc-accent);--pc-b-fg-hover:var(--pc-accent);--pc-b-line:var(--pc-accent);}
     /* The compact join tile at the top of the LOCKED IN card (live question) and of the STANDINGS card (question results):
        the QR code and "Scan to join" with the room code. width:0 with min-width:100% keeps it from widening its card. */
@@ -4782,12 +4780,11 @@ if (location.protocol === "file:" && !window.__resources) {
        background (the standard body color; Halloween's own page color) that also covers the gap above the card. The window
        is what scrolls and no ancestor clips, so sticky pins. Wide screens: a plain row with its 16 px gap. */
     .pc-timer-pin{margin-bottom:16px;}
-    @media (max-width:560px){.pc-timer-pin{position:sticky;top:0;z-index:5;background-color:#111214;padding:8px 0 12px;margin-bottom:0;}.pc-hw .pc-timer-pin{background-color:#131016;}}
+    @media (max-width:560px){.pc-timer-pin{position:sticky;top:0;z-index:5;background-color:var(--pc-page);padding:8px 0 12px;margin-bottom:0;}}
     /* v20, player screens on phones (560 px and below, the breakpoint of the pinned timer): the answer card's slider row
        stacks. The percentage goes above (order:-1, right-aligned by its own text-align) and the slider takes the card's whole
-       content width on its own row; the row's display, align-items and the slider's flex:1 are plain class rules above, so these override them without !important. The slider keeps
-       min-width:0 and zero side margins so it can never push past the card, and the percentage needs no reserved width because
-       it no longer shares a row. Above 560 px the row is v19's (side by side, 20 px gap, percentage at least 120 px wide). */
+       content width on its own row; the plain class rules above are overridden here without !important. The slider keeps min-width:0 and zero side margins so it
+       never pushes past the card; the percentage needs no reserved width. */
     .pc-pred-row{display:flex;align-items:center;margin-bottom:8px;gap:20px;}.pc-pred-row input[type="range"]{flex:1;min-width:0;}.pc-pred-num{min-width:120px;}
     @media (max-width:560px){.pc-pred-row{flex-direction:column;align-items:stretch;gap:6px;}.pc-pred-row input[type="range"]{flex:none;width:100%;box-sizing:border-box;margin-left:0;margin-right:0;}.pc-pred-num{order:-1;min-width:0;}}
     /* v19, the player's results after a question: each lane's pulse track (the 1fr column) only gets what is left once the
@@ -5252,7 +5249,7 @@ Pets: Cats or dogs
               </div>
             </sc-if>
             <div style="margin:8px 0;">
-              <x-import component-from-global-scope="PulseUI.Button" variant="ghost" size="sm" style="color:var(--pc-body);" sc-camel-on-click="{{ addDemo }}" hint-size="200px,32px">{{ demoLabel }}</x-import>
+              <x-import component-from-global-scope="PulseUI.Button" variant="ghost" size="sm" sc-camel-on-click="{{ addDemo }}" hint-size="200px,32px">{{ demoLabel }}</x-import>
             </div>
             <div style="min-height:100px;max-height:520px;overflow-y:auto;">
               <sc-for list="{{ roster }}" as="p" hint-placeholder-count="4">
@@ -6065,6 +6062,7 @@ class Component extends DCLogic {
     // default of 60 s a host stayed LIVE for 90 s; at 10 s a silent drop closes the client within 15 s, and OFFLINE then
     // counts from the last packet heard (v20 spec section 7).
     this.KEEPALIVE_S = 10;
+    this.FAV_HW = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%231E2127'/%3E%3Crect x='0.75' y='0.75' width='46.5' height='46.5' rx='10.25' fill='none' stroke='%23EE8A2A' stroke-width='1.5'/%3E%3Cg transform='translate(4.8779 5.7211) scale(0.7452)'%3E%3Cg transform='translate(34 39) rotate(10) scale(1.5) translate(-10 -18)'%3E%3Cpath fill='%238BD450' d='M4.5 1 H15.5 Q16 1 16 1.5 L15.4 15 H4.6 L4 1.5 Q4 1 4.5 1 Z M1 15 H19 A1.5 1.5 0 0 1 19 18 H1 A1.5 1.5 0 0 1 1 15 Z'/%3E%3Cpath fill='%23EE8A2A' d='M4.4 10.5 H15.6 L15.5 13 H4.5 Z'/%3E%3C/g%3E%3Cg transform='translate(14 41) rotate(-12) scale(1.35) translate(-12 -14)'%3E%3Cpath fill='%23EE8A2A' d='M3 11 C3 5 7 1.5 12 1.5 C17 1.5 21 5 21 11 Z M1 11 H23 A1.5 1.5 0 0 1 23 14 H1 A1.5 1.5 0 0 1 1 11 Z'/%3E%3Cpath fill='%234E8A22' d='M11.2 2 Q11.4 -0.6 14 -1 L14.3 0.2 Q12.8 0.5 12.8 2 Z'/%3E%3Cpath fill='%233A1D08' d='M6.5 7.4 L8.6 4.2 L10.2 7.4 Z M13.8 7.4 L15.4 4.2 L17.5 7.4 Z'/%3E%3C/g%3E%3Cg transform='translate(25 29) rotate(-6) scale(1.3) translate(-11 -22)'%3E%3Cpath fill='%237B4FB0' d='M5 20 L9.6 8 Q10.8 4.4 13.4 3 Q16.4 1.4 20 2.6 Q16.6 3.6 15.2 6.6 L17 20 Z M-1.5 19 H23.5 Q24.6 19 24 20.5 Q23.4 22 21.5 22 H0.5 Q-1.4 22 -2 20.5 Q-2.6 19 -1.5 19 Z'/%3E%3Cpath fill='%238BD450' d='M6.7 15.6 H16.4 L16.8 18.6 H5.6 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"; // the tab icon in Halloween
     // A room state older than the one shown by less than this is a late copy and is dropped (playerState): a host's old
     // connection can deliver what waited in it after the new connection's state, once its network is back.
     this.STALE_MS = 120000;
@@ -6110,7 +6108,7 @@ class Component extends DCLogic {
     // the one a player tries first; it counts only with a valid room and when it is a whole number in range.
     let jr = null, jk = null;
     try { const u = new URL(location.href), q = u.searchParams; if (q.has("room") || q.has("r")) { jr = q.get("room"); jk = q.get("r"); q.delete("room"); q.delete("r"); history.replaceState(history.state, "", u.href); } } catch (e) {}
-    const joinTo = jr && /^[A-Za-z]{4}$/.test(jr) ? jr.toUpperCase() : null, joinRelay = joinTo ? this.relayIdx(jk) : null;
+    const joinTo = jr && /^[A-Za-z]{4}$/.test(jr) ? jr.toUpperCase() : null, linkK = joinTo ? this.relayIdx(jk) : null;
     const base = this.blank();
     let saved = null;
     try { saved = JSON.parse(localStorage.getItem(this.KEY) || "null"); } catch (e) {}
@@ -6121,12 +6119,12 @@ class Component extends DCLogic {
     if (saved && (saved.mode === "player" ? !!saved.me : ((saved.mode === "host" || saved.mode === "solo") && Array.isArray(saved.players)))) {
       // A saved player game in the link's room resumes and takes the link's relay as the one to try first, saved at once
       // so a reload during the search keeps it.
-      if (saved.mode === "player" && joinRelay != null) { saved.linkRelay = joinRelay; try { localStorage.setItem(this.KEY, JSON.stringify(saved)); } catch (e) {} }
+      if (saved.mode === "player" && linkK != null) { saved.linkRelay = linkK; try { localStorage.setItem(this.KEY, JSON.stringify(saved)); } catch (e) {} }
       this.state = Object.assign(base, saved, { conn: "off", net: null, drawn: true, nameInput: "", joinCode: "", joinName: "", linkRelay: saved.mode === "player" ? this.relayIdx(saved.linkRelay) : null, now: Date.now() });
     } else { this.state = base; }
     // On the start page the link fills the code (with the host's relay, kept while the code is the link's) and puts the
     // cursor in the name box.
-    if (joinTo && !this.state.mode) { this.state.joinCode = joinTo; this.state.joinRelay = joinRelay; this._focusName = true; }
+    if (joinTo && !this.state.mode) { this.state.joinCode = joinTo; this.state.joinRelay = linkK; this._focusName = true; }
     const bm = this.loadBanks();
     Object.assign(this.state, { banks: bm.banks, gameBank: bm.gameBank, bankId: bm.gameBank, bank: this.findBank(bm.gameBank, bm).items });
     Object.assign(this.state, this.capPatch(this.state));
@@ -6154,19 +6152,23 @@ class Component extends DCLogic {
     location.reload();
   }
   // The tab icon is the small ManyHats logo of the theme on screen (the host's theme for a player). The standard one is
-  // the page's own <link rel="icon">, read once; Halloween's replaces its href and back. Called on every render.
+  // the page's own <link rel="icon">, read once; Halloween's replaces its href and back. Called on every render, so
+  // the link is found once and the page is touched only when the theme on screen changes.
   tabIcon(hw) {
-    const el = document.querySelector('link[rel="icon"]');
+    hw = !!hw;
+    if (hw === this._favHw) return;
+    const el = this._favEl || (this._favEl = document.querySelector('link[rel="icon"]'));
     if (!el) return;
     if (this.favStd == null) this.favStd = el.getAttribute("href");
-    const want = hw ? "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%231E2127'/%3E%3Crect x='0.75' y='0.75' width='46.5' height='46.5' rx='10.25' fill='none' stroke='%23EE8A2A' stroke-width='1.5'/%3E%3Cg transform='translate(4.8779 5.7211) scale(0.7452)'%3E%3Cg transform='translate(34 39) rotate(10) scale(1.5) translate(-10 -18)'%3E%3Cpath fill='%238BD450' d='M4.5 1 H15.5 Q16 1 16 1.5 L15.4 15 H4.6 L4 1.5 Q4 1 4.5 1 Z M1 15 H19 A1.5 1.5 0 0 1 19 18 H1 A1.5 1.5 0 0 1 1 15 Z'/%3E%3Cpath fill='%23EE8A2A' d='M4.4 10.5 H15.6 L15.5 13 H4.5 Z'/%3E%3C/g%3E%3Cg transform='translate(14 41) rotate(-12) scale(1.35) translate(-12 -14)'%3E%3Cpath fill='%23EE8A2A' d='M3 11 C3 5 7 1.5 12 1.5 C17 1.5 21 5 21 11 Z M1 11 H23 A1.5 1.5 0 0 1 23 14 H1 A1.5 1.5 0 0 1 1 11 Z'/%3E%3Cpath fill='%234E8A22' d='M11.2 2 Q11.4 -0.6 14 -1 L14.3 0.2 Q12.8 0.5 12.8 2 Z'/%3E%3Cpath fill='%233A1D08' d='M6.5 7.4 L8.6 4.2 L10.2 7.4 Z M13.8 7.4 L15.4 4.2 L17.5 7.4 Z'/%3E%3C/g%3E%3Cg transform='translate(25 29) rotate(-6) scale(1.3) translate(-11 -22)'%3E%3Cpath fill='%237B4FB0' d='M5 20 L9.6 8 Q10.8 4.4 13.4 3 Q16.4 1.4 20 2.6 Q16.6 3.6 15.2 6.6 L17 20 Z M-1.5 19 H23.5 Q24.6 19 24 20.5 Q23.4 22 21.5 22 H0.5 Q-1.4 22 -2 20.5 Q-2.6 19 -1.5 19 Z'/%3E%3Cpath fill='%238BD450' d='M6.7 15.6 H16.4 L16.8 18.6 H5.6 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E" : this.favStd;
+    const want = hw ? this.FAV_HW : this.favStd;
     if (el.getAttribute("href") !== want) el.setAttribute("href", want);
+    this._favHw = hw;
   }
   bgStyles(hw) {
     this.tabIcon(hw);
     return {
       rootClass: hw ? "pc-root pc-hw" : "pc-root",
-      rootStyle: "min-height:100vh;font-family:var(--font-sans);color:var(--pc-body);" + (hw ? "background-color:#131016;background-image:repeating-linear-gradient(0deg,rgba(183,156,224,0.03) 0 1px,transparent 1px 26px),repeating-linear-gradient(90deg,rgba(183,156,224,0.03) 0 1px,transparent 1px 26px),repeating-linear-gradient(0deg,rgba(183,156,224,0.05) 0 1px,transparent 1px 130px),repeating-linear-gradient(90deg,rgba(183,156,224,0.05) 0 1px,transparent 1px 130px);" : ""),
+      rootStyle: "min-height:100vh;font-family:var(--font-sans);color:var(--pc-body);" + (hw ? "background-color:var(--pc-page);background-image:repeating-linear-gradient(0deg,rgba(183,156,224,0.03) 0 1px,transparent 1px 26px),repeating-linear-gradient(90deg,rgba(183,156,224,0.03) 0 1px,transparent 1px 26px),repeating-linear-gradient(0deg,rgba(183,156,224,0.05) 0 1px,transparent 1px 130px),repeating-linear-gradient(90deg,rgba(183,156,224,0.05) 0 1px,transparent 1px 130px);" : ""),
       traceStyle: "fill:none;stroke:" + (hw ? "rgba(139,212,80,0.22)" : "rgba(var(--pc-heart-rgb),0.16)") + ";stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;"
     };
   }
@@ -6405,7 +6407,7 @@ class Component extends DCLogic {
     this.endClient(this.client);
   }
   // The next try f after ms, made at once if the network comes back first (onNetBack).
-  later(f, ms) { const g = () => { this._again = null; f(); }; this._again = g; this._rt = setTimeout(g, ms); }
+  later(f, ms, noEarly) { const g = () => { this._again = null; f(); }; this._again = noEarly ? null : g; this._rt = setTimeout(g, ms); }
   onNetBack() { const g = this._again; if (!g || this.blocked) return; clearTimeout(this._rt); g(); }
   onNetGone() { if (this._lost) this._lost(); }
   // Ends client c at once, and forgets it if it is the current one.
@@ -6442,7 +6444,10 @@ class Component extends DCLogic {
       // pause does not count toward OFFLINE (it starts again with the next round).
       const roomless = this._roomless; this._roomless = false;
       if (roomless) { clearTimeout(this._offT); this._offT = null; }
-      this.later(() => { if (gen !== this._gen) return; if (roomless) this.offlineSoon(); this.tryBroker(k, n, gen); }, roomless ? this.NOROOM_WAIT_MS : this.RETRY_MS);
+      // After a failed round the browser's online event cuts the wait short (later); the pause after a round without the room
+      // does not (a plain timer: the network is fine, the room is just not there yet).
+      const next = () => { if (gen !== this._gen) return; if (roomless) this.offlineSoon(); this.tryBroker(k, n, gen); };
+      this.later(next, roomless ? this.NOROOM_WAIT_MS : this.RETRY_MS, roomless);
       return;
     }
     if (!until) { until = Date.now() + this.FAIR_MS; pause = this.AGAIN_MS; }
@@ -6490,7 +6495,11 @@ class Component extends DCLogic {
       if (gen !== this._gen || this.client !== c) return;
       if (topic === this.base() + "/state") {
         if (this._home == null && k === this._linkK && packet && packet.retain && !held) { let d = null; try { d = JSON.parse(msg.toString()); } catch (e) {} if (!(d && d.closed)) { held = true; return; } }
-        clearTimeout(this._nsT); this._home = k;
+        clearTimeout(this._nsT);
+        // The room is on this relay: a player keeps it as the relay to try first next time (a reload goes straight here), also
+        // for a typed code. The hold-back above still goes by _linkK, the relay this connect started from.
+        if (this._home == null && this.state.mode === "player" && this.state.linkRelay !== k) this.set({ linkRelay: k });
+        this._home = k;
       }
       this.onMsg(topic, msg, packet);
     });
@@ -6510,10 +6519,8 @@ class Component extends DCLogic {
       if (this._home === k) this.later(() => this.tryBroker(k, n, gen, Infinity, this.RETRY_MS), this.RETRY_MS);
       else this.tryBroker(k + 1, left - 1, gen);
     };
-    // A keepalive close counts as a silent drop only when it comes about when the keepalive says it should: 1.5
-    // keepalives after the last packet heard, plus 5 s of slack. Much later means the page's timers were frozen (a phone
-    // locked, a laptop asleep) and woke on a socket that died meanwhile, while the network may be fine: then it is an
-    // ordinary loss (CONNECTING, OFFLINE after OFFLINE_MS), not OFFLINE at once.
+    // A keepalive close is a silent drop (OFFLINE at once) only within 1.5 keepalives + 5 s of the last packet heard; later
+    // means the page was frozen (phone locked, laptop asleep), so it counts as an ordinary loss.
     c.on("close", () => { if (!ever) fail(); else lost(silent && Date.now() - heard < this.KEEPALIVE_S * 1500 + 5000 ? heard : 0); });
   }
   onMsg(topic, msg, packet) {
@@ -6896,7 +6903,7 @@ class Component extends DCLogic {
       const code = this.state.joinCode, name = this.state.joinName.trim();
       if (code.length !== 4 || !name) return;
       const me = { id: "r" + Date.now() + Math.floor(Math.random() * 100000), name: name.slice(0, 24), answers: {}, preds: {}, supers: [] };
-      this.setState({ mode: "player", room: code, me, net: null, draft: null, linkRelay: this.relayIdx(this.state.joinRelay), joinRelay: null }, () => { this.save(); this.connect(); });
+      this.set({ mode: "player", room: code, me, net: null, draft: null, linkRelay: this.relayIdx(this.state.joinRelay), joinRelay: null }, () => this.connect());
     };
     vals.joinGame = doJoin;
     vals.onJoinKey = e => { if (e.key === "Enter") doJoin(); };
@@ -7051,6 +7058,7 @@ class Component extends DCLogic {
         defTitle: b.def ? "Plays in new games by default. Tap to remove." : "Tap to play this question in new games by default.",
         // The fill uses background-color in both states, never the background shorthand: the Dark Reader extension keeps its
         // copy of a shorthand that holds a var() after the page changes it, so the off button stayed green (v20 spec section 2).
+        // The darkreader-lock tag covers this; the background-color form is a second layer for a Dark Reader that ignores it.
         defStyle: "font-family:var(--font-sans);flex:none;height:26px;min-width:78px;padding:0 8px;border-radius:3px;font-size:10px;font-weight:600;letter-spacing:0.1em;cursor:pointer;" + (b.def ? "background-color:var(--pc-accent);color:var(--pc-on-accent);border:1px solid var(--pc-accent);" : "background-color:transparent;color:var(--pc-muted);border:1px solid var(--pc-line-3);"),
         toggleDef: () => {
           const cur = this.state.bank || [];
